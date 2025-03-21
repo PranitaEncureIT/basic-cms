@@ -112,7 +112,7 @@
                             @if ($category->status == 1)
                               <h2 class="d-inline-block"><span class="badge badge-success">Active</span></h2>
                             @else
-                              <h2 class="d-inline-block"><span class="badge badge-danger">Deactive</span></h2>
+                              <h2 class="d-inline-block"><span class="badge badge-danger">Inactive</span></h2>
                             @endif
                           </td>
                           <td>{{ $category->serial_number }}</td>

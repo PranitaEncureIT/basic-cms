@@ -65,7 +65,7 @@
                 <div class="card-body pt-5 pb-5">
                     <div class="row">
                         <div class="col-lg-6 offset-lg-3">
-                            <form id="ajaxForm" class="" action="{{ route('admin.service.update') }}" method="post">
+                            <form id="ajaxEditForm" class="" action="{{ route('admin.service.update') }}" method="post">
                                 @csrf
                                 <input type="hidden" name="service_id" value="{{ $service->id }}">
 
@@ -187,7 +187,7 @@
                     <div class="form">
                         <div class="form-group from-show-notify row">
                             <div class="col-12 text-center">
-                                <button type="submit" id="submitBtn" class="btn btn-success">Update</button>
+                                <button type="submit" id="updateBtn" class="btn btn-success">Update</button>
                             </div>
                         </div>
                     </div>

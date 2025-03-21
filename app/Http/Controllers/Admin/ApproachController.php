@@ -118,7 +118,8 @@ class ApproachController extends Controller
         $point->save();
 
         Session::flash('success', 'Point updated successfully!');
-        return back();
+        
+        return "success";
     }
 
     public function pointdelete(Request $request)

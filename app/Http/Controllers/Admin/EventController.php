@@ -144,19 +144,22 @@ class EventController extends Controller
             $images[] = $filename;
         }
 
-        if ($request->filled('video')) {
-            $videoFile = uniqid() .'.'. $extVideo;
-            $directory = "assets/front/img/events/videos/";
-            @mkdir($directory, 0775, true);
-            @copy($video, $directory . $videoFile);
-        }
+        $videoFile = null; // Initialize variable
 
+        if ($request->hasFile('video')) {
+            $video = $request->file('video');
+            $videoFile = uniqid() . '.' . $video->getClientOriginalExtension(); // Generate unique filename
+            $path = public_path('assets/front/img/events/videos/'); // Define path
+        
+            $video->move($path, $videoFile); // Move file to the specified path
+        }
+        
         $event = Event::create($request->except('image', 'video', 'content') + [
-                'slug' => $slug,
-                'image' => json_encode($images),
-                'content' => str_replace(url('/') . '/assets/front/img/', "{base_url}/assets/front/img/", $request->content),
-                'video' => $videoFile
-            ]);
+            'slug' => $slug,
+            'image' => json_encode($images),
+            'content' => str_replace(url('/') . '/assets/front/img/', "{base_url}/assets/front/img/", $request->content),
+            'video' => $videoFile ? 'assets/front/img/events/videos/' . $videoFile : null // Store relative path
+        ]);
         Session::flash('success', 'Event added successfully!');
         return "success";
     }

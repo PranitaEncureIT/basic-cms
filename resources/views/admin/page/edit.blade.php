@@ -84,7 +84,7 @@
                             <label for="">Status **</label>
                             <select class="form-control ltr" name="status">
                             <option value="1" {{$page->status == 1 ? 'selected' : ''}}>Active</option>
-                            <option value="0" {{$page->status == 0 ? 'selected' : ''}}>Deactive</option>
+                            <option value="0" {{$page->status == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>
                             <p id="errstatus" class="em text-danger mb-0"></p>
                         </div>

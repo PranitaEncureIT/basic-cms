@@ -9,6 +9,7 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class GalleryCategoryController extends Controller
 {
@@ -63,7 +64,17 @@ class GalleryCategoryController extends Controller
       return response()->json($validator->errors());
     }
 
-    GalleryCategory::create($request->all());
+    // Generate a slug from the name
+    $slug = Str::slug($request->name);
+
+    // Check if the slug already exists and make it unique
+    $count = GalleryCategory::where('slug', $slug)->count();
+    if ($count > 0) {
+      $slug .= '-' . ($count + 1);
+    }
+
+    // Create the record with slug
+    GalleryCategory::create(array_merge($request->all(), ['slug' => $slug]));
 
     Session::flash('success', 'New gallery category added successfully.');
 

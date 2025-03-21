@@ -42,7 +42,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <form id="statisticForm" action="{{route('admin.statistics.update')}}" method="post">
+        <form id="ajaxEditForm" action="{{route('admin.statistics.update')}}" method="post">
           <div class="card-header">
             <div class="card-title d-inline-block">Edit Statistic</div>
             <a class="btn btn-info btn-sm float-right d-inline-block" href="{{route('admin.statistics.index') . '?language=' . request()->input('language')}}">
@@ -111,7 +111,7 @@
 
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="displayNotif" class="btn btn-success">Update</button>
+                  <button type="submit" id="updateBtn" class="btn btn-success">Update</button>
                 </div>
               </div>
             </div>

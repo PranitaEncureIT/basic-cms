@@ -43,7 +43,7 @@
                     </label>
                     <label class="selectgroup-item">
                       <input type="radio" name="status" value="0" class="selectgroup-input" {{$paypal->status == 0 ? 'checked' : ''}}>
-                      <span class="selectgroup-button">Deactive</span>
+                      <span class="selectgroup-button">Inactive</span>
                     </label>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                     </label>
                     <label class="selectgroup-item">
                       <input type="radio" name="sandbox_check" value="0" class="selectgroup-input" {{$paypalInfo["sandbox_check"] == 0 ? 'checked' : ''}}>
-                      <span class="selectgroup-button">Deactive</span>
+                      <span class="selectgroup-button">Inactive</span>
                     </label>
                   </div>
                 </div>
@@ -124,7 +124,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="status" value="0" class="selectgroup-input" {{$stripe->status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="status" value="0" class="selectgroup-input" {{$paytm->status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -270,7 +270,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="status" value="0" class="selectgroup-input" {{$instamojo->status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -283,7 +283,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="sandbox_check" value="0" class="selectgroup-input" {{$instamojoInfo['sandbox_check'] == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -348,7 +348,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="status" value="0" class="selectgroup-input" {{$paystack->status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -419,7 +419,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="status" value="0" class="selectgroup-input" {{$flutterwave->status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                 </div>
@@ -484,7 +484,7 @@
                         </label>
                         <label class="selectgroup-item">
                             <input type="radio" name="status" value="0" class="selectgroup-input" {{$mollie->status == 0 ? 'checked' : ''}}>
-                            <span class="selectgroup-button">Deactive</span>
+                            <span class="selectgroup-button">Inactive</span>
                         </label>
                         </div>
                     </div>
@@ -544,7 +544,7 @@
                         </label>
                         <label class="selectgroup-item">
                             <input type="radio" name="status" value="0" class="selectgroup-input" {{$razorpay->status == 0 ? 'checked' : ''}}>
-                            <span class="selectgroup-button">Deactive</span>
+                            <span class="selectgroup-button">Inactive</span>
                         </label>
                         </div>
                     </div>
@@ -611,7 +611,7 @@
                             </label>
                             <label class="selectgroup-item">
                                 <input type="radio" name="status" value="0" class="selectgroup-input" {{$payumoney->status == 0 ? 'checked' : ''}}>
-                                <span class="selectgroup-button">Deactive</span>
+                                <span class="selectgroup-button">Inactive</span>
                             </label>
                             </div>
                         </div>
@@ -625,7 +625,7 @@
                               </label>
                               <label class="selectgroup-item">
                                 <input type="radio" name="sandbox_check" value="0" class="selectgroup-input" {{array_key_exists('sandbox_check', $payumoneyInfo) && $payumoneyInfo['sandbox_check'] == 0 ? 'checked' : ''}}>
-                                <span class="selectgroup-button">Deactive</span>
+                                <span class="selectgroup-button">Inactive</span>
                               </label>
                             </div>
                         </div>
@@ -692,7 +692,7 @@
                         </label>
                         <label class="selectgroup-item">
                             <input type="radio" name="status" value="0" class="selectgroup-input" {{$mercadopago->status == 0 ? 'checked' : ''}}>
-                            <span class="selectgroup-button">Deactive</span>
+                            <span class="selectgroup-button">Inactive</span>
                         </label>
                         </div>
                     </div>
@@ -706,7 +706,7 @@
                         </label>
                         <label class="selectgroup-item">
                           <input type="radio" name="sandbox_check" value="0" class="selectgroup-input" {{$mercadopagoInfo["sandbox_check"] == 0 ? 'checked' : ''}}>
-                          <span class="selectgroup-button">Deactive</span>
+                          <span class="selectgroup-button">Inactive</span>
                         </label>
                       </div>
                     </div>

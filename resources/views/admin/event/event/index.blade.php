@@ -96,7 +96,6 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                  <input type="checkbox" class="bulk-check" data-val="{{$event->id}}">
                               </td>
                               @php
-                                // $images = json_decode($event->image, true);
                                 $imagePath = public_path('/assets/front/img/events/sliders/'.$event->image);
                               @endphp
                               

@@ -45,7 +45,7 @@
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="custom_page_pagebuilder" value="0" class="selectgroup-input" {{$abex->custom_page_pagebuilder == 0 ? 'checked' : ''}}>
-                                                <span class="selectgroup-button">Deactive</span>
+                                                <span class="selectgroup-button">Inactive</span>
                                             </label>
                                         </div>
                                     </div>

@@ -48,7 +48,7 @@
                                  </label>
                                  <label class="selectgroup-item">
                                  <input type="radio" name="is_facebook_login" value="0" class="selectgroup-input" {{$bex->is_facebook_login == 0 ? 'checked' : ''}}>
-                                 <span class="selectgroup-button">Deactive</span>
+                                 <span class="selectgroup-button">Inactive</span>
                                  </label>
                               </div>
                               @if ($errors->has('is_facebook_login'))
@@ -96,7 +96,7 @@
                                  </label>
                                  <label class="selectgroup-item">
                                  <input type="radio" name="is_google_login" value="0" class="selectgroup-input" {{$bex->is_google_login == 0 ? 'checked' : ''}}>
-                                 <span class="selectgroup-button">Deactive</span>
+                                 <span class="selectgroup-button">Inactive</span>
                                  </label>
                               </div>
                               @if ($errors->has('is_google_login'))
@@ -138,7 +138,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_whatsapp" value="0" class="selectgroup-input" {{$bex->is_whatsapp == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         <p class="text-warning mb-0">If you enable WhatsApp, then Tawk.to must be disabled.</p>
@@ -171,7 +171,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="whatsapp_popup" value="0" class="selectgroup-input" {{$bex->whatsapp_popup == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('whatsapp_popup'))
@@ -196,7 +196,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_tawkto" value="0" class="selectgroup-input" {{$bs->is_tawkto == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         <p class="text-warning mb-0">If you enable Tawk.to, then WhatsApp must be disabled.</p>
@@ -226,7 +226,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_disqus" value="0" class="selectgroup-input" {{$bs->is_disqus == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('is_disqus'))
@@ -259,7 +259,7 @@
                               </label>
                               <label class="selectgroup-item">
                               <input type="radio" name="is_analytics" value="0" class="selectgroup-input" {{$bs->is_analytics == 0 ? 'checked' : ''}}>
-                              <span class="selectgroup-button">Deactive</span>
+                              <span class="selectgroup-button">Inactive</span>
                               </label>
                            </div>
                            @if ($errors->has('is_analytics'))
@@ -294,7 +294,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_appzi" value="0" class="selectgroup-input" {{$bs->is_appzi == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('is_appzi'))
@@ -328,7 +328,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_addthis" value="0" class="selectgroup-input" {{$bs->is_addthis == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('is_addthis'))
@@ -362,7 +362,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_recaptcha" value="0" class="selectgroup-input" {{$bs->is_recaptcha == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('is_recaptcha'))
@@ -403,7 +403,7 @@
                            </label>
                            <label class="selectgroup-item">
                            <input type="radio" name="is_facebook_pexel" value="0" class="selectgroup-input" {{$be->is_facebook_pexel == 0 ? 'checked' : ''}}>
-                           <span class="selectgroup-button">Deactive</span>
+                           <span class="selectgroup-button">Inactive</span>
                            </label>
                         </div>
                         @if ($errors->has('is_facebook_pexel'))

@@ -33,7 +33,7 @@
             <select name="status" class="form-control ltr">
               <option selected disabled>Select a Status</option>
               <option value="1">Active</option>
-              <option value="0">Deactive</option>
+              <option value="0">Inactive</option>
             </select>
             <p id="errstatus" class="mt-1 mb-0 text-danger em"></p>
           </div>

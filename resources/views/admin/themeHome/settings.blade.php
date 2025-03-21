@@ -45,7 +45,7 @@
                                             </label>
                                             <label class="selectgroup-item">
                                                 <input type="radio" name="home_page_pagebuilder" value="0" class="selectgroup-input" {{$abex->home_page_pagebuilder == 0 ? 'checked' : ''}}>
-                                                <span class="selectgroup-button">Deactive</span>
+                                                <span class="selectgroup-button">Inactive</span>
                                             </label>
                                         </div>
                                         <p class="text-warning mb-0">If <strong class="text-success">Active</strong>, then <strong>Content of Home Page Builder</strong> will be shown in <strong>Website's Home Page</strong></p>

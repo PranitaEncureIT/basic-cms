@@ -55,7 +55,7 @@
           <div class="row">
             <div class="col-lg-6 offset-lg-3">
 
-              <form id="ajaxForm" class="" action="{{route('admin.blog.update')}}" method="post">
+              <form id="ajaxEditForm" class="" action="{{route('admin.blog.update')}}" method="post">
                 @csrf
                 <input type="hidden" name="blog_id" value="{{$blog->id}}">
 
@@ -129,7 +129,7 @@
           <div class="form">
             <div class="form-group from-show-notify row">
               <div class="col-12 text-center">
-                <button type="submit" id="submitBtn" class="btn btn-success">Update</button>
+                <button type="submit" id="updateBtn" class="btn btn-success">Update</button>
               </div>
             </div>
           </div>

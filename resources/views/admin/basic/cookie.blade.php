@@ -74,7 +74,7 @@
                     </label>
                     <label class="selectgroup-item">
                         <input type="radio" name="cookie_alert_status" value="0" class="selectgroup-input" {{$abe->cookie_alert_status == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                     </label>
                   </div>
                   @if ($errors->has('cookie_alert_status'))

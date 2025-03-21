@@ -83,7 +83,7 @@
                                 <input type="hidden" name="type" value="product">
                                 <select class="form-control form-control-sm {{$ogateway->product_checkout_status == 1 ? 'bg-success' : 'bg-danger'}}" name="product_checkout_status" onchange="document.getElementById('productForm{{$ogateway->id}}').submit();">
                                     <option value="1" {{$ogateway->product_checkout_status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$ogateway->product_checkout_status == 0 ? 'selected' : ''}}>Deactive</option>
+                                    <option value="0" {{$ogateway->product_checkout_status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                                 </form>
                               </td>
@@ -96,7 +96,7 @@
                                 <input type="hidden" name="type" value="package">
                                 <select class="form-control form-control-sm {{$ogateway->package_order_status == 1 ? 'bg-success' : 'bg-danger'}}" name="package_order_status" onchange="document.getElementById('packageForm{{$ogateway->id}}').submit();">
                                     <option value="1" {{$ogateway->package_order_status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$ogateway->package_order_status == 0 ? 'selected' : ''}}>Deactive</option>
+                                    <option value="0" {{$ogateway->package_order_status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                                 </form>
                               </td>
@@ -107,7 +107,7 @@
                                 <input type="hidden" name="type" value="course">
                                 <select class="form-control form-control-sm {{$ogateway->course_checkout_status == 1 ? 'bg-success' : 'bg-danger'}}" name="course_checkout_status" onchange="document.getElementById('courseForm{{$ogateway->id}}').submit();">
                                     <option value="1" {{$ogateway->course_checkout_status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$ogateway->course_checkout_status == 0 ? 'selected' : ''}}>Deactive</option>
+                                    <option value="0" {{$ogateway->course_checkout_status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                                 </form>
                               </td>
@@ -118,7 +118,7 @@
                                 <input type="hidden" name="type" value="donation">
                                 <select class="form-control form-control-sm {{$ogateway->donation_checkout_status == 1 ? 'bg-success' : 'bg-danger'}}" name="donation_checkout_status" onchange="document.getElementById('donationForm{{$ogateway->id}}').submit();">
                                     <option value="1" {{$ogateway->donation_checkout_status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$ogateway->donation_checkout_status == 0 ? 'selected' : ''}}>Deactive</option>
+                                    <option value="0" {{$ogateway->donation_checkout_status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                                 </form>
                               </td>
@@ -129,7 +129,7 @@
                                 <input type="hidden" name="type" value="event">
                                 <select class="form-control form-control-sm {{$ogateway->event_checkout_status == 1 ? 'bg-success' : 'bg-danger'}}" name="event_checkout_status" onchange="document.getElementById('eventForm{{$ogateway->id}}').submit();">
                                     <option value="1" {{$ogateway->event_checkout_status == 1 ? 'selected' : ''}}>Active</option>
-                                    <option value="0" {{$ogateway->event_checkout_status == 0 ? 'selected' : ''}}>Deactive</option>
+                                    <option value="0" {{$ogateway->event_checkout_status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                                 </form>
                               </td>

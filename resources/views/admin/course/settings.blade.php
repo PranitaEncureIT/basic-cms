@@ -49,7 +49,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="is_course" value="0" class="selectgroup-input" {{$abex->is_course == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">By enabling / disabling, you can completely enable / disable the relevant pages of Course Module.</p>
@@ -63,7 +63,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="is_course_rating" value="0" class="selectgroup-input" {{$abex->is_course_rating == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                      </div>

@@ -171,7 +171,7 @@
                   <label class="selectgroup-item">
                     <input type="radio" name="order_status" value="0" class="selectgroup-input"
                       {{$package->order_status == 0 ? 'checked' : ''}} onchange="toggleLink({{$package->id}}, 0)">
-                    <span class="selectgroup-button">Deactive</span>
+                    <span class="selectgroup-button">Inactive</span>
                   </label>
                   <label class="selectgroup-item">
                     <input type="radio" name="order_status" value="2" class="selectgroup-input"

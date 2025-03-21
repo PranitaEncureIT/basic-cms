@@ -56,7 +56,7 @@
                                 </label>
                                 <label class="selectgroup-item">
                                     <input type="radio" name="is_receipt" value="0" class="selectgroup-input">
-                                    <span class="selectgroup-button">Deactive</span>
+                                    <span class="selectgroup-button">Inactive</span>
                                 </label>
                             </div>
                         </div>

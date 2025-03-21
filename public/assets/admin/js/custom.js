@@ -545,8 +545,7 @@ $(function ($) {
     let fd = new FormData(ajaxEditForm);
     let url = $("#ajaxEditForm").attr('action');
     let method = $("#ajaxEditForm").attr('method');
-    // console.log(url);
-    // console.log(method);
+
     
     if ($("#ajaxEditForm .summernote").length > 0) {
       $("#ajaxEditForm .summernote").each(function (i) {

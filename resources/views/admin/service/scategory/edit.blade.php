@@ -57,7 +57,7 @@
                     <div class="row">
                         <div class="col-lg-6 offset-lg-3">
 
-                            <form id="ajaxForm" class="" action="{{ route('admin.scategory.update') }}"
+                            <form id="ajaxEditForm" class="" action="{{ route('admin.scategory.update') }}"
                                 method="post">
                                 @csrf
                                 <input type="hidden" name="scategory_id" value="{{ $scategory->id }}">
@@ -107,7 +107,7 @@
                                         <option value="" selected disabled>Select a status</option>
                                         <option value="1" {{ $scategory->status == 1 ? 'selected' : '' }}>Active
                                         </option>
-                                        <option value="0" {{ $scategory->status == 0 ? 'selected' : '' }}>Deactive
+                                        <option value="0" {{ $scategory->status == 0 ? 'selected' : '' }}>Inactive
                                         </option>
                                     </select>
                                     <p id="errstatus" class="mb-0 text-danger em"></p>
@@ -128,7 +128,7 @@
                     <div class="form">
                         <div class="form-group from-show-notify row">
                             <div class="col-12 text-center">
-                                <button type="submit" id="submitBtn" class="btn btn-success">Update</button>
+                                <button type="submit" id="updateBtn" class="btn btn-success">Update</button>
                             </div>
                         </div>
                     </div>

@@ -51,7 +51,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="is_donation" value="0" class="selectgroup-input" {{$abex->is_donation == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">By enabling / disabling, you can completely enable / disable the relevant pages of donation system.</p>
@@ -65,7 +65,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="donation_guest_checkout" value="0" class="selectgroup-input" {{$abex->donation_guest_checkout == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">If you enable 'guest checkout', then customers can checkout without login</p>

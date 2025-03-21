@@ -45,7 +45,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <form id="pointForm" action="{{route('admin.approach.point.update')}}" method="post" onsubmit="update(event)">
+        <form id="ajaxEditForm" action="{{route('admin.approach.point.update')}}" method="post" onsubmit="update(event)">
           <div class="card-header">
             <div class="card-title d-inline-block">Edit Point</div>
             <a class="btn btn-info btn-sm float-right d-inline-block" href="{{route('admin.approach.index') . '?language=' . request()->input('language')}}">
@@ -120,7 +120,7 @@
 
                 </div>
                 <div class="col-12 text-center">
-                  <button type="submit" id="displayNotif" class="btn btn-success">Update</button>
+                  <button type="submit" id="updateBtn" class="btn btn-success editbtn">Update</button>
                 </div>
               </div>
             </div>

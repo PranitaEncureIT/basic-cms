@@ -47,7 +47,7 @@
                   <label class="selectgroup-item">
                     <input type="radio" name="package_category_status" value="0" class="selectgroup-input"
                       {{$abex->package_category_status == 0 ? 'checked' : ''}}>
-                    <span class="selectgroup-button">Deactive</span>
+                    <span class="selectgroup-button">Inactive</span>
                   </label>
                 </div>
               </div>
@@ -62,7 +62,7 @@
                   <label class="selectgroup-item">
                     <input type="radio" name="recurring_billing" value="0" class="selectgroup-input"
                       {{$abex->recurring_billing == 0 ? 'checked' : ''}}>
-                    <span class="selectgroup-button">Deactive</span>
+                    <span class="selectgroup-button">Inactive</span>
                   </label>
                 </div>
                 <p class="text-warning mb-0">Recurring billing / subscription is only allowed for registered users.</p>
@@ -89,7 +89,7 @@
                   <label class="selectgroup-item">
                     <input type="radio" name="package_guest_checkout" value="0" class="selectgroup-input"
                       {{$abex->package_guest_checkout == 0 ? 'checked' : ''}}>
-                    <span class="selectgroup-button">Deactive</span>
+                    <span class="selectgroup-button">Inactive</span>
                   </label>
                 </div>
                 <p class="text-warning mb-0">If you enable 'guest checkout', then customers can checkout without login

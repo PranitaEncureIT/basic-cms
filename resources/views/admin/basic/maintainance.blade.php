@@ -71,7 +71,7 @@
                       </label>
                       <label class="selectgroup-item">
                         <input type="radio" name="maintainance_mode" value="0" class="selectgroup-input" {{$bs->maintainance_mode == 0 ? 'checked' : ''}}>
-                        <span class="selectgroup-button">Deactive</span>
+                        <span class="selectgroup-button">Inactive</span>
                       </label>
                     </div>
                     @if ($errors->has('maintainance_mode'))

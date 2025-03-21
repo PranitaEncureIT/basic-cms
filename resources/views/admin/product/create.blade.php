@@ -86,7 +86,7 @@
                                             <div class="slider-thumbs" id="sliderThumbs2">
 
                                             </div>
-                                            <input id="fileInput2" type="file" name="image" accept="image/*"
+                                            <input id="fileInput2" type="file" name="slider" accept="image/*"
                                                 style="display: none;" value="" />
                                             <label for="fileInput2" class="choose-image btn btn-primary">Choose
                                                 Image

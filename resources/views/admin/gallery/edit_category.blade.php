@@ -24,7 +24,7 @@
             <select name="status" id="instatus" class="form-control">
               <option disabled>Select a Status</option>
               <option value="1">Active</option>
-              <option value="0">Deactive</option>
+              <option value="0">Inactive</option>
             </select>
             <p id="eerrstatus" class="mt-1 mb-0 text-danger em"></p>
           </div>

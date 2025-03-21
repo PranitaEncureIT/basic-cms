@@ -92,7 +92,7 @@ class StatisticsController extends Controller
         $statistic->save();
 
         Session::flash('success', 'Statistic updated successfully!');
-        return back();
+        return "success";
     }
 
     public function upload(Request $request, $langid)

@@ -10,7 +10,8 @@ class GalleryCategory extends Model
     'language_id',
     'name',
     'status',
-    'serial_number'
+    'serial_number',
+    'slug'
   ];
 
   public function galleryCategoryLang()

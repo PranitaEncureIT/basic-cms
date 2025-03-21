@@ -55,7 +55,7 @@
           <div class="row">
             <div class="col-lg-12">
 
-                <form id="ajaxForm" class="" action="{{route('admin.job.update')}}" method="post">
+                <form id="ajaxEditForm" class="" action="{{route('admin.job.update')}}" method="post">
                     @csrf
                     <input type="hidden" name="job_id" value="{{$job->id}}">
                     <div id="sliders"></div>
@@ -229,7 +229,7 @@
           <div class="form">
             <div class="form-group from-show-notify row">
               <div class="col-12 text-center">
-                <button type="submit" id="submitBtn" class="btn btn-success">Update</button>
+                <button type="submit" id="updateBtn" class="btn btn-success">Update</button>
               </div>
             </div>
           </div>

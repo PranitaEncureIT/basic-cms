@@ -44,7 +44,7 @@
                           </label>
                           <label class="selectgroup-item">
                               <input type="radio" name="service_category" value="0" class="selectgroup-input" {{$abex->service_category == 0 ? 'checked' : ''}}>
-                              <span class="selectgroup-button">Deactive</span>
+                              <span class="selectgroup-button">Inactive</span>
                           </label>
                     </div>
                 </div>

@@ -87,7 +87,7 @@
                             @csrf
                             <select class="form-control form-control-sm {{$user->status == 1 ? 'bg-success' : 'bg-danger'}}" name="status" onchange="document.getElementById('userFrom{{$user->id}}').submit();">
                                 <option value="1" {{$user->status == 1 ? 'selected' : ''}}>Active</option>
-                                <option value="0" {{$user->status == 0 ? 'selected' : ''}}>Deactive</option>
+                                <option value="0" {{$user->status == 0 ? 'selected' : ''}}>Inactive</option>
                             </select>
                             <input type="hidden" name="user_id" value="{{$user->id}}">
                             </form>

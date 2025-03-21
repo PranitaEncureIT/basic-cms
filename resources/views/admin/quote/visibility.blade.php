@@ -48,7 +48,7 @@
                         </label>
                         <label class="selectgroup-item">
                             <input type="radio" name="is_quote" value="0" class="selectgroup-input" {{$bs->is_quote == 0 ? 'checked' : ''}}>
-                            <span class="selectgroup-button">Deactive</span>
+                            <span class="selectgroup-button">Inactive</span>
                         </label>
                     </div>
                     @if ($errors->has('is_quote'))

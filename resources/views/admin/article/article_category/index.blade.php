@@ -131,7 +131,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                         @if ($article_category->status == 1)
                         <h2 class="d-inline-block"><span class="badge badge-success">Active</span></h2>
                         @else
-                        <h2 class="d-inline-block"><span class="badge badge-danger">Deactive</span></h2>
+                        <h2 class="d-inline-block"><span class="badge badge-danger">Inactive</span></h2>
                         @endif
                       </td>
                       <td>{{$article_category->serial_number}}</td>
@@ -279,7 +279,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                 disabled
               >Select a status</option>
               <option value="1">Active</option>
-              <option value="0">Deactive</option>
+              <option value="0">Inactive</option>
             </select>
             <p
               id="errstatus"
@@ -392,7 +392,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                 disabled
               >Select a status</option>
               <option value="1">Active</option>
-              <option value="0">Deactive</option>
+              <option value="0">Inactive</option>
             </select>
             <p
               id="eerrstatus"

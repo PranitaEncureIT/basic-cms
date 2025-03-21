@@ -48,7 +48,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="feature_section" value="0" class="selectgroup-input" {{$abs->feature_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="intro_section" value="0" class="selectgroup-input" {{$abs->intro_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="service_section" value="0" class="selectgroup-input" {{$abs->service_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -88,7 +88,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="approach_section" value="0" class="selectgroup-input" {{$abs->approach_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="statistics_section" value="0" class="selectgroup-input" {{$abs->statistics_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="portfolio_section" value="0" class="selectgroup-input" {{$abs->portfolio_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="testimonial_section" value="0" class="selectgroup-input" {{$abs->testimonial_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="team_section" value="0" class="selectgroup-input" {{$abs->team_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="pricing_section" value="0" class="selectgroup-input" {{$abe->pricing_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@
                                         </label>
                                         <label class="selectgroup-item">
                                             <input type="radio" name="call_to_action_section" value="0" class="selectgroup-input" {{$abs->call_to_action_section == 0 ? 'checked' : ''}}>
-                                            <span class="selectgroup-button">Deactive</span>
+                                            <span class="selectgroup-button">Inactive</span>
                                         </label>
                                     </div>
                                 </div>
@@ -180,7 +180,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="news_section" value="0" class="selectgroup-input" {{$abs->news_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="partner_section" value="0" class="selectgroup-input" {{$abs->partner_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -206,7 +206,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="top_footer_section" value="0" class="selectgroup-input" {{$abs->top_footer_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="categories_section" value="0" class="selectgroup-input" {{$abe->categories_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="featured_products_section" value="0" class="selectgroup-input" {{$abe->featured_products_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -246,7 +246,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="category_products_section" value="0" class="selectgroup-input" {{$abe->category_products_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="newsletter_section" value="0" class="selectgroup-input" {{$abs->newsletter_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>
@@ -273,7 +273,7 @@
                                     </label>
                                     <label class="selectgroup-item">
                                         <input type="radio" name="copyright_section" value="0" class="selectgroup-input" {{$abs->copyright_section == 0 ? 'checked' : ''}}>
-                                        <span class="selectgroup-button">Deactive</span>
+                                        <span class="selectgroup-button">Inactive</span>
                                     </label>
                                 </div>
                             </div>

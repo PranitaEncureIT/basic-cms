@@ -176,10 +176,10 @@
 
                                                         @if (!empty($member->image) && file_exists(public_path('cms/memebers/' . $member->image)))
                                                             <img src="{{ asset('cms/memebers/' . $member->image) }}"
-                                                                alt="" style="width:150px;">
+                                                                alt="" style="width:100px;">
                                                         @else
                                                             <img src="{{ asset('assets/front/img/no_image.jpg') }}"
-                                                                alt="No Image" style="width:150px;">
+                                                                alt="No Image" style="width:100px;">
                                                         @endif
 
 

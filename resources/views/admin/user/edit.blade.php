@@ -110,7 +110,7 @@
                                         <select class="form-control" name="status">
                                             <option value="" selected disabled>Select a status</option>
                                             <option value="1" {{$user->status == 1 ? 'selected' : ''}}>Active</option>
-                                            <option value="0" {{$user->status == 0 ? 'selected' : ''}}>Deactive</option>
+                                            <option value="0" {{$user->status == 0 ? 'selected' : ''}}>Inactive</option>
                                         </select>
                                         <p id="errstatus" class="mb-0 text-danger em"></p>
                                     </div>

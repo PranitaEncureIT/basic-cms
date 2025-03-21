@@ -124,7 +124,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                 @endif
                                 " name="status" onchange="document.getElementById('statusForm{{$popup->id}}').submit();">
                                   <option value="1" {{$popup->status == 1 ? 'selected' : ''}}>Active</option>
-                                  <option value="0" {{$popup->status == 0 ? 'selected' : ''}}>Deactive</option>
+                                  <option value="0" {{$popup->status == 0 ? 'selected' : ''}}>Inactive</option>
                                 </select>
                               </form>
                           </td>

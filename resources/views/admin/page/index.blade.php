@@ -98,7 +98,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                             @if ($apage->status == 1)
                               <span class="badge badge-success">Active</span>
                             @elseif ($apage->status == 0)
-                              <span class="badge badge-danger">Deactive</span>
+                              <span class="badge badge-danger">Inactive</span>
                             @endif
                           </td>
                           <td>{{$apage->serial_number}}</td>

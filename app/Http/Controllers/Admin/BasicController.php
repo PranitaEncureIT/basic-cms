@@ -277,6 +277,7 @@ class BasicController extends Controller
 
     public function updatebasicinfo(Request $request)
     {
+
         $rules = [
             'website_title' => 'required',
             'base_color' => 'required',

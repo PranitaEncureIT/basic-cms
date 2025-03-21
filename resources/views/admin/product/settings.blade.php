@@ -51,7 +51,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="is_shop" value="0" class="selectgroup-input" {{$abex->is_shop == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">By enabling / disabling, you can completely enable / disable the relevant pages of your shop in this system.</p>
@@ -65,7 +65,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="catalog_mode" value="0" class="selectgroup-input" {{$abex->catalog_mode == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">If you enable catalog mode, then pricing, cart, checkout option of products will be removed. But product & product details page will remain.</p>
@@ -79,7 +79,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="product_rating_system" value="0" class="selectgroup-input" {{$abex->product_rating_system == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                      </div>
@@ -92,7 +92,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="product_guest_checkout" value="0" class="selectgroup-input" {{$abex->product_guest_checkout == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">If you enable 'guest checkout', then customers can checkout without login</p>

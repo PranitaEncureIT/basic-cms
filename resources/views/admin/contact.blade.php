@@ -40,7 +40,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <form class="mb-3 dm-uploader drag-and-drop-zone" enctype="multipart/form-data" action="{{route('admin.contact.update', $lang_id)}}" method="POST">
+        <form id="ajaxForm" class="mb-3 dm-uploader drag-and-drop-zone" enctype="multipart/form-data" action="{{route('admin.contact.update', $lang_id)}}" method="POST">
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-10">
@@ -135,7 +135,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
             <div class="form">
               <div class="form-group from-show-notify row">
                 <div class="col-12 text-center">
-                  <button id="displayNotif" class="btn btn-success">Update</button>
+                  <button id="submitBtn" class="btn btn-success">Update</button>
                 </div>
               </div>
             </div>

@@ -74,7 +74,7 @@
                                 <label for="">Status **</label>
                                 <select class="form-control ltr" name="status">
                                     <option value="1">Active</option>
-                                    <option value="0">Deactive</option>
+                                    <option value="0">Inactive</option>
                                 </select>
                                 <p id="errstatus" class="em text-danger mb-0"></p>
                             </div>

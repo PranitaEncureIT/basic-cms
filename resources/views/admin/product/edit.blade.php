@@ -107,6 +107,8 @@
                                 <div class="form-group">
                                     <label for="">Slider Images ** </label>
                                     <br>
+
+                               
                                     <div class="slider-thumbs" id="sliderThumbs2">
 
                                     </div>

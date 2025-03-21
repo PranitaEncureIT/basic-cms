@@ -82,7 +82,7 @@
                               @if ($user->status == 1)
                                 <span class="badge badge-success">Active</span>
                               @elseif ($user->status == 0)
-                                <span class="badge badge-danger">Deactive</span>
+                                <span class="badge badge-danger">Inactive</span>
                               @endif
                             </td>
                             <td width="15%">

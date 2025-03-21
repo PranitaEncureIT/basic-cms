@@ -51,7 +51,7 @@
                               </label>
                               <label class="selectgroup-item">
                                   <input type="radio" name="is_ticket" value="0" class="selectgroup-input" {{$abex->is_ticket == 0 ? 'checked' : ''}}>
-                                  <span class="selectgroup-button">Deactive</span>
+                                  <span class="selectgroup-button">Inactive</span>
                               </label>
                         </div>
                         <p class="text-warning mb-0">By enabling / disabling, you can completely enable / disable the relevant pages of support ticket module.</p>

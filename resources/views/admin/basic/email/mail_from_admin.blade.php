@@ -57,7 +57,7 @@
                     </label>
                     <label class="selectgroup-item">
                       <input type="radio" name="is_smtp" value="0" class="selectgroup-input" {{$abe->is_smtp == 0 ? 'checked' : ''}}>
-                      <span class="selectgroup-button">Deactive</span>
+                      <span class="selectgroup-button">Inactive</span>
                     </label>
                   </div>
                   @if ($errors->has('is_smtp'))

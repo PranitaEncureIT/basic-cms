@@ -49,7 +49,7 @@
                         </label>
                         <label class="selectgroup-item">
                             <input type="radio" name="is_user_panel" value="0" class="selectgroup-input" {{$abex->is_user_panel == 0 ? 'checked' : ''}}>
-                            <span class="selectgroup-button">Deactive</span>
+                            <span class="selectgroup-button">Inactive</span>
                         </label>
                     </div>
                 </div>

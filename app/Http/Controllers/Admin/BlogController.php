@@ -114,7 +114,6 @@ class BlogController extends Controller
             'category' => 'required',
             'content' => 'required',
             'serial_number' => 'required|integer',
-            'image' => 'required|image|mimes:jpg,jpeg,png,svg|max:2048',
         ];
 
         $validator = Validator::make($request->all(), $rules);
