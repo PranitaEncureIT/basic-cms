@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BasicSetting as BS;
 use App\Models\Language;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
-use Session;
 
 class HerosectionController extends Controller
 {
     public function static(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['abe'] = $lang->basic_extended;
@@ -102,7 +102,8 @@ class HerosectionController extends Controller
 
     public function video(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
 

@@ -10,7 +10,7 @@ use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use App\Models\Language;
 use App\Models\Package;
 use App\Models\PaymentGateway;
-use Config;
+use Illuminate\Support\Facades\Config;
 
 class StripeController extends PaymentController
 {

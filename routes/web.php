@@ -5,6 +5,8 @@ use App\Models\Permalink;
 use UniSharp\LaravelFilemanager\Lfm;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Artisan;
+
 
 
 /*
@@ -19,10 +21,10 @@ use Spatie\Permission\Models\Role;
 */
 
 Route::get('clear-cache', function () {
-  \Artisan::call('cache:clear');
-  \Artisan::call('route:clear');
-  \Artisan::call('config:clear');
-  \Artisan::call('view:clear');
+  Artisan::call('cache:clear');
+  Artisan::call('route:clear');
+  Artisan::call('config:clear');
+  Artisan::call('view:clear');
   return 'Application optimized';
 });
 

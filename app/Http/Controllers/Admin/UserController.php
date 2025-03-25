@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Models\Admin;
 use App\Models\RoleOld;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {

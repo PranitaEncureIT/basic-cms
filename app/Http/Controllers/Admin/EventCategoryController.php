@@ -9,9 +9,8 @@ use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Megamenu;
-use Validator;
-use Session;
-use DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class EventCategoryController extends Controller
 {
@@ -22,7 +21,8 @@ class EventCategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['lang_id'] = $lang_id;
         $data['event_categories'] = EventCategory::where('lang_id', $lang_id)->orderBy('id', 'DESC')->paginate(10);

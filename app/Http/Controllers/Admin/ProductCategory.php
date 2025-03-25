@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Admin;
 use App\Models\BasicExtended;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use App\Models\Pcategory;
 use App\Models\Language;
 use App\Models\Megamenu;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class ProductCategory extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['pcategories'] = Pcategory::where('language_id', $lang_id)->orderBy('id', 'DESC')->paginate(10);
 
@@ -27,8 +27,6 @@ class ProductCategory extends Controller
 
     public function store(Request $request)
     {
-
-
         $messages = [
             'language_id.required' => 'The language field is required'
         ];

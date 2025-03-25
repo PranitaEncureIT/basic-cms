@@ -15,14 +15,15 @@ use App\Models\Pcategory;
 use App\Models\ProductImage;
 use App\Models\Product;
 use App\Models\ProductOrder;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['products'] = Product::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
@@ -40,7 +41,8 @@ class ProductController extends Controller
 
     public function create(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
         $abx = $lang->basic_extra;
         $categories = Pcategory::where('status',1)->get();
         return view('admin.product.create',compact('categories','abx'));
@@ -186,7 +188,6 @@ class ProductController extends Controller
             'category_id.required' => 'Category is required'
         ];
 
-
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             $errmsgs = $validator->getMessageBag()->add('error', 'true');
@@ -239,10 +240,10 @@ class ProductController extends Controller
         return "success";
     }
 
-
     public function edit(Request $request, $id)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
         $abx = $lang->basic_extra;
         $categories = $lang->pcategories()->where('status',1)->get();
         $data = Product::findOrFail($id);
@@ -520,7 +521,8 @@ class ProductController extends Controller
 
     public function populerTag(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data = BE::where('language_id',$lang_id)->first();
         return view('admin.product.tag.index',compact('data'));
@@ -540,7 +542,8 @@ class ProductController extends Controller
             return response()->json($validator->errors());
         }
 
-        $lang = Language::where('code', $request->language_id)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en'; 
+        $lang = Language::where('code', $lang_code)->first();
         $be = BE::where('language_id',$lang->id)->first();
         $be->popular_tags = $request->popular_tags;
         $be->save();
@@ -623,7 +626,7 @@ class ProductController extends Controller
             $bex->save();
         }
 
-        $request->session()->flash('success', 'Settings updated successfully!');
+        Session::flash('success', 'Settings updated successfully!');
         return back();
     }
 }

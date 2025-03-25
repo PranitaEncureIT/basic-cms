@@ -5,20 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Quote;
-use App\Models\BasicSetting as BS;
 use App\Models\BasicExtended as BE;
 use App\Models\BasicSetting;
 use App\Models\Language;
-use App\Mail\ContactMail;
 use App\Models\QuoteInput;
 use App\Models\QuoteInputOption;
-use Illuminate\Support\Facades\Mail;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use Illuminate\Support\Str;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class QuoteController extends Controller
 {
@@ -35,14 +30,15 @@ class QuoteController extends Controller
             $bs->save();
         }
 
-        $request->session()->flash('success', 'Page status updated successfully!');
+        Session::flash('success', 'Page status updated successfully!');
         return back();
     }
 
 
     public function form(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['inputs'] = QuoteInput::where('language_id', $data['lang_id'])->get();

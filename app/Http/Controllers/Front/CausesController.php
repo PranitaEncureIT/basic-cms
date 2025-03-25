@@ -21,12 +21,9 @@ use App\Http\Controllers\Payment\causes\PayumoneyController;
 use App\Http\Controllers\Payment\causes\RazorpayController;
 use App\Http\Controllers\Payment\causes\StripeController;
 use App\Http\Helpers\KreativMailer;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 use PDF;
-use Auth;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\PHPMailer;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class CausesController extends Controller

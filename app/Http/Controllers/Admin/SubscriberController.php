@@ -6,13 +6,10 @@ use App\Models\BasicExtended;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\Subscriber;
 use App\Models\BasicSetting;
-use App\Mail\ContactMail;
-use Session;
-use Mail;
+use Illuminate\Support\Facades\Session;
 
 class SubscriberController extends Controller
 {
@@ -31,7 +28,7 @@ class SubscriberController extends Controller
 
     public function subscsendmail(Request $request) {
         if(Subscriber::count() == 0) {
-            $request->session()->flash('warning', "No subscriber found!");
+            Session::flash('warning', "No subscriber found!");
             return back();
         }
 

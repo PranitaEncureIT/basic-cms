@@ -10,13 +10,14 @@ use App\Models\Member;
 use App\Models\Language;
 use App\Models\BasicSetting as BS;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class MemberController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['members'] = Member::where('language_id', $data['lang_id'])->get();

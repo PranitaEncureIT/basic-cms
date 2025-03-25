@@ -19,7 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -32,7 +32,8 @@ class DonationController extends Controller
      */
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['lang_id'] = $lang_id;
         $data['abx'] = $lang->basic_extra;
@@ -488,7 +489,7 @@ class DonationController extends Controller
             $bex->save();
         }
 
-        $request->session()->flash('success', 'Settings updated successfully!');
+        Session::flash('success', 'Settings updated successfully!');
         return back();
     }
 

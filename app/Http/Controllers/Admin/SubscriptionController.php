@@ -3,20 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\BasicExtended;
-use App\Exports\SubscriptionExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\OfflineGateway;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\Package;
-use App\Models\PaymentGateway;
 use App\Models\Subscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
-use Maatwebsite\Excel\Facades\Excel;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
 class SubscriptionController extends Controller
 {
@@ -52,7 +47,7 @@ class SubscriptionController extends Controller
         $sub = Subscription::findOrFail($request->subscription_id);
         $sub->delete();
 
-        $request->session()->flash('success', 'Subscription deleted successfully');
+        Session::flash('success', 'Subscription deleted successfully');
         return back();
     }
 
@@ -173,7 +168,7 @@ class SubscriptionController extends Controller
              }
          }
 
-        $request->session()->flash('success', 'Status updated successfully');
+        Session::flash('success', 'Status updated successfully');
         return back();
     }
 

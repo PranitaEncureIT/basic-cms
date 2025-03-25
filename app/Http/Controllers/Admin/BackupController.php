@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Symfony\Component\Process\Process;
 use App\Models\Backup;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
 
 class BackupController extends Controller
 {
@@ -15,23 +18,34 @@ class BackupController extends Controller
       return view('admin.backup', $data);
     }
 
-    public function store() {
-      $filename = uniqid() . '.sql';
-      $process = new Process(sprintf(
-          'mysqldump -u%s -p%s %s > %s',
-          config('database.connections.mysql.username'),
-          config('database.connections.mysql.password'),
-          config('database.connections.mysql.database'),
-          'core/storage/app/public/' . $filename
-      ));
-      $process->mustRun();
-
-      $backup = new Backup;
-      $backup->filename = $filename;
-      $backup->save();
-
-      Session::flash('success', 'Backup saved successfully');
-      return back();
+    public function store()
+    {
+        $filename = uniqid('backup_') . '.sql';
+        $filepath = storage_path('app/public/' . $filename);
+    
+        // Build the command securely using an array
+        $process = new Process([
+            'mysqldump',
+            '-u' . config('database.connections.mysql.username'),
+            '-p' . config('database.connections.mysql.password'),
+            config('database.connections.mysql.database')
+        ]);
+    
+        try {
+            $process->mustRun();
+            
+            // Save output to storage
+            Storage::put('public/' . $filename, $process->getOutput());
+    
+            // Store backup record in the database
+            Backup::create(['filename' => $filename]);
+    
+            Session::flash('success', 'Backup saved successfully.');
+        } catch (ProcessFailedException $exception) {
+            Session::flash('error', 'Backup failed: ' . $exception->getMessage());
+        }
+    
+        return back();
     }
 
     public function download(Request $request) {

@@ -9,7 +9,8 @@ use App\Models\Page;
 use App\Models\Home;
 use App\Models\Pcategory;
 use App\Models\Product;
-use File,DB;
+use DragonCode\Support\Facades\Filesystem\File;
+use Illuminate\Support\Facades\DB;
 
 class PageBuilderController extends Controller
 {
@@ -121,7 +122,8 @@ class PageBuilderController extends Controller
 
     public function content(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         if ($request->type == 'page') {
             $data = Page::findOrFail($request->id);
         } elseif ($request->type == 'themeHome') {

@@ -8,14 +8,15 @@ use App\Http\Controllers\Controller;
 use App\Models\BasicSetting as BS;
 use App\Models\Point;
 use App\Models\Language;
-use Session;
-use Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ApproachController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['points'] = Point::where('language_id', $data['lang_id'])->orderBy('id', 'DESC')->get();

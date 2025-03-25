@@ -39,14 +39,10 @@ use App\Models\Quote;
 use App\Models\Language;
 use App\Models\Package;
 use App\Models\PackageOrder;
-use App\Models\Admin;
 use App\Models\BasicExtra;
 use App\Models\CalendarEvent;
 use App\Models\FAQCategory;
 use App\Models\Home;
-use App\Mail\ContactMail;
-use App\Mail\OrderPackage;
-use App\Mail\OrderQuote;
 use App\Models\OfflineGateway;
 use App\Models\PackageCategory;
 use App\Models\PackageInput;
@@ -57,12 +53,13 @@ use App\Models\QuoteInput;
 use App\Models\RssFeed;
 use App\Models\RssPost;
 use App\Models\Subscription;
-use Session;
-use Validator;
-use Config;
-use Mail;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use PDF;
-use Auth;
+
 
 class FrontendController extends Controller
 {
@@ -1318,7 +1315,7 @@ class FrontendController extends Controller
         $in['package_currency'] = $package->currency;
         $in['package_price'] = $package->price;
         $in['package_description'] = $package->description;
-        $fileName = \Str::random(4) . time() . '.pdf';
+        $fileName = Str::random(4) . time() . '.pdf';
         $in['invoice'] = $fileName;
         $po = PackageOrder::create($in);
 

@@ -18,8 +18,9 @@ class ArticleCategoryController extends Controller
    */
   public function index(Request $request)
   {
-    $language = Language::where('code', $request->language)->first();
-    $language_id = $language->id;
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
+    $language_id = $lang->id;
 
     $article_categories = ArticleCategory::where('language_id', $language_id)
       ->orderBy('serial_number', 'asc')

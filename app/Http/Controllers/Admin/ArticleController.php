@@ -14,9 +14,10 @@ class ArticleController extends Controller
 {
 	public function index(Request $request)
 	{
-		$language = Language::where('code', $request->language)->first();
-		$language_id = $language->id;
-
+		$lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
+		$language_id = $lang->id;
+		
 		$articles = Article::where('language_id', $language_id)
 			->orderBy('id', 'DESC')
 			->get();

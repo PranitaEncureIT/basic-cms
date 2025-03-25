@@ -20,7 +20,8 @@ class MenuBuilderController extends Controller
 {
 
     public function index(Request $request) {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
 
         // set language
@@ -72,7 +73,8 @@ class MenuBuilderController extends Controller
     }
 
     public function megaMenuEdit(Request $request) {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         // for 'services' mega menu
         if ($request->type == 'services') {
@@ -242,7 +244,7 @@ class MenuBuilderController extends Controller
         $megamenu->menus = $menus;
         $megamenu->save();
 
-        $request->session()->flash('success', 'Mega Menu updated for ' . $request->type);
+        Session::flash('success', 'Mega Menu updated for ' . $request->type);
         return back();
     }
 
@@ -286,7 +288,7 @@ class MenuBuilderController extends Controller
             $pl->save();
         }
 
-        $request->session()->flash('success', 'Permalinks updated successfully');
+        Session::flash('success', 'Permalinks updated successfully');
         return back();
     }
 }

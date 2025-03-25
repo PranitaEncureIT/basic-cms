@@ -13,8 +13,9 @@ use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
 use App\Models\Subscription;
 use PDF;
-use Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
@@ -229,7 +230,7 @@ class PaymentController extends Controller
             $po = Subscription::findOrFail($po->id);
         }
         // saving invoice in DB
-        $fileName = \Str::random(4) . time() . '.pdf';
+        $fileName = Str::random(4) . time() . '.pdf';
         $po->invoice = $fileName;
         $po->save();
 

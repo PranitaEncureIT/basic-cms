@@ -4,16 +4,7 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Payment\PaymentController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\Language;
-use App\Models\OfflineGateway;
-use App\Models\Package;
-use App\Models\PackageInput;
-use App\Models\PackageOrder;
-use App\Models\PaymentGateway;
-use PDF;
 
 class PaystackController extends PaymentController
 {

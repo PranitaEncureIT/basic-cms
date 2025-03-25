@@ -7,10 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-use Mail;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 
 class ForgetController extends Controller
 {

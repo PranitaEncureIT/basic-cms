@@ -10,7 +10,8 @@ use App\Models\Language;
 use App\Models\Package;
 use App\Models\PackageOrder;
 use App\Models\Subscription;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class MollieController extends PaymentController
 {
@@ -48,7 +49,7 @@ class MollieController extends PaymentController
         $package = Package::find($request->package_id);
 
         $order['item_name'] = $package->title." Order";
-        $order['item_number'] = \Str::random(4).time();
+        $order['item_number'] = Str::random(4).time();
         $order['item_amount'] = $package->price;
         $order['order_id'] = $po->id;
         $order['package_id'] = $package->id;

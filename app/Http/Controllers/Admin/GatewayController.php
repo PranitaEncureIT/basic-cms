@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\OfflineGateway;
 use App\Models\PaymentGateway;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+
 
 class GatewayController extends Controller
 {
@@ -41,7 +43,7 @@ class GatewayController extends Controller
 
         $paypal->save();
 
-        $request->session()->flash('success', "Paypal informations updated successfully!");
+        Session::flash('success', "Paypal informations updated successfully!");
 
         return back();
     }
@@ -59,7 +61,7 @@ class GatewayController extends Controller
 
         $stripe->save();
 
-        $request->session()->flash('success', "Stripe informations updated successfully!");
+        Session::flash('success', "Stripe informations updated successfully!");
 
         return back();
     }
@@ -78,7 +80,7 @@ class GatewayController extends Controller
 
         $paystack->save();
 
-        $request->session()->flash('success', "Paystack informations updated successfully!");
+        Session::flash('success', "Paystack informations updated successfully!");
 
         return back();
     }
@@ -98,7 +100,7 @@ class GatewayController extends Controller
 
         $paytm->save();
 
-        $request->session()->flash('success', "Paytm informations updated successfully!");
+        Session::flash('success', "Paytm informations updated successfully!");
 
         return back();
     }
@@ -116,7 +118,7 @@ class GatewayController extends Controller
 
         $flutterwave->save();
 
-        $request->session()->flash('success', "Flutterwave informations updated successfully!");
+        Session::flash('success', "Flutterwave informations updated successfully!");
 
         return back();
     }
@@ -135,7 +137,7 @@ class GatewayController extends Controller
 
         $instamojo->save();
 
-        $request->session()->flash('success', "Instamojo informations updated successfully!");
+        Session::flash('success', "Instamojo informations updated successfully!");
 
         return back();
     }
@@ -154,9 +156,9 @@ class GatewayController extends Controller
 
         $arr = ['MOLLIE_KEY' => $request->key];
         setEnvironmentValue($arr);
-        \Artisan::call('config:clear');
+        Artisan::call('config:clear');
 
-        $request->session()->flash('success', "Mollie Payment informations updated successfully!");
+        Session::flash('success', "Mollie Payment informations updated successfully!");
 
         return back();
     }
@@ -174,7 +176,7 @@ class GatewayController extends Controller
 
         $razorpay->save();
 
-        $request->session()->flash('success', "Razorpay informations updated successfully!");
+        Session::flash('success', "Razorpay informations updated successfully!");
 
         return back();
     }
@@ -192,7 +194,7 @@ class GatewayController extends Controller
 
         $mercadopago->save();
 
-        $request->session()->flash('success', "Mercado Pago informations updated successfully!");
+        Session::flash('success', "Mercado Pago informations updated successfully!");
 
         return back();
 
@@ -214,15 +216,16 @@ class GatewayController extends Controller
 
         $arr = ['INDIPAY_MERCHANT_KEY' => $request->key,'INDIPAY_SALT' => $request->salt];
         setEnvironmentValue($arr);
-        \Artisan::call('config:clear');
+        Artisan::call('config:clear');
 
-        $request->session()->flash('success', "PayUmoney informations updated successfully!");
+        Session::flash('success', "PayUmoney informations updated successfully!");
 
         return back();
     }
 
     public function offline(Request $request) {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['ogateways'] = OfflineGateway::where('language_id', $lang_id)->orderBy('id', 'DESC')->paginate(10);

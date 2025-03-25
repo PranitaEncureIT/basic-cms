@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\BasicExtended;
 use App\Models\BasicExtra;
-use App\Models\BasicSetting;
 use App\Exports\PackageOrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
@@ -19,7 +18,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -28,7 +26,8 @@ class PackageController extends Controller
 {
   public function index(Request $request)
   {
-    $lang = Language::where('code', $request->language)->first();
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['packages'] = Package::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
@@ -43,7 +42,8 @@ class PackageController extends Controller
 
   public function edit(Request $request, $id)
   {
-    $lang = Language::where('code', $request->language)->first();
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
 
     $data['categories'] = PackageCategory::where('language_id', $lang->id)
       ->where('status', 1)
@@ -63,7 +63,8 @@ class PackageController extends Controller
 
   public function form(Request $request)
   {
-    $lang = Language::where('code', $request->language)->firstOrFail();
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
     $data['lang_id'] = $lang->id;
     $data['abs'] = $lang->basic_setting;
     $data['inputs'] = PackageInput::where('language_id', $data['lang_id'])->get();
@@ -641,7 +642,8 @@ class PackageController extends Controller
 
   public function background(Request $request)
   {
-    $lang = Language::where('code', $request->language)->firstOrFail();
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
     $data['lang_id'] = $lang->id;
     $data['abe'] = $lang->basic_extended;
 
@@ -680,7 +682,7 @@ class PackageController extends Controller
       $be->save();
     }
 
-    $request->session()->flash('success', 'Package section background');
+    Session::flash('success', 'Package section background');
     return back();
   }
 
@@ -702,7 +704,7 @@ class PackageController extends Controller
       $bex->save();
     }
 
-    $request->session()->flash('success', 'Settings updated successfully!');
+    Session::flash('success', 'Settings updated successfully!');
     return back();
   }
 

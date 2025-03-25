@@ -8,14 +8,15 @@ use Illuminate\Support\Str;
 use App\Models\Job;
 use App\Models\Jcategory;
 use App\Models\Language;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class JobController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['jobs'] = Job::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();

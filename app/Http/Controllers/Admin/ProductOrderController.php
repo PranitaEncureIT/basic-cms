@@ -15,7 +15,7 @@ use App\Models\OfflineGateway;
 use App\Models\PaymentGateway;
 use App\Models\User;
 use Carbon\Carbon;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ProductOrderController extends Controller
 {

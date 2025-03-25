@@ -10,14 +10,12 @@ use App\Models\BasicExtra;
 use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ShippingCharge;
-use App\Models\ProductReview;
-use Auth;
 use App\Models\Pcategory;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\Language;
-use App\Models\OfflineGateway;
 use App\Models\PaymentGateway;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {

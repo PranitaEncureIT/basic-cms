@@ -37,9 +37,10 @@ class FAQCategoryController extends Controller
 
   public function index(Request $request)
   {
-    $language = Language::where('code', $request->language)->first();
+    $lang_code = isset($request->language) ?  $request->language : 'en';
+    $lang = Language::where('code', $lang_code)->first();
 
-    $categories = FAQCategory::where('language_id', $language->id)
+    $categories = FAQCategory::where('language_id', $lang->id)
       ->orderBy('id', 'desc')
       ->paginate(10);
 

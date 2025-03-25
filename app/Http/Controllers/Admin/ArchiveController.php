@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Archive;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+
 
 class ArchiveController extends Controller
 {

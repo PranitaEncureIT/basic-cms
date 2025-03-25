@@ -6,7 +6,7 @@ use App\Models\BasicExtended;
 use App\Models\EmailTemplate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class EmailController extends Controller
 {

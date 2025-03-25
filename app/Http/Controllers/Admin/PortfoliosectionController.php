@@ -6,20 +6,22 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BasicSetting as BS;
 use App\Models\Language;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class PortfoliosectionController extends Controller
 {
     public function index(Request $request)
     {
-        if (empty($request->language)) {
-            $data['lang_id'] = 0;
-            $data['abs'] = BS::firstOrFail();
-        } else {
-            $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = $request->language ?? 'en';
+        $lang = Language::where('code', $lang_code)->first();
+
+        if ($lang) {
             $data['lang_id'] = $lang->id;
             $data['abs'] = $lang->basic_setting;
+        } else {
+            $data['lang_id'] = 0;
+            $data['abs'] = BS::firstOrFail();
         }
         return view('admin.home.portfolio-section', $data);
     }

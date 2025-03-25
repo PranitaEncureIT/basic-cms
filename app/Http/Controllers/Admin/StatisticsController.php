@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Models\BasicExtended;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BasicSetting as BS;
 use App\Models\Statistic;
 use App\Models\Language;
-use Session;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class StatisticsController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['statistics'] = Statistic::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
@@ -128,7 +128,7 @@ class StatisticsController extends Controller
 
         }
 
-        $request->session()->flash('success', 'Statistics section background image');
+        Session::flash('success', 'Statistics section background image');
         return back();
     }
 

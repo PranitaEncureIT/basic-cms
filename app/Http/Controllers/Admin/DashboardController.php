@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Quote;
-use App\Models\Product;
 use App\Models\ProductOrder;
 
 class DashboardController extends Controller

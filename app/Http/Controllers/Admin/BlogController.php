@@ -10,15 +10,15 @@ use App\Models\Language;
 use App\Models\Blog;
 use App\Models\Megamenu;
 use App\Helper\CommonHelper;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Session;
 
 class BlogController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
-
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['lang_id'] = $lang_id;
         $data['blogs'] = Blog::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();

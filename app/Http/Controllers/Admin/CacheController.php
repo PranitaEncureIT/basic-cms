@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Artisan;
-use Session;
+
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Session;
+
 
 class CacheController extends Controller
 {

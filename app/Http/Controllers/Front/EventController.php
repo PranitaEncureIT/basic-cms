@@ -23,8 +23,6 @@ use App\Http\Controllers\Payment\causes\StripeController;
 use App\Http\Helpers\KreativMailer;
 use Illuminate\Support\Facades\Auth;
 use PDF;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
@@ -35,9 +33,9 @@ class EventController extends Controller
         $event = Event::findOrFail($request->event_id);
         if ($event->available_tickets < $request->ticket_quantity) {
             if ($event->available_tickets == 0 || $event->available_tickets < 0) {
-                $request->session()->flash('error', 'No Tickets Available');
+                Session::flash('error', 'No Tickets Available');
             } else {
-                $request->session()->flash('error', 'Only ' . $event->available_tickets . ' Tickets Available');
+                Session::flash('error', 'Only ' . $event->available_tickets . ' Tickets Available');
             }
             return back();
         }

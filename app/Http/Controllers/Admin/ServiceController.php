@@ -7,13 +7,12 @@ use App\Models\BasicExtra;
 use App\Helper\CommonHelper;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use App\Models\Service;
 use App\Models\Scategory;
 use App\Models\Language;
 use App\Models\Megamenu;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class ServiceController extends Controller
 {
@@ -32,13 +31,14 @@ class ServiceController extends Controller
             $bex->save();
         }
 
-        $request->session()->flash('success', 'Settings updated successfully!');
+        Session::flash('success', 'Settings updated successfully!');
         return back();
     }
 
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['services'] = Service::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();

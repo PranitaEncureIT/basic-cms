@@ -11,7 +11,9 @@ use App\Models\Package;
 use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
 use App\Models\Subscription;
-use Session;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class PayumoneyController extends PaymentController
 {
@@ -20,12 +22,12 @@ class PayumoneyController extends PaymentController
         $data = PaymentGateway::whereKeyword('payumoney')->first();
         $paydata = $data->convertAutoData();
         if ($paydata['sandbox_check'] == 1) {
-            \Config::set('indipay.testMode', true);
+            Config::set('indipay.testMode', true);
         } else {
-            \Config::set('indipay.testMode', false);
+            Config::set('indipay.testMode', false);
         }
-        \Config::set('indipay.payumoney.successUrl', 'payumoney/notify');
-        \Config::set('indipay.payumoney.failureUrl', 'payumoney/notify');
+        Config::set('indipay.payumoney.successUrl', 'payumoney/notify');
+        Config::set('indipay.payumoney.failureUrl', 'payumoney/notify');
     }
 
     public function store(Request $request)
@@ -59,7 +61,7 @@ class PayumoneyController extends PaymentController
 
 
         $orderData['item_name'] = $package->title . " Order";
-        $orderData['item_number'] = \Str::random(4) . time();
+        $orderData['item_number'] = Str::random(4) . time();
         $orderData['item_amount'] = $package->price;
         $orderData['order_id'] = $po->id;
         $orderData['package_id'] = $package->id;

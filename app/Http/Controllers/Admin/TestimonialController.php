@@ -9,13 +9,14 @@ use App\Models\Language;
 use App\Models\Testimonial;
 use App\Models\BasicSetting as BS;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class TestimonialController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['testimonials'] = Testimonial::where('language_id', $data['lang_id'])->orderBy('id', 'DESC')->get();

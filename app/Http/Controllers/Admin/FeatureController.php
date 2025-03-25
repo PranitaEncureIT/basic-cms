@@ -7,14 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
 use App\Models\Feature;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class FeatureController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['features'] = Feature::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
         $data['lang_id'] = $lang_id;

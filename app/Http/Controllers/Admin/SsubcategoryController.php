@@ -5,8 +5,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Ssubcategory;
 use App\Models\Scategory;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class SsubcategoryController extends Controller
 {

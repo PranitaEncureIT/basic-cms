@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use Illuminate\Http\Request;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CouponController extends Controller
 {
@@ -79,7 +79,7 @@ class CouponController extends Controller
         $coupon = Coupon::find($request->coupon_id);
         $coupon->delete();
 
-        $request->session()->flash('success', 'Coupon deleted successfully!');
+        Session::flash('success', 'Coupon deleted successfully!');
         return back();
     }
 }

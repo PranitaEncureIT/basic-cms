@@ -8,13 +8,13 @@ use App\Models\BasicSetting;
 use App\Models\Home;
 use App\Http\Controllers\Controller;
 use App\Models\Language;
-use App\Models\Service;
+
 use App\Models\Timezone;
-use Artisan;
-use Config;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Session;
-use Validator;
+
 
 class BasicController extends Controller
 {
@@ -137,7 +137,7 @@ class BasicController extends Controller
 
         }
 
-        $request->session()->flash('success', 'Images updated successfully!');
+        Session::flash('success', 'Images updated successfully!');
         return back();
     }
 
@@ -361,7 +361,8 @@ class BasicController extends Controller
 
     public function seo(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abe'] = $lang->basic_extended;
 
@@ -421,7 +422,8 @@ class BasicController extends Controller
 
     public function support(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
 
@@ -446,7 +448,8 @@ class BasicController extends Controller
 
     public function heading(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['abe'] = $lang->basic_extended;
@@ -750,7 +753,8 @@ class BasicController extends Controller
 
     public function cookiealert(Request $request)
     {
-        $lang = Language::where('code', $request->language)->firstOrFail();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
         $data['lang_id'] = $lang->id;
         $data['abe'] = $lang->basic_extended;
 

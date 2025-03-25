@@ -7,82 +7,80 @@ use App\Http\Controllers\Controller;
 use App\Models\BasicExtended as BE;
 use App\Models\Language;
 use App\Models\ShippingCharge;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class ShopSettingController extends Controller
 {
-   public function index(Request $request)
-   {
+    public function index(Request $request)
+    {
 
-       $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['shippings'] = ShippingCharge::where('language_id', $lang_id)->orderBy('id', 'DESC')->paginate(10);
         $data['lang_id'] = $lang_id;
-       return view('admin.product.shop_setting.index',$data);
-   }
-
-
-   public function store(Request $request)
-   {
-    $rules = [
-        'language_id' => 'required',
-        'title' => 'required',
-        'text' => 'required|max:255',
-        'charge' => 'required',
-    ];
-
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        $errmsgs = $validator->getMessageBag()->add('error', 'true');
-        return response()->json($validator->errors());
+        return view('admin.product.shop_setting.index', $data);
     }
 
-    $input = $request->all();
 
-    $data = new ShippingCharge;
-    $data->create($input);
+    public function store(Request $request)
+    {
+        $rules = [
+            'language_id' => 'required',
+            'title' => 'required',
+            'text' => 'required|max:255',
+            'charge' => 'required',
+        ];
 
-    Session::flash('success', 'Shipping Charge added successfully!');
-    return "success";
-   }
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
+            return response()->json($validator->errors());
+        }
 
-   public function edit($id)
-   {
-       $shipping = ShippingCharge::findOrFail($id);
-       return view('admin.product.shop_setting.edit',compact('shipping'));
-   }
+        $input = $request->all();
 
-   public function update(Request $request)
-   {
-    $rules = [
-        'title' => 'required',
-        'text' => 'required|max:255',
-        'charge' => 'required',
-    ];
+        $data = new ShippingCharge;
+        $data->create($input);
 
-    $validator = Validator::make($request->all(), $rules);
-    if ($validator->fails()) {
-        $errmsgs = $validator->getMessageBag()->add('error', 'true');
-        return response()->json($validator->errors());
+        Session::flash('success', 'Shipping Charge added successfully!');
+        return "success";
     }
 
-    $data = ShippingCharge::findOrFail($request->shipping_id);
-    $data->update($request->all());
+    public function edit($id)
+    {
+        $shipping = ShippingCharge::findOrFail($id);
+        return view('admin.product.shop_setting.edit', compact('shipping'));
+    }
 
-    Session::flash('success', 'Shipping charge update successfully!');
-    return "success";
+    public function update(Request $request)
+    {
+        $rules = [
+            'title' => 'required',
+            'text' => 'required|max:255',
+            'charge' => 'required',
+        ];
 
-   }
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            $errmsgs = $validator->getMessageBag()->add('error', 'true');
+            return response()->json($validator->errors());
+        }
+
+        $data = ShippingCharge::findOrFail($request->shipping_id);
+        $data->update($request->all());
+
+        Session::flash('success', 'Shipping charge update successfully!');
+        return "success";
+    }
 
 
-   public function delete(Request $request)
-   {
+    public function delete(Request $request)
+    {
         $data = ShippingCharge::findOrFail($request->shipping_id);
         $data->delete();
         Session::flash('success', 'Shipping charge delete successfully!');
         return back();
-   }
-
-
+    }
 }

@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Payment\PaymentController;
 use Illuminate\Http\Request;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\Language;
-use App\Models\Package;
-use App\Models\PackageOrder;
-use PDF;
+
 
 class OfflineController extends PaymentController
 {

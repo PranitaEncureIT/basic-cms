@@ -8,13 +8,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Partner;
 use App\Models\Language;
 use Illuminate\Support\Facades\Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class PartnerController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['partners'] = Partner::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();

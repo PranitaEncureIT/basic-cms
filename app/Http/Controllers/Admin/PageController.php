@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Models\Language;
-use Session;
-use Validator;
+use DragonCode\Support\Facades\Filesystem\File;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+        $lang = Language::where('code', $lang_code)->first();
         $lang_id = $lang->id;
         $data['apages'] = Page::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
 
@@ -215,7 +217,7 @@ class PageController extends Controller
         $imageName = uniqid().'.'.'png';
 
         $path = 'assets/front/img/pagebuilder/' . $imageName;
-        \File::put($path, base64_decode($image));
+        File::put($path, base64_decode($image));
 
         $assets[] = [
             'name' => $imageName,

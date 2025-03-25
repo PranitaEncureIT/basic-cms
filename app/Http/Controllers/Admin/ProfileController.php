@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-use Auth;
-use Session;
-use Hash;
-use Validator;
-use App\Models\Admin;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {

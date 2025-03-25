@@ -7,14 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Models\CalendarEvent;
 use App\Models\Language;
 use Carbon\Carbon;
-use Validator;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class CalendarController extends Controller
 {
     public function index(Request $request)
     {
-        $lang = Language::where('code', $request->language)->first();
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
         $data['events'] = CalendarEvent::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();

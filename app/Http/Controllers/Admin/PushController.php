@@ -7,9 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Guest;
 use App\Notifications\PushDemo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
-use Notification;
-use Validator;
+
 
 class PushController extends Controller
 {
@@ -53,7 +54,7 @@ class PushController extends Controller
         if ($request->has('public_key') && $request->has('private_key')) {
             $arr = ['VAPID_PUBLIC_KEY' => $request->public_key,'VAPID_PRIVATE_KEY' => $request->private_key];
             setEnvironmentValue($arr);
-            \Artisan::call('config:clear');
+            Artisan::call('config:clear');
         }
 
         session()->flash('success', 'Push Notification icon updated!');
@@ -80,7 +81,7 @@ class PushController extends Controller
 
         Notification::send(Guest::all(), new PushDemo($title, $message, $buttonText, $buttonURL));
 
-        $request->session()->flash('success', 'Push notification sent');
+        Session::flash('success', 'Push notification sent');
         return redirect()->route('admin.pushnotification.send');
     }
 }

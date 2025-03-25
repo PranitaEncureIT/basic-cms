@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Ticket;
-use Validator;
-use Auth;
+use Illuminate\Support\Facades\Validator;
 use XSSCleaner;
 use App\Models\Conversation;
-use Session;
+use Illuminate\Support\Facades\Session;
 use App\Models\Admin;
 use App\Models\BasicExtra;
+use Illuminate\Support\Facades\Auth;
 
 class TicketController extends Controller
 {
@@ -241,7 +241,7 @@ class TicketController extends Controller
             $bex->save();
         }
 
-        $request->session()->flash('success', 'Settings updated successfully!');
+        Session::flash('success', 'Settings updated successfully!');
         return back();
     }
 }

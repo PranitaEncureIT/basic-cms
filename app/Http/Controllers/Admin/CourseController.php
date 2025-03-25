@@ -27,8 +27,9 @@ class CourseController extends Controller
 {
     public function index(Request $request)
     {
-        $language = Language::where('code', $request->language)->first();
-        $language_id = $language->id;
+        $lang_code = isset($request->language) ?  $request->language : 'en';
+		$lang = Language::where('code', $lang_code)->first();
+        $language_id = $lang->id;
 
         $courses = Course::where('language_id', $language_id)
             ->orderBy('id', 'desc')
@@ -364,7 +365,7 @@ class CourseController extends Controller
             $bex->save();
         }
 
-        $request->session()->flash('success', 'Settings updated successfully!');
+        Session::flash('success', 'Settings updated successfully!');
         return back();
     }
 

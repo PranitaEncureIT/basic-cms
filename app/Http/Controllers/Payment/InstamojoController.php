@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Payment;
 use App\Models\BasicExtra;
 use App\Http\Controllers\Payment\PaymentController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Helpers\Instamojo;
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\Language;
-use App\Models\OfflineGateway;
 use App\Models\Package;
-use App\Models\PackageInput;
 use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
 use App\Models\Subscription;
-use PDF;
-use Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class InstamojoController extends PaymentController
 {
@@ -53,7 +49,7 @@ class InstamojoController extends PaymentController
 
         $package = Package::findOrFail($request->package_id);
         $order['item_name'] = $package->title . " Order";
-        $order['item_number'] = \Str::random(4) . time();
+        $order['item_number'] = Str::random(4) . time();
         $order['item_amount'] = $package->price;
         $order['order_id'] = $po->id;
         $order['package_id'] = $package->id;

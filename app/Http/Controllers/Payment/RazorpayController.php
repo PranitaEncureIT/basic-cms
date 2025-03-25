@@ -11,7 +11,8 @@ use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
 use App\Models\Subscription;
 use Razorpay\Api\Api;
-use Session;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Session;
 
 
 class RazorpayController extends PaymentController
@@ -57,7 +58,7 @@ class RazorpayController extends PaymentController
 
 
         $order['title'] = $package->title . " Order";
-        $order['item_number'] = \Str::random(4) . time();
+        $order['item_number'] = Str::random(4) . time();
         $order['item_amount'] = $package->price;
         $order['package_id'] = $package->id;
         $order['order_id'] = $po->id;
