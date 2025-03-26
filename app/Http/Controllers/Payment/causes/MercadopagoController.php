@@ -6,17 +6,9 @@ use App\Http\Controllers\Front\CausesController;
 use App\Http\Controllers\Front\EventController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\Language;
-use App\Models\OfflineGateway;
-use App\Models\Package;
-use App\Models\PackageInput;
-use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Str;
-use PDF;
 
 class MercadopagoController extends Controller
 {

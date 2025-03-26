@@ -1,30 +1,44 @@
+<style>
+  .navbar-toggler i,
+.topbar-toggler i,
+.nav-toggle i {
+    color: black !important;
+}
+
+</style>
 <div class="main-header">
-  <!-- Logo Header -->
-  <div class="logo-header" data-background-color="light2">
+<!-- Logo Header -->
+<div class="logo-header" data-background-color="light2">
+  @php
+    $logoPath = public_path('assets/front/img/' . $bs->logo);
+  @endphp
+  <a href="{{ route('front.index') }}" class="logo" target="_blank">
+    @if (file_exists($logoPath) && !empty($bs->logo))
+      <img src="{{ asset('assets/front/img/' . $bs->logo) }}" alt="Navbar Brand" class="navbar-brand" width="60">
+    @else
+      <img src="{{ asset('assets/front/img/logo2.png') }}" alt="Default Logo" class="navbar-brand" width="60">
+    @endif
+  </a>
 
-    @php
-      $logoPath = public_path('assets/front/img/' . $bs->logo);
-    @endphp
-    <a href="{{route('front.index')}}" class="logo" target="_blank">
+  <!-- Hamburger (Closes Sidebar) -->
+  <button class="navbar-toggler sidenav-toggler ml-auto text-dark" type="button">
+    <span class="navbar-toggler-icon">
+      <i class="icon-menu"></i>
+    </span>
+  </button>
 
-      @if (file_exists($logoPath) && !empty($bs->logo))
-        <img src="{{ asset('assets/front/img/' . $bs->logo) }}" alt="Navbar Brand" class="navbar-brand" width="60">
-      @else
-        <img src="{{ asset('assets/front/img/logo2.png') }}" alt="Default Logo" class="navbar-brand" width="60">
-      @endif
-    </a>
-    <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon">
-        <i class="icon-menu"></i>
-      </span>
+  <!--  (Opens Sidebar) -->
+  <button class="topbar-toggler more text-dark">
+    <i class="icon-options-vertical"></i>
+  </button>
+
+  <div class="nav-toggle">
+    <button class="btn btn-toggle text-dark @if(request()->routeIs('admin.file-manager')) sidenav-overlay-toggler @else toggle-sidebar @endif">
+      <i class="icon-menu"></i>
     </button>
-    <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
-    <div class="nav-toggle">
-      <button class="btn btn-toggle @if(request()->routeIs('admin.file-manager')) sidenav-overlay-toggler @else toggle-sidebar @endif">
-        <i class="icon-menu"></i>
-      </button>
-    </div>
   </div>
+</div>
+
   <!-- End Logo Header -->
 
   <!-- Navbar Header -->
@@ -81,3 +95,20 @@
   </nav>
   <!-- End Navbar -->
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let sidebar = document.querySelector(".sidebar"); // Change this selector if needed
+
+    // Hamburger Button (Closes Sidebar)
+    document.querySelector(".navbar-toggler").addEventListener("click", function () {
+        sidebar.classList.toggle("active"); // Add or remove 'active' class
+    });
+
+    // Three Dots Button (Opens Sidebar)
+    document.querySelector(".topbar-toggler").addEventListener("click", function () {
+        sidebar.classList.add("active"); // Force open the sidebar
+    });
+});
+
+</script>

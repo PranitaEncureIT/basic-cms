@@ -18,7 +18,8 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-use Redirect;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class PaypalController extends Controller
@@ -29,7 +30,7 @@ class PaypalController extends Controller
     {
         $data = PaymentGateway::whereKeyword('paypal')->first();
         $paydata = $data->convertAutoData();
-        $paypal_conf = \Config::get('paypal');
+        $paypal_conf = Config::get('paypal');
         $paypal_conf['client_id'] = $paydata['client_id'];
         $paypal_conf['secret'] = $paydata['client_secret'];
         $paypal_conf['settings']['mode'] = $paydata['sandbox_check'] == 1 ? 'sandbox' : 'live';

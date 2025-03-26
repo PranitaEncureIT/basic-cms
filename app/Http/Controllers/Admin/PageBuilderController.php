@@ -9,7 +9,7 @@ use App\Models\Page;
 use App\Models\Home;
 use App\Models\Pcategory;
 use App\Models\Product;
-use DragonCode\Support\Facades\Filesystem\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 
 class PageBuilderController extends Controller

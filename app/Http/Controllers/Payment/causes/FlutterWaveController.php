@@ -2,20 +2,13 @@
 
 namespace App\Http\Controllers\Payment\causes;
 
-use App\Models\DonationDetail;
 use App\Http\Controllers\Front\CausesController;
 use App\Http\Controllers\Front\EventController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 use App\Models\Language;
-use App\Models\OfflineGateway;
-use App\Models\Package;
-use App\Models\PackageInput;
-use App\Models\PackageOrder;
 use App\Models\PaymentGateway;
-use PDF;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 
 class FlutterWaveController extends Controller
@@ -125,7 +118,7 @@ class FlutterWaveController extends Controller
                 $chargeResponsecode = $resp['data']['chargecode'];
                 $paymentFor = Session::get('paymentFor');
                 if (($chargeResponsecode == "00" || $chargeResponsecode == "0") && ($paymentStatus == "successful")) {
-                    $transaction_id = 'txn_' . \Str::random(8) . time();
+                    $transaction_id = 'txn_' . Str::random(8) . time();
                     $transaction_details = json_encode($request['data']);
                     if ($paymentFor == "Cause") {
                         return $requestData["donation_id"];

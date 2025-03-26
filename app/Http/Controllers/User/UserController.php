@@ -5,13 +5,13 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
-use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\BasicExtra;
 use App\Models\Language;
 use App\Models\ProductOrder;
 use App\Models\Subscription;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {

@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers\Payment\causes;
 
-use App\Models\DonationDetail;
 use App\Http\Controllers\Front\CausesController;
 use App\Http\Controllers\Front\EventController;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use App\Mail\Donation;
 use App\Http\Controllers\Controller;
-use App\Models\Language;
 use App\Models\PaymentGateway;
+use Exception;
 use Illuminate\Support\Facades\Session;
-use PDF;
-use Symfony\Component\HttpFoundation\Response;
 
 class StripeController extends Controller
 {

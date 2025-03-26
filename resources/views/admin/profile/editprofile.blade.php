@@ -47,7 +47,7 @@
                   </div>
                   <div class="col-sm-12">
                     <div class="from-group mb-2">
-                      <input type="text" class="form-control progressbar" aria-describedby="fileHelp" placeholder="No image uploaded..." readonly="readonly" />
+                      {{-- <input type="text" class="form-control progressbar" aria-describedby="fileHelp" placeholder="No image uploaded..." readonly="readonly" /> --}}
 
                       <div class="progress mb-2 d-none">
                         <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary"
@@ -75,7 +75,7 @@
                <form action="{{route('admin.updateProfile')}}" method="post" role="form">
                  {{csrf_field()}}
                  <div class="form-body">
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                         <div class="col-md-12">
                           <label>Username</label>
                         </div>
@@ -91,7 +91,8 @@
                            <label>Email</label>
                          </div>
                         <div class="col-md-12">
-                           <input class="form-control input-lg" name="email" value="{{$admin->email}}" placeholder="Your Email" type="text">
+                          <input class="form-control input-lg" name="email" value="{{$admin->email}}" placeholder="Your Email" type="text" readonly style="background-color: #fff !important; opacity: 1; cursor: not-allowed;">
+
                            @if ($errors->has('email'))
                              <p style="margin:0px;" class="text-danger">{{$errors->first('email')}}</p>
                            @endif
@@ -133,5 +134,8 @@
       </div>
     </div>
   </div>
-
+  <style>
+ 
+  
+  </style>
 @endsection

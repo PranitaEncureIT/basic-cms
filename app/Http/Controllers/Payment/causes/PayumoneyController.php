@@ -9,6 +9,7 @@ use App\Http\Controllers\Front\EventController;
 use Softon\Indipay\Facades\Indipay;
 use App\Models\Language;
 use App\Models\PaymentGateway;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
 class PayumoneyController extends Controller
@@ -18,12 +19,12 @@ class PayumoneyController extends Controller
         $data = PaymentGateway::whereKeyword('payumoney')->first();
         $paydata = $data->convertAutoData();
         if ($paydata['sandbox_check'] == 1) {
-            \Config::set('indipay.testMode', true);
+            Config::set('indipay.testMode', true);
         } else {
-            \Config::set('indipay.testMode', false);
+            Config::set('indipay.testMode', false);
         }
-        \Config::set('indipay.payumoney.successUrl', 'cause/payumoney/payment');
-        \Config::set('indipay.payumoney.failureUrl', 'cause/payumoney/payment');
+        Config::set('indipay.payumoney.successUrl', 'cause/payumoney/payment');
+        Config::set('indipay.payumoney.failureUrl', 'cause/payumoney/payment');
     }
 
     public function paymentProcess(Request $request,$_amount,$_item_number,$_title,$_success_url,$_cancel_url)

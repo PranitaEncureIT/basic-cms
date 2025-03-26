@@ -132,10 +132,10 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
 
                     @if (file_exists($imagePath) && !empty($course->course_image))
                       <img src="{{ asset('assets/front/img/courses/' . $course->course_image) }}"
-                        alt="Image">
+                        alt="Image" style="width: 100px">
                     @else
                       <img src="{{ asset('assets/front/img/no_image.jpg') }}"
-                        alt="Image">
+                        alt="Image" style="width: 100px"> 
                     @endif
 
                     </td>
