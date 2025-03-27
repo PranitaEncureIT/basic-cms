@@ -48,26 +48,26 @@
                             {{-- @if (count($users) == 0)
                                 <h3 class="text-center">NO USER FOUND</h3>
                             @else 
-                            @endif--}}
-                                <div class="table-responsive">
-                                    <table id="user_list" class="table table-striped table-row-bordered gy-5 gs-7 mt-3">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">
-                                                    <input type="checkbox" class="bulk-check" data-val="all">
-                                                </th>
-                                                <th scope="col"> Name</th>
-                                                <th scope="col"> Email</th>
-                                                <th scope="col"> Number</th>
-                                                <th scope="col"> Email Status</th>
-                                                <th scope="col"> Account</th>
-                                                <th scope="col"> Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            @endif --}}
+                            <div class="table-responsive">
+                                <table id="user_list" class="table table-striped table-row-bordered gy-5 gs-7 mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">
+                                                <input type="checkbox" class="bulk-check" data-val="all">
+                                            </th>
+                                            <th scope="col"> Name</th>
+                                            <th scope="col"> Email</th>
+                                            <th scope="col"> Number</th>
+                                            <th scope="col"> Email Status</th>
+                                            <th scope="col"> Account</th>
+                                            <th scope="col"> Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,36 +99,110 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
     <script>
-        var table = $('#user_list').DataTable({
-            processing: true,
-            serverSide: true,
-            paging: true,
-            lengthChange: true,
-            searching: true,
-            info: true,
-            autoWidth: false,
-            scrollX: true,
-            scrollCollapse: true,
-            // dom: 'Bfrtip', // Include buttons in the layout
-            "order": [
-                [0, "asc"]
-            ],
-            "ajax": {
-                url: "{{ route('admin.register.user') }}",
-                type: "GET"
-                // data: function (d) {
-                //     d.name = $('#search_name').val();
-                // }
-            },
-            columns: [
-        {data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
-        {data: 'username', name: 'username', searchable: true},
-        {data: 'email', name: 'email'},
-        {data: 'number', name: 'number'},
-        {data: 'email_verified', name: 'email_verified', orderable: false, searchable: false},
-        {data: 'status', name: 'status', orderable: false, searchable: false},
-        {data: 'action', name: 'action', orderable: false, searchable: false},
-    ]
+        let table;
+        $(document).ready(function() {
+            var table = $('#user_list').DataTable({
+                processing: true,
+                serverSide: true,
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                autoWidth: false,
+                scrollX: true,
+                scrollCollapse: true,
+                // dom: 'Bfrtip', // Include buttons in the layout
+                "order": [
+                    [0, "asc"]
+                ],
+                "ajax": {
+                    url: "{{ route('admin.register.user') }}",
+                    type: "GET"
+                    // data: function (d) {
+                    //     d.name = $('#search_name').val();
+                    // }
+                },
+                columns: [{
+                        data: 'checkbox',
+                        name: 'checkbox',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'username',
+                        name: 'username',
+                        searchable: true
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'number',
+                        name: 'number'
+                    },
+                    {
+                        data: 'email_verified',
+                        name: 'email_verified',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+
+            // Use the table element (or a container) as the delegation root.
+            $('#user_list').on('click', '.deletebutton', function(e) {
+                e.preventDefault(); // Prevent any default behavior
+
+                let clientId = $(this).data('id'); // Get ID from data attribute
+                console.log("Client ID:", clientId); // Check if correct id is received
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "This record will be deleted permanently!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('register.user.delete') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                user_id: clientId
+                            },
+                            success: function(response) {
+                                console.log("AJAX success response:", response);
+                                if (response.success) {
+                                    // Reload the DataTable
+                                    window.location.reload();
+                                } else {
+                                    console.error("Deletion did not return success");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX error:", error);
+                            }
+                        });
+                    }
+                });
+            });
+
         });
     </script>
 @endsection

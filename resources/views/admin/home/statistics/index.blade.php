@@ -77,18 +77,6 @@
                                 @if ($errors->has('background_image'))
                                 <p class="text-danger mb-0">{{$errors->first('background_image')}}</p>
                                 @endif
-
-                                <!-- Image LFM Modal -->
-                                <div class="modal fade lfm-modal" id="lfmModal1" tabindex="-1" role="dialog" aria-labelledby="lfmModalTitle" aria-hidden="true">
-                                    <i class="fas fa-times-circle"></i>
-                                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-body p-0">
-                                                <iframe src="{{url('laravel-filemanager')}}?serial=1" style="width: 100%; height: 500px; overflow: hidden; border: none;"></iframe>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -118,7 +106,7 @@
                 <h2 class="text-center">NO STATISTIC ADDED</h2>
               @else
                 <div class="table-responsive">
-                  <table class="table table-striped mt-3">
+                  <table id="statistics_section" class="table table-striped mt-3">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -130,33 +118,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($statistics as $key => $statistic)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td><i class="{{ $statistic->icon }}"></i></td>
-                          <td>{{convertUtf8($statistic->title)}}</td>
-                          <td>{{$statistic->quantity}}</td>
-                          <td>{{$statistic->serial_number}}</td>
-                          <td>
-                            <a class="btn btn-secondary btn-sm" href="{{route('admin.statistics.edit', $statistic->id) . '?language=' . request()->input('language')}}">
-                            <span class="btn-label">
-                              <i class="fas fa-edit"></i>
-                            </span>
-                            Edit
-                            </a>
-                            <form class="d-inline-block deleteform" action="{{route('admin.statistics.delete')}}" method="post">
-                              @csrf
-                              <input type="hidden" name="statisticid" value="{{$statistic->id}}">
-                              <button type="submit" class="btn btn-danger btn-sm deletebtn">
-                                <span class="btn-label">
-                                  <i class="fas fa-trash"></i>
-                                </span>
-                                Delete
-                              </button>
-                            </form>
-                          </td>
-                        </tr>
-                      @endforeach
+
                     </tbody>
                   </table>
                 </div>
@@ -170,6 +132,124 @@
 
   {{-- Statistic Create Modal --}}
   @includeif('admin.home.statistics.create')
+
+      <!-- DataTables CSS -->
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+      <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+  
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  
+      <!-- DataTables JS -->
+      <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+      <script>
+          let table;
+          $(document).ready(function() {
+              var table = $('#statistics_section').DataTable({
+                  processing: true,
+                  serverSide: true,
+                  paging: true,
+                  lengthChange: true,
+                  searching: true,
+                  info: true,
+                  autoWidth: false,
+                  scrollX: true,
+                  scrollCollapse: true,
+                  // dom: 'Bfrtip', // Include buttons in the layout
+                  "order": [
+                      [0, "asc"]
+                  ],
+                  "ajax": {
+                      url: "{{ route('admin.statistics.index') }}",
+                      type: "GET"
+                      // data: function (d) {
+                      //     d.name = $('#search_name').val();
+                      // }
+                  },
+                  columns: [{
+                          data: 'sr_no',
+                          name: 'sr_no',
+                          orderable: false,
+                          searchable: true
+                      },
+                      {
+                          data: 'icon',
+                          name: 'icon',
+                      },
+                      {
+                          data: 'title',
+                          name: 'title',
+                          searchable: true
+                      },
+                      {
+                          data: 'quantity',
+                          name: 'quantity'
+                      },
+                      {
+                          data: 'serial_number',
+                          name: 'serial_number'
+                      },
+                      {
+                          data: 'action',
+                          name: 'action',
+                          orderable: false,
+                          searchable: false
+                      },
+                  ]
+              });
+  
+              // Use the table element (or a container) as the delegation root.
+              $('#statistics_section').on('click', '.deletebutton', function(e) {
+                  e.preventDefault(); // Prevent any default behavior
+  
+                  let clientId = $(this).data('id'); // Get ID from data attribute
+                  console.log("Client ID:", clientId); // Check if correct id is received
+  
+                  Swal.fire({
+                      title: "Are you sure?",
+                      text: "This record will be deleted permanently!",
+                      icon: "warning",
+                      showCancelButton: true,
+                      confirmButtonColor: "#d33",
+                      cancelButtonColor: "#3085d6",
+                      confirmButtonText: "Yes, delete it!"
+                  }).then((result) => {
+                      if (result.isConfirmed) {
+                          $.ajax({
+                              url: "{{ route('admin.statistics.delete') }}",
+                              type: "POST",
+                              data: {
+                                  _token: "{{ csrf_token() }}",
+                                  user_id: clientId
+                              },
+                              success: function(response) {
+                                  console.log("AJAX success response:", response);
+                                  if (response.success) {
+                                      // Reload the DataTable
+                                      window.location.reload();
+                                  } else {
+                                      console.error("Deletion did not return success");
+                                  }
+                              },
+                              error: function(xhr, status, error) {
+                                  console.error("AJAX error:", error);
+                              }
+                          });
+                      }
+                  });
+              });
+  
+          });
+      </script>
 @endsection
 
 

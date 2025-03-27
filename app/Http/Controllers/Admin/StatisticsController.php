@@ -18,11 +18,68 @@ class StatisticsController extends Controller
         $lang = Language::where('code', $lang_code)->first();
 
         $lang_id = $lang->id;
-        $data['statistics'] = Statistic::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
 
         $data['lang_id'] = $lang_id;
         $data['abe'] = $lang->basic_extended;
         $data['selLang'] = Language::where('code', $request->language)->first();
+        $data['statistics'] = Statistic::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
+
+        if ($request->ajax()) {
+            $draw = intval($request->input('draw'));
+            $start = intval($request->input('start'));
+            $length = intval($request->input('length'));
+            $search = $request->input('search')['value'] ?? null;
+    
+            $query = Statistic::where('language_id', $data['lang_id']);
+    
+            // Apply search filter
+            if (!empty($search)) {
+                $query->where('title', 'LIKE', "%$search%");
+            }
+    
+            // Get total count before applying pagination
+            $recordsTotal = $query->count();
+    
+            // Apply ordering, pagination, and fetch data
+            $statistics = $query->orderBy('id', 'DESC')->skip($start)->take($length)->get();
+            // dd($points);
+    
+            $languageParam = request()->input('language');
+    
+            // Modify each point for DataTables response
+            foreach ($statistics as $key => $statistic) {
+                $statistic->sr_no = $key + 1 + $start;
+    
+                // Ensure icon is properly formatted
+                $statistic->icon = "<div class='d-flex flex-column'>
+                                    <i class='" . e($statistic->icon) . "'></i>
+                                </div>";
+    
+                $statistic->title = "<div class='d-flex flex-column'>" . e(convertUtf8($statistic->title)) . "</div>";
+                $statistic->quantity = "<div class='d-flex flex-column'>" . e($statistic->quantity) . "</div>";
+                $statistic->serial_number = "<div class='d-flex flex-column'>" . e($statistic->serial_number) . "</div>";
+    
+                // Action buttons
+                $editUrl = route('admin.statistics.edit', $statistic->id) . '?language=' . e($languageParam);
+    
+                $statistic->action = "<div class='d-flex align-items-center gap-2'>
+                    <a href='" . $editUrl . "' class='btn btn-sm btn-secondary' title='Edit'>
+                        <i class='fas fa-pencil-alt'></i>
+                    </a>
+                    <button type='button' class='btn btn-sm btn-danger deletebutton' data-id='" . $statistic->id . "' title='Delete'>
+                        <i class='fas fa-trash-alt'></i>
+                    </button>
+                </div>";
+            }
+    
+            // Prepare DataTables response
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsTotal,
+                'data' => $statistics->toArray(),
+            ]);
+        }
 
         return view('admin.home.statistics.index', $data);
     }
@@ -135,10 +192,14 @@ class StatisticsController extends Controller
     public function delete(Request $request)
     {
 
-        $statistic = Statistic::findOrFail($request->statisticid);
+        $statistic = Statistic::findOrFail($request->user_id);
         $statistic->delete();
 
         Session::flash('success', 'Statistic deleted successfully!');
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return back();
     }
 }

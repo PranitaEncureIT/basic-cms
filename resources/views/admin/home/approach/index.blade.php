@@ -129,7 +129,7 @@
                         <h2 class="text-center">NO POINT ADDED</h2>
                         @else
                         <div class="table-responsive">
-                            <table class="table table-striped mt-3">
+                            <table id="approach_section" class="table table-striped table-row-bordered gy-5 gs-7 mt-3">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -140,32 +140,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($points as $key => $point)
-                                    <tr>
-                                        <td>{{$loop->iteration}}</td>
-                                        <td><i class="{{ $point->icon }}"></i></td>
-                                        <td>{{convertUtf8($point->title)}}</td>
-                                        <td>{{$point->serial_number}}</td>
-                                        <td>
-                                            <a class="btn btn-secondary btn-sm" href="{{route('admin.approach.point.edit', $point->id) . '?language=' . request()->input('language')}}">
-                                                <span class="btn-label">
-                                                    <i class="fas fa-edit"></i>
-                                                </span>
-                                                Edit
-                                            </a>
-                                            <form class="d-inline-block deleteform" action="{{route('admin.approach.pointdelete')}}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="pointid" value="{{$point->id}}">
-                                                <button type="submit" class="btn btn-danger btn-sm deletebtn">
-                                                    <span class="btn-label">
-                                                        <i class="fas fa-trash"></i>
-                                                    </span>
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -179,6 +153,118 @@
 
 {{-- Point Create Modal --}}
 @includeif('admin.home.approach.create')
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+        let table;
+        $(document).ready(function() {
+            var table = $('#approach_section').DataTable({
+                processing: true,
+                serverSide: true,
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                autoWidth: false,
+                scrollX: true,
+                scrollCollapse: true,
+                // dom: 'Bfrtip', // Include buttons in the layout
+                "order": [
+                    [0, "asc"]
+                ],
+                "ajax": {
+                    url: "{{ route('admin.approach.index') }}",
+                    type: "GET"
+                    // data: function (d) {
+                    //     d.name = $('#search_name').val();
+                    // }
+                },
+                columns: [{
+                        data: 'sr_no',
+                        name: 'sr_no',
+                        orderable: false,
+                        searchable: true
+                    },
+                    {
+                        data: 'icon',
+                        name: 'icon',
+                    },
+                    {
+                        data: 'title',
+                        name: 'title',
+                        searchable: true
+                    },
+                    {
+                        data: 'serial_number',
+                        name: 'serial_number'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+
+            // Use the table element (or a container) as the delegation root.
+            $('#approach_section').on('click', '.deletebutton', function(e) {
+                e.preventDefault(); // Prevent any default behavior
+
+                let clientId = $(this).data('id'); // Get ID from data attribute
+                console.log("Client ID:", clientId); // Check if correct id is received
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "This record will be deleted permanently!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.approach.pointdelete') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                user_id: clientId
+                            },
+                            success: function(response) {
+                                console.log("AJAX success response:", response);
+                                if (response.success) {
+                                    // Reload the DataTable
+                                    window.location.reload();
+                                } else {
+                                    console.error("Deletion did not return success");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX error:", error);
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
 @endsection
 
 

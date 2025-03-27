@@ -20,8 +20,6 @@ class RegisterUserController extends Controller
             $length = $request->input('length');
             $search = $request->input('search')['value'] ?? null;
 
-
-            // $query = Role::whereIn('roles', [2, 3]);
             $query = User::select('users.*');
 
             // Apply search filter
@@ -48,8 +46,7 @@ class RegisterUserController extends Controller
 
                 // Name & Email formatted
                 $user->username = "<div class='d-flex flex-column'>
-                                    <a href='javascript:void(0)' class='text-gray-800 text-hover-primary mb-1'>" . convertUtf8($user->username) . "</a>
-                                   
+                                    <p href='javascript:void(0)' class='text-gray-800 text-hover-primary mb-1'>" . convertUtf8($user->username) . "</p>
                                    </div>";
 
                 // Status switch
@@ -84,14 +81,10 @@ class RegisterUserController extends Controller
                 <a href='" . route('register.user.changePass', $user->id) . "' class='btn btn-sm btn-warning' title='Change Password'>
                     <i class='fa fa-key'></i>
                 </a>
-                <form class='deleteform' action='" . route('register.user.delete') . "' method='post'>
-                    " . csrf_field() . "
-                    <input type='hidden' name='user_id' value='{$user->id}'>
-                    <button type='submit' class='btn btn-sm btn-danger deletebtn' title='Delete'>
-                        <i class='fas fa-trash'></i>
-                    </button>
-                </form>
-            </div>";
+                <a class='btn btn-sm btn-danger deletebutton' data-id='" . $user->id . "' title='Delete'>
+                     <i class='fas fa-trash-alt'></i>
+                </a>
+                </div>";
             }
 
             // Prepare DataTables response
@@ -226,101 +219,107 @@ class RegisterUserController extends Controller
         $user->delete();
 
         Session::flash('success', 'User deleted successfully!');
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
+
+
         return back();
     }
 
-    public function bulkDelete(Request $request)
-    {
-        $ids = $request->ids;
+    // public function bulkDelete(Request $request)
+    // {
+    //     $ids = $request->ids;
 
-        foreach ($ids as $id) {
-            $user = User::findOrFail($id);
+    //     foreach ($ids as $id) {
+    //         $user = User::findOrFail($id);
 
-            if ($user->conversations()->count() > 0) {
-                $convs = $user->conversations()->get();
-                foreach ($convs as $key => $conv) {
-                    @unlink('assets/front/user-suppor-file/' . $conv->file);
-                    $conv->delete();
-                }
-            }
+    //         if ($user->conversations()->count() > 0) {
+    //             $convs = $user->conversations()->get();
+    //             foreach ($convs as $key => $conv) {
+    //                 @unlink('assets/front/user-suppor-file/' . $conv->file);
+    //                 $conv->delete();
+    //             }
+    //         }
 
-            if ($user->courseOrder()->count() > 0) {
-                $coursePurchases = $user->courseOrder()->get();
-                foreach ($coursePurchases as $key => $cp) {
-                    @unlink('assets/front/receipt/' . $cp->receipt);
-                    @unlink('assets/front/invoices/course/' . $cp->invoice);
-                    $cp->delete();
-                }
-            }
+    //         if ($user->courseOrder()->count() > 0) {
+    //             $coursePurchases = $user->courseOrder()->get();
+    //             foreach ($coursePurchases as $key => $cp) {
+    //                 @unlink('assets/front/receipt/' . $cp->receipt);
+    //                 @unlink('assets/front/invoices/course/' . $cp->invoice);
+    //                 $cp->delete();
+    //             }
+    //         }
 
-            if ($user->course_reviews()->count() > 0) {
-                $user->course_reviews()->delete();
-            }
+    //         if ($user->course_reviews()->count() > 0) {
+    //             $user->course_reviews()->delete();
+    //         }
 
-            if ($user->donation_details()->count() > 0) {
-                $donations = $user->donation_details()->get();
-                foreach ($donations as $key => $donation) {
-                    @unlink('assets/front/receipt/' . $donation->receipt);
-                    $donation->delete();
-                }
-            }
+    //         if ($user->donation_details()->count() > 0) {
+    //             $donations = $user->donation_details()->get();
+    //             foreach ($donations as $key => $donation) {
+    //                 @unlink('assets/front/receipt/' . $donation->receipt);
+    //                 $donation->delete();
+    //             }
+    //         }
 
-            if ($user->event_details()->count() > 0) {
-                $bookings = $user->event_details()->get();
-                foreach ($bookings as $key => $booking) {
-                    @unlink('assets/front/receipt/' . $booking->receipt);
-                    @unlink('assets/front/invoices/' . $booking->invoice);
-                    $booking->delete();
-                }
-            }
+    //         if ($user->event_details()->count() > 0) {
+    //             $bookings = $user->event_details()->get();
+    //             foreach ($bookings as $key => $booking) {
+    //                 @unlink('assets/front/receipt/' . $booking->receipt);
+    //                 @unlink('assets/front/invoices/' . $booking->invoice);
+    //                 $booking->delete();
+    //             }
+    //         }
 
-            if ($user->order_items()->count() > 0) {
-                $user->order_items()->delete();
-            }
+    //         if ($user->order_items()->count() > 0) {
+    //             $user->order_items()->delete();
+    //         }
 
-            if ($user->package_orders()->count() > 0) {
-                $pos = $user->package_orders()->get();
-                foreach ($pos as $key => $po) {
-                    @unlink('assets/front/receipt/' . $po->receipt);
-                    @unlink('assets/front/invoices/' . $po->invoice);
-                    $po->delete();
-                }
-            }
+    //         if ($user->package_orders()->count() > 0) {
+    //             $pos = $user->package_orders()->get();
+    //             foreach ($pos as $key => $po) {
+    //                 @unlink('assets/front/receipt/' . $po->receipt);
+    //                 @unlink('assets/front/invoices/' . $po->invoice);
+    //                 $po->delete();
+    //             }
+    //         }
 
-            if ($user->orders()->count() > 0) {
-                $orders = $user->orders()->get();
-                foreach ($orders as $key => $order) {
-                    @unlink('assets/front/receipt/' . $order->receipt);
-                    @unlink('assets/front/invoices/product/' . $order->invoice_number);
-                    $order->delete();
-                }
-            }
+    //         if ($user->orders()->count() > 0) {
+    //             $orders = $user->orders()->get();
+    //             foreach ($orders as $key => $order) {
+    //                 @unlink('assets/front/receipt/' . $order->receipt);
+    //                 @unlink('assets/front/invoices/product/' . $order->invoice_number);
+    //                 $order->delete();
+    //             }
+    //         }
 
-            if ($user->product_reviews()->count() > 0) {
-                $user->product_reviews()->delete();
-            }
+    //         if ($user->product_reviews()->count() > 0) {
+    //             $user->product_reviews()->delete();
+    //         }
 
-            if ($user->subscription()->count() > 0) {
-                @unlink('assets/front/receipt/' . $user->subscription->receipt);
-                @unlink('assets/front/invoices/' . $user->subscription->invoice);
-                $user->subscription()->delete();
-            }
+    //         if ($user->subscription()->count() > 0) {
+    //             @unlink('assets/front/receipt/' . $user->subscription->receipt);
+    //             @unlink('assets/front/invoices/' . $user->subscription->invoice);
+    //             $user->subscription()->delete();
+    //         }
 
-            if ($user->tickets()->count() > 0) {
-                $tickets = $user->tickets()->get();
-                foreach ($tickets as $key => $ticket) {
-                    @unlink('assets/front/user-suppor-file/' . $ticket->zip_file);
-                    $ticket->delete();
-                }
-            }
+    //         if ($user->tickets()->count() > 0) {
+    //             $tickets = $user->tickets()->get();
+    //             foreach ($tickets as $key => $ticket) {
+    //                 @unlink('assets/front/user-suppor-file/' . $ticket->zip_file);
+    //                 $ticket->delete();
+    //             }
+    //         }
 
-            @unlink('assets/front/img/user/' . $user->photo);
-            $user->delete();
-        }
+    //         @unlink('assets/front/img/user/' . $user->photo);
+    //         $user->delete();
+    //     }
 
-        Session::flash('success', 'Users deleted successfully!');
-        return "success";
-    }
+    //     Session::flash('success', 'Users deleted successfully!');
+    //     return "success";
+    // }
 
 
     public function changePass($id)
