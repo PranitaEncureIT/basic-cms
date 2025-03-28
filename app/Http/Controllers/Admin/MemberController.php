@@ -21,6 +21,81 @@ class MemberController extends Controller
         $data['lang_id'] = $lang->id;
         $data['abs'] = $lang->basic_setting;
         $data['members'] = Member::where('language_id', $data['lang_id'])->get();
+
+        if ($request->ajax()) {
+            $draw = intval($request->input('draw'));
+            $start = intval($request->input('start'));
+            $length = intval($request->input('length'));
+            $search = $request->input('search')['value'] ?? null;
+    
+            $query = Member::where('language_id', $data['lang_id']);
+    
+            // Apply search filter
+            if (!empty($search)) {
+                $query->orwhere('name', 'LIKE', "%$search%")
+                ->orwhere('rank', 'LIKE', "%$search%");
+
+            }
+    
+            // Get total count before applying pagination
+            $recordsTotal = $query->count();
+    
+            // Apply ordering, pagination, and fetch data
+            $members = $query->orderBy('id', 'DESC')->skip($start)->take($length)->get();
+            $languageParam = request()->input('language');
+    
+            // Modify each point for DataTables response
+            foreach ($members as $key => $member) {
+                $member->sr_no = $key + 1 + $start;
+
+                $imagePath = public_path('cms/memebers/' . $member->image);
+                if (!empty($member->image) && file_exists($imagePath)) {
+                    $imageUrl = asset('cms/memebers/' . $member->image);
+                } else {
+                    $imageUrl = asset('assets/front/img/no_image.jpg');
+                }
+    
+                // Ensure image is properly formatted
+                $member->image = "<div class='d-flex flex-column'>
+                <img src='" . e($imageUrl) . "' alt='member Image' style='width:100px;'>
+           </div>";
+    
+                $member->name = "<div class='d-flex flex-column'>" . e(convertUtf8($member->name)) . "</div>";
+                $member->rank = "<div class='d-flex flex-column'>" . e($member->rank) . "</div>";
+                $memberFeature = $member->feature == 1 ? 'bg-success' : 'bg-danger';
+                $member->feature = "<form id='memberForm{$member->id}' action='" . route('admin.member.feature') . "' method='post'>
+                                    " . csrf_field() . "
+                                    <select class='form-control form-control-sm $memberFeature' 
+                                        name='feature' onchange='document.getElementById(\"memberForm{$member->id}\").submit();'>
+                                        <option value='1' " . ($member->feature == 1 ? 'selected' : '') . ">Yes</option>
+                                        <option value='0' " . ($member->feature == 0 ? 'selected' : '') . ">No</option>
+                                    </select>
+                                    <input type='hidden' name='user_id' value='{$member->id}'>
+                                 </form>";
+    
+                // Action buttons
+                $editUrl = route('admin.member.edit', $member->id) . '?language=' . e($languageParam);
+    
+                $member->action = "<div class='d-flex align-items-center gap-2'>
+                    <a href='" . $editUrl . "' class='btn btn-sm btn-secondary' title='Edit'>
+                        <i class='fas fa-pencil-alt'></i>
+                    </a>
+                    <button type='button' class='btn btn-sm btn-danger deletebutton' data-id='" . $member->id . "' title='Delete'>
+                        <i class='fas fa-trash-alt'></i>
+                    </button>
+                </div>";
+            }
+    
+            // Prepare DataTables response
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsTotal,
+                'data' => $members->toArray(),
+            ]);
+        }
+
+
         return view('admin.home.member.index', $data);
     }
 
@@ -174,6 +249,10 @@ class MemberController extends Controller
         $member->delete();
 
         Session::flash('success', 'Member deleted successfully!');
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return back();
     }
 

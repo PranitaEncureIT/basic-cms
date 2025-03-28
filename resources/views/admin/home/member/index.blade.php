@@ -154,7 +154,7 @@
                                 <h3 class="text-center">NO MEMBER FOUND</h3>
                             @else
                                 <div class="table-responsive">
-                                    <table class="table table-striped mt-3">
+                                    <table id="members_section" class="table table-striped mt-3">   
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -166,69 +166,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($members as $key => $member)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>
-                                                        @php
-                                                            $imagePath = public_path('cms/memebers/' . $member->image);
-                                                        @endphp
-
-                                                        @if (!empty($member->image) && file_exists(public_path('cms/memebers/' . $member->image)))
-                                                            <img src="{{ asset('cms/memebers/' . $member->image) }}"
-                                                                alt="" style="width:100px;">
-                                                        @else
-                                                            <img src="{{ asset('assets/front/img/no_image.jpg') }}"
-                                                                alt="No Image" style="width:100px;">
-                                                        @endif
-
-
-                                                    </td>
-                                                    <td>{{ convertUtf8($member->name) }}</td>
-                                                    <td>{{ $member->rank }}</td>
-                                                    <td>
-                                                        <form id="featureForm{{ $member->id }}" class="d-inline-block"
-                                                            action="{{ route('admin.member.feature') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="member_id"
-                                                                value="{{ $member->id }}">
-                                                            <select
-                                                                class="form-control {{ $member->feature == 1 ? 'bg-success' : 'bg-danger' }}"
-                                                                name="feature"
-                                                                onchange="document.getElementById('featureForm{{ $member->id }}').submit();">
-                                                                <option value="1"
-                                                                    {{ $member->feature == 1 ? 'selected' : '' }}>Yes
-                                                                </option>
-                                                                <option value="0"
-                                                                    {{ $member->feature == 0 ? 'selected' : '' }}>No
-                                                                </option>
-                                                            </select>
-                                                        </form>
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-secondary btn-sm"
-                                                            href="{{ route('admin.member.edit', $member->id) . '?language=' . request()->input('language') }}">
-                                                            <span class="btn-label">
-                                                                <i class="fas fa-edit"></i>
-                                                            </span>
-                                                            Edit
-                                                        </a>
-                                                        <form class="deleteform d-inline-block"
-                                                            action="{{ route('admin.member.delete') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="member_id"
-                                                                value="{{ $member->id }}">
-                                                            <button type="submit"
-                                                                class="btn btn-danger btn-sm deletebtn">
-                                                                <span class="btn-label">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </span>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -239,4 +176,121 @@
             </div>
         </div>
     </div>
+
+          <!-- DataTables CSS -->
+          <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+          <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+      
+          <!-- jQuery -->
+          <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+      
+          <!-- DataTables JS -->
+          <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+          <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    
+          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // let table;
+        $(document).ready(function() {
+            var table = $('#members_section').DataTable({
+                processing: true,
+                serverSide: true,
+                paging: true,
+                lengthChange: true,
+                searching: true,
+                info: true,
+                autoWidth: false,
+                scrollX: true,
+                scrollCollapse: true,
+                // dom: 'Bfrtip', // Include buttons in the layout
+                "order": [
+                    [0, "asc"]
+                ],
+                "ajax": {
+                    url: "{{ route('admin.member.index') }}",
+                    type: "GET"
+                    // data: function (d) {
+                    //     d.name = $('#search_name').val();
+                    // }
+                },
+                columns: [{
+                        data: 'sr_no',
+                        name: 'sr_no',
+                        orderable: false,
+                        searchable: true
+                    },
+                    {
+                        data: 'image',
+                        name: 'image',
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
+                        searchable: true
+                    },
+                    {
+                        data: 'rank',
+                        name: 'rank'
+                    },
+                    {
+                        data: 'feature',
+                        name: 'feature'
+                    },
+                    {
+                        data: 'action',
+                        name: 'action',
+                        orderable: false,
+                        searchable: false
+                    },
+                ]
+            });
+    
+            // Use the table element (or a container) as the delegation root.
+            $('#members_section').on('click', '.deletebutton', function(e) {
+                e.preventDefault(); // Prevent any default behavior
+    
+                let clientId = $(this).data('id'); // Get ID from data attribute
+                console.log("Client ID:", clientId); // Check if correct id is received
+    
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "This record will be deleted permanently!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('admin.member.delete') }}",
+                            type: "POST",
+                            data: {
+                                _token: "{{ csrf_token() }}",
+                                member_id: clientId
+                            },
+                            success: function(response) {
+                                console.log("AJAX success response:", response);
+                                if (response.success) {
+                                    // Reload the DataTable
+                                    window.location.reload();
+                                } else {
+                                    console.error("Deletion did not return success");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("AJAX error:", error);
+                            }
+                        });
+                    }
+                });
+            });
+    
+        });
+    </script>
 @endsection

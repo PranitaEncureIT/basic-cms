@@ -39,8 +39,6 @@ class TestimonialController extends Controller
     
             // Apply ordering, pagination, and fetch data
             $testimonials = $query->orderBy('id', 'DESC')->skip($start)->take($length)->get();
-            // dd($points);
-            // dd($testimonials);
             $languageParam = request()->input('language');
     
             // Modify each point for DataTables response
