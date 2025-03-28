@@ -70,9 +70,8 @@ class MemberController extends Controller
                                         <option value='1' " . ($member->feature == 1 ? 'selected' : '') . ">Yes</option>
                                         <option value='0' " . ($member->feature == 0 ? 'selected' : '') . ">No</option>
                                     </select>
-                                    <input type='hidden' name='user_id' value='{$member->id}'>
-                                 </form>";
-    
+                                    <input type='hidden' name='member_id' value='{$member->id}'>
+                                 </form>";  
                 // Action buttons
                 $editUrl = route('admin.member.edit', $member->id) . '?language=' . e($languageParam);
     
