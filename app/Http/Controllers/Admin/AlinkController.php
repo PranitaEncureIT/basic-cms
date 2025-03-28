@@ -18,6 +18,63 @@ class AlinkController extends Controller
         $lang_id = $lang->id;
         $data['alink'] = Alink::where('language_id', $lang_id)->get();
         $data['lang_id'] = $lang_id;
+
+        if ($request->ajax()) {
+            $draw = intval($request->input('draw'));
+            $start = intval($request->input('start'));
+            $length = intval($request->input('length'));
+            $search = $request->input('search')['value'] ?? null;
+    
+            $query = Alink::where('language_id', $data['lang_id']);
+    
+            // Apply search filter
+            if (!empty($search)) {
+                $query->where('name', 'LIKE', "%$search%");
+            }
+    
+            // Get total count before applying pagination
+            $recordsTotal = $query->count();
+    
+            // Apply ordering, pagination, and fetch data
+            $alinks = $query->orderBy('id', 'DESC')->skip($start)->take($length)->get();
+            $languageParam = request()->input('language');
+    
+            // Modify each point for DataTables response
+            foreach ($alinks as $key => $alink) {
+                $alink->sr_no = $key + 1 + $start;
+    
+                $alink->name = "<div class='d-flex flex-column'>" . e(convertUtf8($alink->name)) . "</div>";
+                $alink->url = "<div class='d-flex flex-column'>" . e($alink->url) . "</div>";
+    
+                // Action buttons
+                // $editUrl = route('admin.ulink.edit', $ulink->id) . '?language=' . e($languageParam);
+    
+                $alink->action = "<div class='d-flex align-items-center gap-2'>
+                <button type='button' class='btn btn-sm btn-secondary editButton' 
+                    data-id='" . $alink->id . "' 
+                    data-name='" . e(strip_tags($alink->name)) . "' 
+                    data-url='" . e(strip_tags($alink->url)) . "' 
+                    title='Edit'>
+                    <i class='fas fa-pencil-alt'></i>
+                </button>
+                <button type='button' class='btn btn-sm btn-danger deletebutton' 
+                    data-id='" . $alink->id . "' 
+                    title='Delete'>
+                    <i class='fas fa-trash-alt'></i>
+                </button>
+            </div>";
+            
+            }
+    
+            // Prepare DataTables response
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsTotal,
+                'data' => $alinks->toArray(),
+            ]);
+        }
+
         return view('admin.footer.alink.index',$data);
     }
 
@@ -84,6 +141,10 @@ class AlinkController extends Controller
         $alink->delete();
 
         Session::flash('success', 'About deleted successfully!');
+
+        if($request->ajax()) {
+        return response()->json(['success'=>true]);
+        }
         return back();
     }
 }

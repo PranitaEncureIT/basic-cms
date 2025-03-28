@@ -19,8 +19,65 @@ class PartnerController extends Controller
 
         $lang_id = $lang->id;
         $data['partners'] = Partner::where('language_id', $lang_id)->orderBy('id', 'DESC')->get();
-
         $data['lang_id'] = $lang_id;
+
+        if ($request->ajax()) {
+            $draw = intval($request->input('draw'));
+            $start = intval($request->input('start'));
+            $length = intval($request->input('length'));
+            $search = $request->input('search')['value'] ?? null;
+    
+            $query = Partner::where('language_id', $data['lang_id']);
+    
+            // Apply search filter
+            if (!empty($search)) {
+                $query->where('name', 'LIKE', "%$search%");
+            }
+    
+            // Get total count before applying pagination
+            $recordsTotal = $query->count();
+    
+            // Apply ordering, pagination, and fetch data
+            $partners = $query->orderBy('id', 'DESC')->skip($start)->take($length)->get();
+            $languageParam = request()->input('language');
+    
+            // Modify each point for DataTables response
+            foreach ($partners as $key => $partner) {
+                $partner->sr_no = $key + 1 + $start;
+
+                $imagePath = public_path('cms/partners/' . $partner->image);
+                if (!empty($partner->image) && file_exists($imagePath)) {
+                    $imageUrl = asset('cms/partners/' . $partner->image);
+                } else {
+                    $imageUrl = asset('assets/front/img/no_image.jpg');
+                }
+    
+                // Ensure image is properly formatted
+                $partner->image = "<div class='d-flex flex-column'>
+                <img src='" . e($imageUrl) . "' alt='Partner Image' style='width:100px;'>
+           </div>";
+    
+                // Action buttons
+                $editUrl = route('admin.partner.edit', $partner->id) . '?language=' . e($languageParam);
+    
+                $partner->action = "<div class='d-flex align-items-center gap-2'>
+                    <a href='" . $editUrl . "' class='btn btn-sm btn-secondary' title='Edit'>
+                        <i class='fas fa-pencil-alt'></i>
+                    </a>
+                    <button type='button' class='btn btn-sm btn-danger deletebutton' data-id='" . $partner->id . "' title='Delete'>
+                        <i class='fas fa-trash-alt'></i>
+                    </button>
+                </div>";
+            }
+    
+            // Prepare DataTables response
+            return response()->json([
+                'draw' => $draw,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsTotal,
+                'data' => $partners->toArray(),
+            ]);
+        }
         return view('admin.home.partner.index', $data);
     }
 
@@ -108,6 +165,10 @@ class PartnerController extends Controller
         $partner->delete();
 
         Session::flash('success', 'Partner deleted successfully!');
+
+        if ($request->ajax()) {
+            return response()->json(['success' => true]);
+        }
         return back();
     }
 }

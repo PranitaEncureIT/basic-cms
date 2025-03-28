@@ -79,7 +79,7 @@
                                 <h3 class="text-center">NO PARTNER FOUND</h3>
                             @else
                                 <div class="table-responsive">
-                                    <table class="table table-striped mt-3">
+                                    <table id="partner_section" class="table table-striped mt-3">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
@@ -88,46 +88,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($partners as $partner)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>
-                                                        @php
-                                                            $imagePath = public_path(
-                                                                'cms/partners/' . $partner->image,
-                                                            );
-                                                        @endphp
-                                                        @if (!empty($partner->image) && file_exists(public_path('cms/partners/' . $partner->image)))
-                                                            <img src="{{ asset('cms/partners/' . $partner->image) }}"
-                                                                alt="Partner Image" style="width:100px;">
-                                                        @else
-                                                            <img src="{{ asset('assets/front/img/no_image.jpg') }}"
-                                                                alt="No Image" style="width:100px;">
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-secondary btn-sm mr-2"
-                                                            href="{{ route('admin.partner.edit', $partner->id) . '?language=' . request()->input('language') }}">
-                                                            <span class="btn-label">
-                                                                <i class="fas fa-edit"></i>
-                                                            </span>
-                                                            Edit
-                                                        </a>
-                                                        <form class="deleteform d-inline-block"
-                                                            action="{{ route('admin.partner.delete') }}" method="post">
-                                                            @csrf
-                                                            <input type="hidden" name="partner_id"
-                                                                value="{{ $partner->id }}">
-                                                            <button type="submit" class="btn btn-danger btn-sm deletebtn">
-                                                                <span class="btn-label">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </span>
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -264,4 +224,90 @@
             });
         });
     </script>
+<script>
+    // let table;
+    $(document).ready(function() {
+        var table = $('#partner_section').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            lengthChange: true,
+            searching: false,
+            info: true,
+            autoWidth: false,
+            scrollX: true,
+            scrollCollapse: true,
+            // dom: 'Bfrtip', // Include buttons in the layout
+            "order": [
+                [0, "asc"]
+            ],
+            "ajax": {
+                url: "{{ route('admin.partner.index') }}",
+                type: "GET"
+                // data: function (d) {
+                //     d.name = $('#search_name').val();
+                // }
+            },
+            columns: [{
+                    data: 'sr_no',
+                    name: 'sr_no',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'image',
+                    name: 'image',
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                },
+            ]
+        });
+
+        // Use the table element (or a container) as the delegation root.
+        $('#partner_section').on('click', '.deletebutton', function(e) {
+            e.preventDefault(); // Prevent any default behavior
+
+            let clientId = $(this).data('id'); // Get ID from data attribute
+            console.log("Client ID:", clientId); // Check if correct id is received
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "This record will be deleted permanently!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('admin.partner.delete') }}",
+                        type: "POST",
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            partner_id: clientId
+                        },
+                        success: function(response) {
+                            console.log("AJAX success response:", response);
+                            if (response.success) {
+                                // Reload the DataTable
+                                window.location.reload();
+                            } else {
+                                console.error("Deletion did not return success");
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("AJAX error:", error);
+                        }
+                    });
+                }
+            });
+        });
+
+    });
+</script>
 @endsection
