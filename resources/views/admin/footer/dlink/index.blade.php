@@ -74,7 +74,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                 <h3 class="text-center">NO DLinks FOUND</h3>
               @else
                 <div class="table-responsive">
-                  <table class="table table-striped mt-3">
+                  <table id="dlink_section" class="table table-striped mt-3">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
@@ -84,31 +84,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($dlink as $key => $dlinks)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{convertUtf8($dlinks->name)}}</td>
-                          <td>{{$dlinks->url}}</td>
-                          <td>
-                            <a class="btn btn-secondary btn-sm editbtn" href="#editModal" data-toggle="modal" data-ulink_id="{{$dlinks->id}}" data-name="{{$dlinks->name}}" data-url="{{$dlinks->url}}">
-                              <span class="btn-label">
-                                <i class="fas fa-edit"></i>
-                              </span>
-                              Edit
-                            </a>
-                            <form class="deleteform d-inline-block" action="{{route('admin.dlink.delete')}}" method="post">
-                              @csrf
-                              <input type="hidden" name="dlink_id" value="{{$dlinks->id}}">
-                              <button type="submit" class="btn btn-danger btn-sm deletebtn">
-                                <span class="btn-label">
-                                  <i class="fas fa-trash"></i>
-                                </span>
-                                Delete
-                              </button>
-                            </form>
-                          </td>
-                        </tr>
-                      @endforeach
+
                     </tbody>
                   </table>
                 </div>
@@ -235,6 +211,116 @@ $(document).ready(function() {
                 $("form.create .nicEdit-main").removeClass('rtl text-right');
             }
         })
+    });
+});
+</script>
+<script>
+  // let table;
+  $(document).ready(function() {
+      var table = $('#dlink_section').DataTable({
+          processing: true,
+          serverSide: true,
+          paging: true,
+          lengthChange: true,
+          searching: true,
+          info: true,
+          autoWidth: false,
+          scrollX: true,
+          scrollCollapse: true,
+          // dom: 'Bfrtip', // Include buttons in the layout
+          "order": [
+              [0, "asc"]
+          ],
+          "ajax": {
+              url: "{{ route('admin.dlink.index') }}",
+              type: "GET"
+
+          },
+          columns: [{
+                  data: 'sr_no',
+                  name: 'sr_no',
+                  orderable: false,
+                  searchable: true
+              },
+              {
+                  data: 'name',
+                  name: 'name',
+                  searchable: true
+              },
+              {
+                  data: 'url',
+                  name: 'url'
+              },
+              {
+                  data: 'action',
+                  name: 'action',
+                  orderable: false,
+                  searchable: false
+              },
+          ]
+      });
+
+      // Use the table element (or a container) as the delegation root.
+      $('#dlink_section').on('click', '.deletebutton', function(e) {
+          e.preventDefault(); // Prevent any default behavior
+
+          let clientId = $(this).data('id'); // Get ID from data attribute
+          console.log("Client ID:", clientId); // Check if correct id is received
+
+          Swal.fire({
+              title: "Are you sure?",
+              text: "This record will be deleted permanently!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#d33",
+              cancelButtonColor: "#3085d6",
+              confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  $.ajax({
+                      url: "{{ route('admin.dlink.delete') }}",
+                      type: "POST",
+                      data: {
+                          _token: "{{ csrf_token() }}",
+                          dlink_id: clientId
+                      },
+                      success: function(response) {
+                          console.log("AJAX success response:", response);
+                          if (response.success) {
+                              // Reload the DataTable
+                              window.location.reload();
+                          } else {
+                              console.error("Deletion did not return success");
+                          }
+                      },
+                      error: function(xhr, status, error) {
+                          console.error("AJAX error:", error);
+                      }
+                  });
+              }
+          });
+      });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $(document).on("click", ".editButton", function () {
+        let dlink_id = $(this).data("id");
+        let name = $(this).data("name");
+        let url = $(this).data("url");
+
+        // Populate modal fields
+        $("#inulink_id").val(dlink_id);
+        $("#inname").val(name);
+        $("#inurl").val(url);
+
+        // Show modal
+        $("#editModal").modal("show");
+    });
+
+    // Submit the form when "Save Changes" is clicked
+    $("#updateBtn").on("click", function () {
+        $("#ajaxEditForm").submit();
     });
 });
 </script>
