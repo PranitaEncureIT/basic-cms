@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2025 at 01:07 PM
+-- Generation Time: Jun 03, 2025 at 06:57 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,7 +46,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `role_id`, `username`, `email`, `first_name`, `last_name`, `image`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'encureit@admin.com', 'encureit@admin.com', 'EncureIt', 'Admin', NULL, '$2y$10$6zSzt81RomGHp8NKM4DWzOPsdS4lMjXrKLXl1p0uRGExQU.H7K4uK', 1, '2024-04-19 09:15:27', '2025-02-28 12:15:11'),
+(1, 1, 'encureit@admin.com', 'encureit@admin.com', 'EncureIT', 'Admin', '67e3e0f004d27.jpg', '$2y$10$6zSzt81RomGHp8NKM4DWzOPsdS4lMjXrKLXl1p0uRGExQU.H7K4uK', 1, '2024-04-19 09:15:27', '2025-03-26 11:11:44'),
 (2, 1, 'admin@admin.com', 'admin@admin.com', 'Admin', 'test', '67c1a5cd26283.webp', '$2y$10$7PD5oeVWdHLwn9G1qUTXKuiL8StFoOk38hdbPWcGY4xbHn/4NMtOK', 1, '2024-04-19 09:15:27', '2025-02-28 12:02:21'),
 (3, 1, 'test@admin.com', 'admin@staging.com', 'Kendrik', 'Lamar', '67c1a63bdb365.webp', '$2y$10$Ztnx4ovECh/XfYikCqBUMuTVzuUH0ROOajHB2PrSH1zDLnOQhzQkK', 1, '2025-02-28 12:04:11', '2025-02-28 12:04:11');
 
@@ -91,7 +91,8 @@ CREATE TABLE `archives` (
 --
 
 INSERT INTO `archives` (`id`, `date`) VALUES
-(1, '08-2025');
+(1, '08-2025'),
+(2, '08-2025');
 
 -- --------------------------------------------------------
 
@@ -113,6 +114,13 @@ CREATE TABLE `articles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `language_id`, `article_category_id`, `title`, `slug`, `content`, `serial_number`, `meta_keywords`, `meta_description`, `created_at`, `updated_at`) VALUES
+(1, 169, 1, 'adfs', 'adfs', 0x3c703e64666173666164733c2f703e, 5, NULL, NULL, '2025-03-20 13:01:05', '2025-03-20 13:01:05');
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +136,14 @@ CREATE TABLE `article_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `article_categories`
+--
+
+INSERT INTO `article_categories` (`id`, `language_id`, `name`, `status`, `serial_number`, `created_at`, `updated_at`) VALUES
+(1, 169, 'test', 1, 4, '2025-03-20 13:00:17', '2025-03-20 13:00:17'),
+(2, 169, 'Kendrik Lamar', 1, 1, '2025-03-21 12:48:34', '2025-03-21 12:48:34');
 
 -- --------------------------------------------------------
 
@@ -200,7 +216,24 @@ INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `
 (41, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"hero_bg\":\"67c0138f9880e.webp\",\"hero_section_text\":\"Trusted to help guide entrepreneurs make better financial decisions.\"}', '{\"hero_bg\":\"67c01433d10a6.webp\",\"hero_section_text\":\"Testing Testing\"}', 'http://127.0.0.1:8000/admin/herosection/169/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-27 07:28:51', '2025-02-27 07:28:51'),
 (42, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"hero_bg\":\"67c01433d10a6.webp\"}', '{\"hero_bg\":\"67c0152431877.webp\"}', 'http://127.0.0.1:8000/admin/herosection/169/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-27 07:32:54', '2025-02-27 07:32:54'),
 (43, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"footer_logo\":\"6641b3029329b.png\"}', '{\"footer_logo\":\"67c0460eed1e5.webp\"}', 'http://127.0.0.1:8000/admin/footer/169/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-27 11:01:35', '2025-02-27 11:01:35'),
-(44, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"footer_logo\":\"67c0460eed1e5.webp\"}', '{\"footer_logo\":\"67c046311b271.webp\"}', 'http://127.0.0.1:8000/admin/footer/169/update', '127.0.0.1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', NULL, '2025-02-27 11:02:09', '2025-02-27 11:02:09');
+(44, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"footer_logo\":\"67c0460eed1e5.webp\"}', '{\"footer_logo\":\"67c046311b271.webp\"}', 'http://127.0.0.1:8000/admin/footer/169/update', '127.0.0.1', 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1', NULL, '2025-02-27 11:02:09', '2025-02-27 11:02:09'),
+(45, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"hero_bg\":\"67c0152431877.webp\"}', '{\"hero_bg\":\"67dd15f2217e1.webp\"}', 'http://127.0.0.1:8000/admin/herosection/169/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', NULL, '2025-03-21 07:32:04', '2025-03-21 07:32:04'),
+(46, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"footer_logo\":\"67c046311b271.webp\"}', '{\"footer_logo\":\"67dd3c5dad9e6.webp\"}', 'http://127.0.0.1:8000/admin/footer/169/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', NULL, '2025-03-21 10:15:58', '2025-03-21 10:15:58'),
+(47, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"contact_form_title\":\"Have Any Questions?\"}', '{\"contact_form_title\":\"Have Any Questions? no\"}', 'http://127.0.0.1:8000/admin/contact/169/post', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', NULL, '2025-03-21 13:26:21', '2025-03-21 13:26:21'),
+(48, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"favicon\":\"66419f794d65c.png\"}', '{\"favicon\":\"682c1160c6269.png\"}', 'http://127.0.0.1:8000/admin/logo/post', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:21:36', '2025-05-20 05:21:36'),
+(49, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"favicon\":\"66419f794d65c.png\"}', '{\"favicon\":\"682c1160cbed7.png\"}', 'http://127.0.0.1:8000/admin/logo/post', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:21:36', '2025-05-20 05:21:36'),
+(50, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":0}', '{\"maintainance_mode\":\"1\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:34:11', '2025-05-20 05:34:11'),
+(51, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":0}', '{\"maintainance_mode\":\"1\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:34:11', '2025-05-20 05:34:11'),
+(52, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":1}', '{\"maintainance_mode\":\"0\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:34:37', '2025-05-20 05:34:37'),
+(53, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":1}', '{\"maintainance_mode\":\"0\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:34:37', '2025-05-20 05:34:37'),
+(54, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":0,\"secret_path\":null}', '{\"maintainance_mode\":\"1\",\"secret_path\":\"http:\\/\\/127.0.0.1:8000\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:35:26', '2025-05-20 05:35:26'),
+(55, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":0,\"secret_path\":null}', '{\"maintainance_mode\":\"1\",\"secret_path\":\"http:\\/\\/127.0.0.1:8000\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:35:26', '2025-05-20 05:35:26'),
+(56, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":1}', '{\"maintainance_mode\":\"0\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:35:37', '2025-05-20 05:35:37'),
+(57, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":1}', '{\"maintainance_mode\":\"0\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:35:37', '2025-05-20 05:35:37'),
+(58, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":0,\"secret_path\":\"http:\\/\\/127.0.0.1:8000\"}', '{\"maintainance_mode\":\"1\",\"secret_path\":\"http:\\/\\/127.0.0.1:8000\\/quote\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:37:46', '2025-05-20 05:37:46'),
+(59, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":0,\"secret_path\":\"http:\\/\\/127.0.0.1:8000\"}', '{\"maintainance_mode\":\"1\",\"secret_path\":\"http:\\/\\/127.0.0.1:8000\\/quote\"}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:37:46', '2025-05-20 05:37:46'),
+(60, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 142, '{\"maintainance_mode\":1,\"secret_path\":\"http:\\/\\/127.0.0.1:8000\\/quote\"}', '{\"maintainance_mode\":\"0\",\"secret_path\":null}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:38:03', '2025-05-20 05:38:03'),
+(61, NULL, NULL, 'updated', 'App\\Models\\BasicSetting', 156, '{\"maintainance_mode\":1,\"secret_path\":\"http:\\/\\/127.0.0.1:8000\\/quote\"}', '{\"maintainance_mode\":\"0\",\"secret_path\":null}', 'http://127.0.0.1:8000/admin/maintainance/update', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', NULL, '2025-05-20 05:38:03', '2025-05-20 05:38:03');
 
 -- --------------------------------------------------------
 
@@ -340,8 +373,8 @@ CREATE TABLE `basic_settings` (
 --
 
 INSERT INTO `basic_settings` (`id`, `language_id`, `favicon`, `logo`, `website_heading`, `header_logo`, `website_title`, `base_color`, `secondary_base_color`, `support_email`, `support_phone`, `breadcrumb`, `footer_logo`, `footer_text`, `newsletter_text`, `copyright_text`, `hero_bg`, `hero_section_title`, `hero_section_bold_text`, `hero_section_text`, `hero_section_button_text`, `hero_section_button_url`, `hero_section_video_link`, `intro_bg`, `intro_section_title`, `intro_section_subtitle`, `intro_section_text`, `intro_section_button_text`, `intro_section_button_url`, `intro_section_video_link`, `service_section_title`, `our_services_desc`, `service_section_subtitle`, `approach_title`, `approach_subtitle`, `approach_button_text`, `approach_button_url`, `cta_bg`, `cta_section_text`, `cta_section_button_text`, `cta_section_button_url`, `portfolio_section_title`, `portfolio_section_text`, `team_bg`, `team_section_title`, `team_section_subtitle`, `contact_form_title`, `contact_form_subtitle`, `quote_title`, `quote_subtitle`, `tawk_to_script`, `google_analytics_script`, `is_recaptcha`, `google_recaptcha_site_key`, `google_recaptcha_secret_key`, `is_tawkto`, `is_disqus`, `disqus_script`, `is_analytics`, `maintainance_mode`, `maintainance_text`, `secret_path`, `is_appzi`, `appzi_script`, `is_addthis`, `addthis_script`, `service_title`, `service_subtitle`, `portfolio_title`, `portfolio_subtitle`, `testimonial_title`, `testimonial_subtitle`, `blog_section_title`, `blog_section_subtitle`, `faq_title`, `faq_subtitle`, `blog_title`, `blog_subtitle`, `service_details_title`, `portfolio_details_title`, `blog_details_title`, `gallery_title`, `gallery_subtitle`, `team_title`, `team_subtitle`, `contact_title`, `contact_subtitle`, `error_title`, `error_subtitle`, `is_quote`, `home_version`, `event_title`, `event_subtitle`, `event_details_title`, `cause_title`, `cause_subtitle`, `cause_details_title`, `feature_section`, `intro_section`, `service_section`, `approach_section`, `statistics_section`, `portfolio_section`, `testimonial_section`, `team_section`, `news_section`, `call_to_action_section`, `partner_section`, `top_footer_section`, `copyright_section`, `newsletter_section`) VALUES
-(142, 169, '66419f794d65c.png', '66419f78dcded.png', 'CMS', '66419f7945bae.png', 'CMS', '17305E', '303743', 'info@geotechit.com', '+44 078 9101 1714', '66419f795c8c2.png', '67c046311b271.webp', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.  We Believe quality and standard worlwidex Consider.', 'Subscribe to get Latest News, Offer and connect With Us.', 0x3c703e436f7079726967687420c2a920323032342e20416c6c20726967687473207265736572766564206279266e6273703b20656e6375726569743c62723e3c2f703e, '67c0152431877.webp', 'Testing', 'Quality Service Happy customers', 'Testing Testing', 'Learn More', 'https://megasoft.biz/plusagency/about-us/22/page', 'https://www.youtube.com/watch?v=BAVfUvByStY', '6641a059e0f9d.png', 'STEM having capacity of treating 316 million+', 'liters per day of high quality potable water per day', 'Our mission is to provide reliable, sustainable, and accessible water services to communities, ensuring their well-being and prosperity. We are committed to innovation, responsible resource management, and delivering exceptional customer service.', 'KNOW MORE ABOUT STEM', 'https://stemwater.org/', 'https://www.youtube.com/watch?v=S7wCAquf9Us', 'Our Services', 'At STEM, our primary objective is to provide high-quality water supply services to Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and rural areas. We strive for excellence in managing, maintaining, and administering the water infrastructure assets entrusted to us.', 'We work with you to achieve your goals', 'How we do', 'A fresh approach to financial services for entrepreneurs', 'Our Approach', 'https://megasoft.biz/plusagency/about-us/22/page', '618d0785966f1.jpg', 'Contact us for help with your finances.', 'Contact Us', 'http://localhost/plusagency/plusagency_2.5/contact', 'Our latest projects', 'A fresh approach to financial services for entrepreneurs', '618d08247ce11.jpg', 'Expert Team', 'Meet our expert finlance executive team', 'Have Any Questions?', 'Distinctively exploit revolutionary catalysts for chang the Seamlessly optimal rather than just in web & apps development optimal alignments for intuitive.', 'Request A Quote', 'Have a project ? Send us a quote', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5e7477c08d24fc226588d638/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', '<!-- Global site tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-137437974-2\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-137437974-2\');\r\n</script>', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 1, 1, '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 1, 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you.', NULL, 0, '<!-- Appzi: Capture Insightful Feedback -->\r\n<script async src=\"https://w.appzi.io/bootstrap/bundle.js?token=LyCxj\"></script>\r\n<!-- End Appzi -->', 0, '<!-- Go to www.addthis.com/dashboard to customize your tools -->\r\n<script type=\"text/javascript\" src=\"//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db876f049b4480b\"></script>', 'Services We Provide', 'We work with you to achieve your goals.', 'Portfolios', 'Have a look at our all projects', 'Testimonial', 'What people say about finlance planning', 'Latest news', 'Have a look at the finlance latest News', 'F.A.Q', 'Frequestly Asked Questions', 'Latest Blog', 'From the latest news and blog', 'Service Details', 'Portfolio Details', 'Blog Details', 'Our Gallery', 'Take a look at our captured moments', 'Team Members', 'Meet our team members', 'Contact Us', 'Need information? contact us', '404 Not Found', 'Oops! Looks like you\'re lost', 1, 'static', 'Events', 'Join Our Events & Conferences', 'Event Details', 'Causes', 'Donate Us to Grow Together', 'Cause Details', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-(156, 170, '66419f794d65c.png', '66419f78dcded.png', 'CMS', '66419f7945bae.png', 'CMS', '17305E', '303743', 'info@geotechit.com', '+44 078 9101 1714', '66419f795c8c2.png', '663a2431e1c14.png', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.  We Believe quality and standard worlwidex Consider.', 'Subscribe to get Latest News, Offer and connect With Us.', 0xe0a495e0a589e0a4aae0a580e0a4b0e0a4bee0a487e0a49f20c2a920323032342e20e0a4b8e0a4b0e0a58de0a4b520e0a4b9e0a495e0a58de0a49520656e63757265697420e0a4a6e0a58de0a4b5e0a4bee0a4b0e0a58720e0a4b0e0a4bee0a496e0a580e0a4b520e0a486e0a4b9e0a587e0a4a4, '618d038bbd7f9.jpg', 'Financial Planning For Life', 'Quality Service Happy customers', 'Trusted to help guide entrepreneurs make better financial decisions.', 'Learn More', 'https://megasoft.biz/plusagency/about-us/22/page', 'https://www.youtube.com/watch?v=BAVfUvByStY', '6641a72e9abda.png', 'STEM ची उपचार क्षमता 316 दशलक्ष आहे', 'लिटर प्रतिदिन उच्च दर्जाचे पिण्यायोग्य पाणी...', 'आमचे ध्येय समुदायांना विश्वासार्ह, शाश्वत आणि प्रवेशयोग्य पाणी सेवा प्रदान करणे, त्यांचे कल्याण आणि समृद्धी सुनिश्चित करणे हे आहे. आम्ही नावीन्य, जबाबदार संसाधन व्यवस्थापन आणि अपवादात्मक ग्राहक सेवा देण्यासाठी वचनबद्ध आहोत.', 'STEM बद्दल अधिक जाणून घ्या', 'https://stemwater.org/', 'https://www.youtube.com/watch?v=S7wCAquf9Us', 'आमच्या सेवा', 'STEM मध्ये, आमचे प्राथमिक उद्दिष्ट ठाणे महानगरपालिका, भिवंडी निजामपूर महानगरपालिका, मीरा भाईंदर महानगरपालिका आणि ग्रामीण भागात उच्च दर्जाची पाणीपुरवठा सेवा प्रदान करणे आहे. आमच्याकडे सोपवलेल्या पाण्याच्या पायाभूत सुविधांच्या मालमत्तेचे व्यवस्थापन, देखरेख आणि प्रशासन करण्यासाठी आम्ही उत्कृष्टतेसाठी प्रयत्न करतो.', 'We work with you to achieve your goals', 'How we do', 'A fresh approach to financial services for entrepreneurs', 'Our Approach', 'https://megasoft.biz/plusagency/about-us/22/page', '618d0785966f1.jpg', 'Contact us for help with your finances.', 'Contact Us', 'http://localhost/plusagency/plusagency_2.5/contact', 'Our latest projects', 'A fresh approach to financial services for entrepreneurs', '618d08247ce11.jpg', 'Expert Team', 'Meet our expert finlance executive team', 'काही प्रश्न आहेत का?', 'केवळ वेब आणि ॲप्स डेव्हलपमेंटमध्ये अंतर्ज्ञानी इष्टतम संरेखन करण्याऐवजी अखंडपणे इष्टतम बदलण्यासाठी क्रांतिकारक उत्प्रेरकांचे विशिष्टपणे शोषण करा.', 'Request A Quote', 'Have a project ? Send us a quote', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5e7477c08d24fc226588d638/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', '<!-- Global site tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-137437974-2\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-137437974-2\');\r\n</script>', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 1, 1, '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 1, 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you.', NULL, 0, '<!-- Appzi: Capture Insightful Feedback -->\r\n<script async src=\"https://w.appzi.io/bootstrap/bundle.js?token=LyCxj\"></script>\r\n<!-- End Appzi -->', 0, '<!-- Go to www.addthis.com/dashboard to customize your tools -->\r\n<script type=\"text/javascript\" src=\"//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db876f049b4480b\"></script>', 'Services We Provide', 'We work with you to achieve your goals.', 'Portfolios', 'Have a look at our all projects', 'Testimonial', 'What people say about finlance planning', 'Latest news', 'Have a look at the finlance latest News', 'F.A.Q', 'Frequestly Asked Questions', 'Latest Blog', 'From the latest news and blog', 'Service Details', 'Portfolio Details', 'Blog Details', 'Our Gallery', 'Take a look at our captured moments', 'Team Members', 'Meet our team members', 'Contact Us', 'Need information? contact us', '404 Not Found', 'Oops! Looks like you\'re lost', 1, 'static', 'Events', 'Join Our Events & Conferences', 'Event Details', 'Causes', 'Donate Us to Grow Together', 'Cause Details', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(142, 169, '682c1160c6269.png', '66419f78dcded.png', 'CMS', '66419f7945bae.png', 'CMS', '17305E', '303743', 'info@geotechit.com', '+44 078 9101 1714', '66419f795c8c2.png', '67dd3c5dad9e6.webp', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.  We Believe quality and standard worlwidex Consider.', 'Subscribe to get Latest News, Offer and connect With Us.', 0x3c703e436f7079726967687420c2a920323032342e20416c6c20726967687473207265736572766564206279266e6273703b20656e6375726569743c62723e3c2f703e, '67dd15f2217e1.webp', 'Testing', 'Quality Service Happy customers', 'Testing Testing', 'Learn More', 'https://megasoft.biz/plusagency/about-us/22/page', 'https://www.youtube.com/watch?v=BAVfUvByStY', '6641a059e0f9d.png', 'STEM having capacity of treating 316 million+', 'liters per day of high quality potable water per day', 'Our mission is to provide reliable, sustainable, and accessible water services to communities, ensuring their well-being and prosperity. We are committed to innovation, responsible resource management, and delivering exceptional customer service.', 'KNOW MORE ABOUT STEM', 'https://stemwater.org/', 'https://www.youtube.com/watch?v=S7wCAquf9Us', 'Our Services', 'At STEM, our primary objective is to provide high-quality water supply services to Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and rural areas. We strive for excellence in managing, maintaining, and administering the water infrastructure assets entrusted to us.', 'We work with you to achieve your goals', 'How we do', 'A fresh approach to financial services for entrepreneurs', 'Our Approach', 'https://megasoft.biz/plusagency/about-us/22/page', '618d0785966f1.jpg', 'Contact us for help with your finances.', 'Contact Us', 'http://localhost/plusagency/plusagency_2.5/contact', 'Our latest projects', 'A fresh approach to financial services for entrepreneurs', '618d08247ce11.jpg', 'Expert Team', 'Meet our expert finlance executive team', 'Have Any Questions? no', 'Distinctively exploit revolutionary catalysts for chang the Seamlessly optimal rather than just in web & apps development optimal alignments for intuitive.', 'Request A Quote', 'Have a project ? Send us a quote', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5e7477c08d24fc226588d638/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', '<!-- Global site tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-137437974-2\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-137437974-2\');\r\n</script>', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 1, 1, '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 1, 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you.', NULL, 0, '<!-- Appzi: Capture Insightful Feedback -->\r\n<script async src=\"https://w.appzi.io/bootstrap/bundle.js?token=LyCxj\"></script>\r\n<!-- End Appzi -->', 0, '<!-- Go to www.addthis.com/dashboard to customize your tools -->\r\n<script type=\"text/javascript\" src=\"//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db876f049b4480b\"></script>', 'Services We Provide', 'We work with you to achieve your goals.', 'Portfolios', 'Have a look at our all projects', 'Testimonial', 'What people say about finlance planning', 'Latest news', 'Have a look at the finlance latest News', 'F.A.Q', 'Frequestly Asked Questions', 'Latest Blog', 'From the latest news and blog', 'Service Details', 'Portfolio Details', 'Blog Details', 'Our Gallery', 'Take a look at our captured moments', 'Team Members', 'Meet our team members', 'Contact Us', 'Need information? contact us', '404 Not Found', 'Oops! Looks like you\'re lost', 1, 'static', 'Events', 'Join Our Events & Conferences', 'Event Details', 'Causes', 'Donate Us to Grow Together', 'Cause Details', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+(156, 170, '682c1160cbed7.png', '66419f78dcded.png', 'CMS', '66419f7945bae.png', 'CMS', '17305E', '303743', 'info@geotechit.com', '+44 078 9101 1714', '66419f795c8c2.png', '663a2431e1c14.png', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.  We Believe quality and standard worlwidex Consider.', 'Subscribe to get Latest News, Offer and connect With Us.', 0xe0a495e0a589e0a4aae0a580e0a4b0e0a4bee0a487e0a49f20c2a920323032342e20e0a4b8e0a4b0e0a58de0a4b520e0a4b9e0a495e0a58de0a49520656e63757265697420e0a4a6e0a58de0a4b5e0a4bee0a4b0e0a58720e0a4b0e0a4bee0a496e0a580e0a4b520e0a486e0a4b9e0a587e0a4a4, '618d038bbd7f9.jpg', 'Financial Planning For Life', 'Quality Service Happy customers', 'Trusted to help guide entrepreneurs make better financial decisions.', 'Learn More', 'https://megasoft.biz/plusagency/about-us/22/page', 'https://www.youtube.com/watch?v=BAVfUvByStY', '6641a72e9abda.png', 'STEM ची उपचार क्षमता 316 दशलक्ष आहे', 'लिटर प्रतिदिन उच्च दर्जाचे पिण्यायोग्य पाणी...', 'आमचे ध्येय समुदायांना विश्वासार्ह, शाश्वत आणि प्रवेशयोग्य पाणी सेवा प्रदान करणे, त्यांचे कल्याण आणि समृद्धी सुनिश्चित करणे हे आहे. आम्ही नावीन्य, जबाबदार संसाधन व्यवस्थापन आणि अपवादात्मक ग्राहक सेवा देण्यासाठी वचनबद्ध आहोत.', 'STEM बद्दल अधिक जाणून घ्या', 'https://stemwater.org/', 'https://www.youtube.com/watch?v=S7wCAquf9Us', 'आमच्या सेवा', 'STEM मध्ये, आमचे प्राथमिक उद्दिष्ट ठाणे महानगरपालिका, भिवंडी निजामपूर महानगरपालिका, मीरा भाईंदर महानगरपालिका आणि ग्रामीण भागात उच्च दर्जाची पाणीपुरवठा सेवा प्रदान करणे आहे. आमच्याकडे सोपवलेल्या पाण्याच्या पायाभूत सुविधांच्या मालमत्तेचे व्यवस्थापन, देखरेख आणि प्रशासन करण्यासाठी आम्ही उत्कृष्टतेसाठी प्रयत्न करतो.', 'We work with you to achieve your goals', 'How we do', 'A fresh approach to financial services for entrepreneurs', 'Our Approach', 'https://megasoft.biz/plusagency/about-us/22/page', '618d0785966f1.jpg', 'Contact us for help with your finances.', 'Contact Us', 'http://localhost/plusagency/plusagency_2.5/contact', 'Our latest projects', 'A fresh approach to financial services for entrepreneurs', '618d08247ce11.jpg', 'Expert Team', 'Meet our expert finlance executive team', 'काही प्रश्न आहेत का?', 'केवळ वेब आणि ॲप्स डेव्हलपमेंटमध्ये अंतर्ज्ञानी इष्टतम संरेखन करण्याऐवजी अखंडपणे इष्टतम बदलण्यासाठी क्रांतिकारक उत्प्रेरकांचे विशिष्टपणे शोषण करा.', 'Request A Quote', 'Have a project ? Send us a quote', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5e7477c08d24fc226588d638/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', '<!-- Global site tag (gtag.js) - Google Analytics -->\r\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=UA-137437974-2\"></script>\r\n<script>\r\n  window.dataLayer = window.dataLayer || [];\r\n  function gtag(){dataLayer.push(arguments);}\r\n  gtag(\'js\', new Date());\r\n\r\n  gtag(\'config\', \'UA-137437974-2\');\r\n</script>', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 1, 1, '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 1, 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you.', NULL, 0, '<!-- Appzi: Capture Insightful Feedback -->\r\n<script async src=\"https://w.appzi.io/bootstrap/bundle.js?token=LyCxj\"></script>\r\n<!-- End Appzi -->', 0, '<!-- Go to www.addthis.com/dashboard to customize your tools -->\r\n<script type=\"text/javascript\" src=\"//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5db876f049b4480b\"></script>', 'Services We Provide', 'We work with you to achieve your goals.', 'Portfolios', 'Have a look at our all projects', 'Testimonial', 'What people say about finlance planning', 'Latest news', 'Have a look at the finlance latest News', 'F.A.Q', 'Frequestly Asked Questions', 'Latest Blog', 'From the latest news and blog', 'Service Details', 'Portfolio Details', 'Blog Details', 'Our Gallery', 'Take a look at our captured moments', 'Team Members', 'Meet our team members', 'Contact Us', 'Need information? contact us', '404 Not Found', 'Oops! Looks like you\'re lost', 1, 'static', 'Events', 'Join Our Events & Conferences', 'Event Details', 'Causes', 'Donate Us to Grow Together', 'Cause Details', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -574,7 +607,8 @@ CREATE TABLE `bcategories` (
 --
 
 INSERT INTO `bcategories` (`id`, `language_id`, `name`, `slug`, `status`, `serial_number`) VALUES
-(1, 169, 'One Piece', 'One-Piece', 1, 1);
+(1, 169, 'Two Piece', 'Two-Piece', 1, 1),
+(2, 169, 'One Piece', 'One-Piece', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -603,44 +637,60 @@ CREATE TABLE `blogs` (
 --
 
 INSERT INTO `blogs` (`id`, `language_id`, `bcategory_id`, `title`, `slug`, `main_image`, `content`, `sidebar`, `meta_keywords`, `meta_description`, `serial_number`, `created_at`, `updated_at`) VALUES
-(1, 169, 1, 'Ye', 'Ye', '67c14d7d59492.webp', 0x3c703e4b616e79653c2f703e, 1, NULL, NULL, 1, '2025-02-28 05:45:33', '2025-02-28 05:45:33');
+(1, 169, 1, 'Ye', 'Ye', '67dd509139509.webp', 0x3c703e4b616e79653c2f703e, 1, NULL, NULL, 1, '2025-02-28 05:45:33', '2025-03-21 11:42:09');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `budgets`
+-- Table structure for table `calendar_events`
 --
 
-CREATE TABLE `budgets` (
+CREATE TABLE `calendar_events` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT 0,
-  `limits` varchar(255) DEFAULT NULL
+  `language_id` int(11) DEFAULT NULL,
+  `category_type` varchar(200) DEFAULT NULL COMMENT 'meetings, news, events',
+  `title` varchar(255) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `image` varchar(200) DEFAULT NULL,
+  `url` text DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `is_active` tinyint(4) NOT NULL DEFAULT 1,
+  `days_after_expire` varchar(250) DEFAULT NULL,
+  `date_expired` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `contact_query`
+-- Dumping data for table `calendar_events`
 --
 
-CREATE TABLE `contact_query` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `phone` varchar(90) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `message` longtext DEFAULT NULL,
-  `status` int(3) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `contact_query`
---
-
-INSERT INTO `contact_query` (`id`, `name`, `phone`, `email`, `message`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Pranita', '7776865238', 'pranita@abc.com', 'Testing', 0, '2024-05-13 05:56:14', '2024-05-13 05:56:14', NULL);
+INSERT INTO `calendar_events` (`id`, `language_id`, `category_type`, `title`, `start_date`, `end_date`, `description`, `image`, `url`, `status`, `is_active`, `days_after_expire`, `date_expired`, `created_at`, `updated_at`) VALUES
+(1, 169, 'events', 'Mahaparinirvan Divas', '2024-12-06 11:00:00', '2024-12-06 03:59:00', 'Mahaparinirvan Divas is observed on December 6th every year to commemorate the death anniversary of Dr. B.R. Ambedkar, the architect of the Indian Constitution.', NULL, NULL, 1, 1, NULL, '2024-12-06', '2024-10-27 03:10:52', '2024-10-27 03:10:52'),
+(2, 169, 'events', 'DR. B. R. Ambedkar Jayanti', '2025-04-14 10:00:00', '2025-04-14 10:00:00', 'Ambedkar Jayanti is observed with great reverence across India. As the architect of the Indian Constitution, he played a pivotal role in shaping the nation\'s democratic framework.', NULL, NULL, 1, 1, NULL, '2025-04-14', '2024-10-27 03:12:09', '2024-10-29 13:29:40'),
+(3, 169, 'events', 'Annabhau Sathe Jayanti', '2025-08-01 11:00:00', '2025-08-01 12:59:00', 'Annabhau Sathe Jayanti is observed annually to commemorate the birth anniversary of the eminent Marathi writer.', NULL, NULL, 1, 1, NULL, '2025-08-01', '2024-10-27 03:13:13', '2024-10-27 03:13:13'),
+(4, 169, 'news', 'Public Safety & Public Affairs Cabinet Meeting', '2024-02-14 09:30:00', '2024-02-14 10:30:00', 'City Council Meeting Room', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:16:09', '2024-10-29 12:26:36'),
+(5, 169, 'news', 'Street Sketches & Urban History', '2024-02-14 11:00:00', '2024-02-14 12:59:00', 'Royal National Park', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:17:34', '2024-10-27 03:17:34'),
+(6, 169, 'news', 'City Job Fair 2024 for Civil and Mech Engineers', '2024-02-14 02:00:00', '2024-02-14 04:15:00', 'Central Park West', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:19:23', '2024-10-29 12:28:48'),
+(7, 169, 'meetings', 'Public Safety & Public Affairs Cabinet Meeting', '2024-02-14 09:00:00', '2024-02-14 10:30:00', 'Village Council Meeting Room', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:20:44', '2024-10-29 12:31:58'),
+(10, 169, 'events', 'Independence Day', '2024-07-15 08:00:00', '2024-07-15 10:00:00', 'Independence Day is celebrated on 15th August every year to mark the end of British rule in 1947 and establishment of a free and independent Indian nation.', NULL, NULL, 1, 1, NULL, '2024-07-15', '2024-11-04 06:04:41', '2024-11-04 06:04:41'),
+(12, 170, 'events', 'महापरिनिर्वाण दिवस', '2024-12-06 11:00:00', '2024-12-06 03:59:00', 'डॉ. बी.आर. यांच्या पुण्यतिथीच्या स्मरणार्थ दरवर्षी ६ डिसेंबर रोजी महापरिनिर्वाण दिवस साजरा केला जातो. आंबेडकर, भारतीय राज्यघटनेचे शिल्पकार.', NULL, NULL, 1, 1, NULL, '2024-12-06', '2024-10-27 03:10:52', '2024-10-27 03:10:52'),
+(13, 170, 'events', 'डॉ. बी.आर. आंबेडकर जयंती', '2025-04-14 10:00:00', '2025-04-14 10:00:00', 'आंबेडकर जयंती संपूर्ण भारतात मोठ्या श्रद्धेने साजरी केली जाते. भारतीय राज्यघटनेचे शिल्पकार म्हणून त्यांनी देशाच्या लोकशाही चौकटीला आकार देण्यात मोलाची भूमिका बजावली.', NULL, NULL, 1, 1, NULL, '2025-04-14', '2024-10-27 03:12:09', '2024-10-29 13:29:40'),
+(14, 170, 'events', 'अण्णाभाऊ साठे जयंती', '2025-08-01 11:00:00', '2025-08-01 12:59:00', 'प्रख्यात मराठी लेखक यांच्या जयंतीनिमित्त दरवर्षी अण्णाभाऊ साठे जयंती साजरी केली जाते.', NULL, NULL, 1, 1, NULL, '2025-08-01', '2024-10-27 03:13:13', '2024-10-27 03:13:13'),
+(15, 170, 'events', 'स्वातंत्र्य दिन', '2024-07-15 08:00:00', '2024-07-15 10:00:00', '१९४७ मध्ये ब्रिटिश राजवटीचा अंत आणि स्वतंत्र आणि स्वतंत्र भारतीय राष्ट्राची स्थापना झाल्याबद्दल दरवर्षी १५ ऑगस्ट रोजी स्वातंत्र्य दिन साजरा केला जातो.', NULL, NULL, 1, 1, NULL, '2024-07-15', '2024-11-04 06:04:41', '2024-11-19 10:53:37'),
+(16, 170, 'news', 'सार्वजनिक सुरक्षा आणि सार्वजनिक व्यवहार मंत्रिमंडळ बैठक', '2024-02-14 09:30:00', '2024-02-14 10:30:00', 'नगर परिषद बैठक कक्ष', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:16:09', '2024-10-29 12:26:36'),
+(17, 170, 'news', 'स्ट्रीट स्केचेस आणि शहरी इतिहास', '2024-02-14 11:00:00', '2024-02-14 12:59:00', 'रॉयल नॅशनल पार्क', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:17:34', '2024-10-27 03:17:34'),
+(18, 170, 'news', 'सिव्हिल आणि मेक इंजिनियर्ससाठी सिटी जॉब फेअर २०२४', '2024-02-14 02:00:00', '2024-02-14 04:15:00', 'सेंट्रल पार्क वेस्ट', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:19:23', '2024-10-29 12:28:48'),
+(19, 170, 'meetings', 'सार्वजनिक सुरक्षा आणि सार्वजनिक व्यवहार मंत्रिमंडळ बैठक', '2024-02-14 09:00:00', '2024-02-14 10:30:00', 'ग्राम परिषद बैठक कक्ष', NULL, NULL, 1, 1, NULL, '2024-02-14', '2024-10-27 03:20:44', '2024-10-29 12:31:58'),
+(20, 169, 'meetings', 'Public Safety & Public Affairs Cabinet Meeting', '2024-11-14 12:00:00', '2024-11-14 11:59:00', 'Village Council Meeting Room', NULL, NULL, 1, 1, NULL, '2024-11-14', '2024-11-14 07:54:45', '2024-11-14 07:54:45'),
+(21, 169, 'events', 'Mahad Chavdar Tale Satyagraha', '2025-03-12 22:00:00', '2025-04-15 11:00:00', 'Mahad Satyagraha or Chavdar Tale Satyagraha was a satyagraha led by B. R. Ambedkar. Mahad Satyagraha was held on 20th March 1927 to allow untouchables to use water in a public tank in Mahad (currently in Raigad district), Maharashtra, India. The day (20th March) is observed as Social Empowerment day in India.', NULL, NULL, 1, 1, NULL, '2025-03-20', '2024-11-19 07:22:02', '2025-03-20 11:30:36'),
+(22, 171, 'events', 'ಸ್ವಾತಂತ್ರ್ಯ ದಿನಾಚರಣೆ', '2024-08-15 08:00:00', '2024-08-15 10:00:00', '1947 ರಲ್ಲಿ ಬ್ರಿಟಿಷ್ ಆಳ್ವಿಕೆಯ ಅಂತ್ಯ ಮತ್ತು ಸ್ವತಂತ್ರ ಮತ್ತು ಸ್ವತಂತ್ರ ಭಾರತ ರಾಷ್ಟ್ರದ ಸ್ಥಾಪನೆಯನ್ನು ಗುರುತಿಸಲು ಪ್ರತಿ ವರ್ಷ ಆಗಸ್ಟ್ 15 ರಂದು ಸ್ವಾತಂತ್ರ್ಯ ದಿನವನ್ನು ಆಚರಿಸಲಾಗುತ್ತದೆ.', NULL, NULL, 1, 1, NULL, '2024-08-15', '2025-03-18 22:02:49', '2025-03-18 22:02:49'),
+(23, 171, 'events', 'ಮಹಾಪರಿನಿರ್ವಾನ ದಿವಸ', '2024-12-06 11:00:00', '2024-12-06 03:59:00', 'ಡಾ. ಬಿ.ಆರ್ ಅವರ ಪುಣ್ಯಸ್ಮರಣೆಯ ನೆನಪಿಗಾಗಿ ಪ್ರತಿ ವರ್ಷ ಡಿಸೆಂಬರ್ 6 ರಂದು ಮಹಾಪರಿನಿರ್ವಾಣ ದಿವಸ್ ಆಚರಿಸಲಾಗುತ್ತದೆ. ಅಂಬೇಡ್ಕರ್, ಭಾರತೀಯ ಸಂವಿಧಾನದ ಶಿಲ್ಪಿ.', NULL, NULL, 1, 1, NULL, '2024-12-06', '2025-03-18 22:05:11', '2025-03-18 22:05:11'),
+(24, 171, 'events', 'ಮಹಾಡ ಚವ್ದಾರ್ ಕಥೆ ಸತ್ಯಾಗ್ರಹ', '2025-03-20 12:00:00', '2025-03-21 11:59:00', 'ಮಹಾಡ ಸತ್ಯಾಗ್ರಹ ಅಥವಾ ಚವ್ದಾರ್ ಕೆರೆ ಸತ್ಯಾಗ್ರಹವು ಬಿ.ಆರ್. ಅಂಬೇಡ್ಕರ್ ನೇತೃತ್ವದ ಸತ್ಯಾಗ್ರಹವಾಗಿತ್ತು. ಮಹಾಡ ಸತ್ಯಾಗ್ರಹವು 20 ನೇ ಮಾರ್ಚ್ 1927 ರಂದು ಭಾರತದ ಮಹಾರಾಷ್ಟ್ರದ ಮಹಾಡ (ಪ್ರಸ್ತುತ ರಾಯಗಡ ಜಿಲ್ಲೆ) ನಲ್ಲಿರುವ ಸಾರ್ವಜನಿಕ ತೊಟ್ಟಿಯಲ್ಲಿ ನೀರನ್ನು ಬಳಸಲು ಅಸ್ಪೃಶ್ಯರಿಗೆ ಅವಕಾಶವನ್ನು  ನೀಡಿದರು. ಈ ದಿನವನ್ನು (ಮಾರ್ಚ್ 20) ಭಾರತದಲ್ಲಿ ಸಾಮಾಜಿಕ ಸಬಲೀಕರಣ ದಿನವನ್ನಾಗಿ ಆಚರಿಸಲಾಗುತ್ತದೆ.', NULL, NULL, 1, 1, NULL, '2025-03-21', '2025-03-18 22:09:42', '2025-03-18 22:09:42'),
+(25, 171, 'events', 'DR. ಬಿ.ಆರ್.ಅಂಬೇಡ್ಕರ್ ಜಯಂತಿ', '2025-04-14 10:00:00', '2025-04-15 10:00:00', 'ಅಂಬೇಡ್ಕರ್ ಜಯಂತಿಯನ್ನು ಭಾರತದಾದ್ಯಂತ ಅತ್ಯಂತ ಗೌರವದಿಂದ ಆಚರಿಸಲಾಗುತ್ತದೆ. ಭಾರತೀಯ ಸಂವಿಧಾನದ ಶಿಲ್ಪಿಯಾಗಿ, ರಾಷ್ಟ್ರದ ಪ್ರಜಾಸತ್ತಾತ್ಮಕ ಚೌಕಟ್ಟನ್ನು ರೂಪಿಸುವಲ್ಲಿ ಅವರು ಪ್ರಮುಖ ಪಾತ್ರ ವಹಿಸಿದ್ದಾರೆ.', NULL, NULL, 1, 1, NULL, '2025-04-15', '2025-03-18 22:12:09', '2025-03-18 22:12:09'),
+(27, NULL, NULL, 'sdsdfasdf', '2025-03-20 00:00:00', '2025-03-20 23:59:00', NULL, NULL, NULL, 1, 1, NULL, NULL, '2025-03-20 11:19:21', '2025-03-20 11:19:21');
 
 -- --------------------------------------------------------
 
@@ -677,6 +727,13 @@ CREATE TABLE `coupons` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `name`, `code`, `type`, `value`, `start_date`, `end_date`, `minimum_spend`, `created_at`, `updated_at`) VALUES
+(1, 'test', '123', 'percentage', 10.00, '03/29/2025', '03/19/2025', NULL, '2025-03-20 11:50:04', '2025-03-20 11:50:18');
+
 -- --------------------------------------------------------
 
 --
@@ -695,7 +752,7 @@ CREATE TABLE `courses` (
   `course_image` varchar(255) NOT NULL,
   `video_link` varchar(255) DEFAULT NULL,
   `overview` text NOT NULL,
-  `instructor_image` varchar(255) NOT NULL,
+  `instructor_image` varchar(255) DEFAULT NULL,
   `instructor_name` varchar(255) NOT NULL,
   `instructor_occupation` varchar(255) NOT NULL,
   `instructor_details` text NOT NULL,
@@ -709,6 +766,13 @@ CREATE TABLE `courses` (
   `is_featured` tinyint(4) NOT NULL DEFAULT 0,
   `average_rating` double(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `language_id`, `course_category_id`, `title`, `slug`, `current_price`, `previous_price`, `summary`, `course_image`, `video_link`, `overview`, `instructor_image`, `instructor_name`, `instructor_occupation`, `instructor_details`, `instructor_facebook`, `instructor_instagram`, `instructor_twitter`, `instructor_linkedin`, `created_at`, `updated_at`, `duration`, `is_featured`, `average_rating`) VALUES
+(1, 169, 1, 'test', 'test', 489, 547, NULL, '67dc0bd5e1782.webp', 'https://www.youtube.com/watch?v=7KB_VYp9X5c', '<p><br></p>', NULL, 'Laravel', 'Laravel', 'details', NULL, NULL, NULL, NULL, '2025-03-20 12:36:38', '2025-03-20 12:36:51', '10h', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -809,67 +873,6 @@ INSERT INTO `dlink` (`id`, `language_id`, `name`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `documents`
---
-
-CREATE TABLE `documents` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `document_category_id` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `name_mr` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT 0,
-  `files` varchar(255) DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `documents`
---
-
-INSERT INTO `documents` (`id`, `language_id`, `document_category_id`, `name`, `name_mr`, `status`, `files`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, 'BRIHANMUMBAI MUNICIPAL CORPORATION-BRIDGE WORKS-2023', 'बृहन्मुंबई महानगरपालिका-ब्रिज वर्क-२०२३', 1, '404-1715602335.pdf', NULL, '2024-05-13 12:12:15', '2024-05-13 12:12:15'),
-(2, NULL, 1, 'MUNICIPAL CORPORATION OF GREATER MUMBAI VOLUME-I USOR FOR HORTICULTURE AND GARDEN WORKS 2013', 'ग्रेटर मुंबई व्हॉल्यूम-1 युएसओआर फॉर हॉर्टीकल्चर अँड गार्डन वर्क्स 2013 चे नगरपालिका कॉर्पोरेशन', 1, '673-1715602356.pdf', NULL, '2024-05-13 12:12:36', '2024-05-13 12:12:36'),
-(3, NULL, 1, 'BRIHAN MUMBAI MAHANAGARPALIKA HORTICULTURE DEVELOPMENT, MAINTENANCE, GARDEN MATERIALS AND TREE PRESERVATION & PROTECTION WORKS USOR 2023', 'बृहन मुंबई महानगरपालिका फलोत्पादन विकास, देखभाल, गार्डन मटेरिअल्स आणि ट्री रिझर्वेशन आणि प्रोटेक्शन वर्क्स USOR 2023', 1, '174-1715602402.pdf', NULL, '2024-05-13 12:13:22', '2024-05-13 12:13:22'),
-(4, NULL, 1, 'BRIHAN MUMBAI MUNICIPAL CORPORATION VOLUME - I USOR FOR HYDRAULIC ENGINEERING SCHEDULE 2023', 'बृहन मुंबई महानगरपालिका खंड - हायड्रोलिक इंजिनिअरिंग शेड्यूल 2023 साठी I USOR', 1, '434-1715602429.pdf', NULL, '2024-05-13 12:13:49', '2024-05-13 12:13:49'),
-(5, NULL, 1, 'BRIHAN MUMBAI MUNICIPAL CORPORATION WATER SUPPLY PROJECTS USoR 2023', 'बृहन मुंबई महानगरपालिका पाणी पुरवठा प्रकल्प USoR 2023', 1, '509-1715602458.pdf', NULL, '2024-05-13 12:14:18', '2024-05-13 12:14:18'),
-(6, NULL, 2, 'Thok Jaladara joint to be used for industrial and agricultural projects', 'औद्योगिक व कृषी सिंचन प्रयोजनार्थ वापरल्या जाणाऱ्या पाण्यासाठी ठोक जलदराबाबत', 1, '275-1715602563.pdf', NULL, '2024-05-13 12:16:03', '2024-05-13 12:16:03'),
-(7, NULL, 2, 'Maharashtra Civil Service Rules, 1981', 'महाराष्ट्र नागरी सेवा नियम, १९८१', 1, '332-1715602589.pdf', NULL, '2024-05-13 12:16:29', '2024-05-13 12:16:29'),
-(8, NULL, 2, 'Maharashtra Water Resources Regulatory Authority', 'महाराष्ट्र जलसंपत्ती नियमन प्राधिकरण', 1, '470-1715602607.pdf', NULL, '2024-05-13 12:16:47', '2024-05-13 12:16:47'),
-(9, NULL, 2, 'Institutional Arbitration Policy', 'संस्थात्मक लवाद धोरण', 1, '591-1715602623.pdf', NULL, '2024-05-13 12:17:03', '2024-05-13 12:17:03'),
-(10, NULL, NULL, 'Tender publicity, opening of tender envelopes under e-tendering process of Public Works Department and Consolidated Revised Instructions regarding Tender Inspection and Acceptance', 'सार्वजनिक बांधकाम विभागाच्या ई निविदा प्रक्रियेअंतर्गत निविदा प्रसिद्धी, निविदा लिफाफे उघडणे आणि निविदा तपासणी व स्विकृती याबाबत एकत्रित सुधारित सूचना', 1, '943-1715602662.pdf', NULL, '2024-05-13 12:17:42', '2024-05-13 12:17:42');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `document_categories`
---
-
-CREATE TABLE `document_categories` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `name_mr` varchar(255) DEFAULT NULL,
-  `slug` varchar(250) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `document_categories`
---
-
-INSERT INTO `document_categories` (`id`, `language_id`, `name`, `name_mr`, `slug`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'Technical Documents', 'तांत्रिक कागदपत्रे', 'technical-documents-896', 1, NULL, '2024-05-13 09:20:27', '2024-05-13 09:20:27'),
-(2, NULL, 'Circulars', 'परिपत्रके', 'circulars-2717', 1, NULL, '2024-05-13 09:20:46', '2024-05-13 09:20:46');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `donations`
 --
 
@@ -908,7 +911,8 @@ INSERT INTO `donations` (`id`, `title`, `slug`, `content`, `goal_amount`, `min_a
 (26, 'Alimentos', 'Alimentos', '<p style=\"line-height: 1.6;\"><span style=\"font-size: 14px;\"><font color=\"#636363\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</font></span><br></p>', 500000, 50, '50,1000,2000', 'meta1,meta2', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', '1613806624.jpg', 170, '2021-02-19 20:38:11', '2021-02-19 20:38:11'),
 (27, 'Count Me Out', 'Count-Me-Out', '<p>Content</p>', 100000, 10000000000, '8979846', NULL, NULL, '67c1940964e26.webp', 169, '2025-02-28 10:12:12', '2025-02-28 10:46:33'),
 (28, 'SZA', 'SZA', '<p>sza</p>', 879456123, 89456123, '879546', NULL, NULL, '67c1932e19842.webp', 169, '2025-02-28 10:22:59', '2025-02-28 10:42:54'),
-(29, 'SZAA', 'SZAA', '<p>Lean On</p>', 456123, 456123, '456123', NULL, NULL, '67c193770c2d9.webp', 169, '2025-02-28 10:43:53', '2025-02-28 10:44:07');
+(29, 'SZAA', 'SZAA', '<p>Lean On</p>', 456123, 456123, '456123', NULL, NULL, '67c193770c2d9.webp', 169, '2025-02-28 10:43:53', '2025-02-28 10:44:07'),
+(30, 'dfgsfdg', 'dfgsfdg', '<p>fgasdfgdsf</p>', 87489489, 989, NULL, NULL, NULL, '67dc11215e748.webp', 169, '2025-03-20 12:59:14', '2025-03-20 12:59:14');
 
 -- --------------------------------------------------------
 
@@ -1024,7 +1028,8 @@ INSERT INTO `events` (`id`, `title`, `slug`, `content`, `date`, `time`, `cost`, 
 (32, 'Virtual Royall House and Slave Quarters Tour: Premiere and Discussion', 'Virtual-Royall-House-and-Slave-Quarters-Tour:-Premiere-and-Discussion', '<p style=\"line-height: 1.6;\"><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"><font color=\"#636363\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</font></span><br></p>', '2024-03-27', '12:15:00', 40, 100000, 'Demo Organizer', 'organize@gmail.com', '236237237', 'http://example.com/', 'California', 'California, USA', '3478348233', 'Event,California', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making', '[\"603098e32f2a4.jpg\",\"603098e2edb8e.jpg\",\"6030a370be32f.jpg\",\"6030a37118b3f.jpg\",\"6030a38abf552.jpg\"]', 'event-601e3309793e5.mp4', 169, 10, '2021-02-05 13:11:46', '2021-02-19 12:57:16'),
 (33, 'Joy & Connection - with Chude Jideonwo', 'Joy-&-Connection---with-Chude-Jideonwo', '<p style=\"line-height: 1.6;\"><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"><font color=\"#636363\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</font></span><br></p>', '2024-03-27', '12:15:00', 30, 99994, 'Demo Organizer', 'organize@gmail.com', '236237237', 'http://example.com/', 'California', 'California, USA', '3478348233', 'Event,California', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making', '[\"6030a370be32f.jpg\",\"603098e2edb8e.jpg\",\"603098e32f2a4.jpg\",\"6030a37118b3f.jpg\",\"6030a38abf552.jpg\"]', 'event-601e3309793e5.mp4', 169, 9, '2021-02-05 13:11:46', '2021-02-19 14:09:42'),
 (34, 'Virtual Event: Los Angeles A Cappella Festival 2021', 'Virtual-Event:-Los-Angeles-A-Cappella-Festival-2021', '<p style=\"line-height: 1.6;\"><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; font-size: 14px; text-align: justify;\"><font color=\"#636363\">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.</font></span><br></p>', '2024-03-27', '12:15:00', 50, 99998, 'Demo Organizer', 'organize@gmail.com', '236237237', 'http://example.com/', 'California', 'California, USA', '3478348233', 'Event,California', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making', '[\"6030a38abf552.jpg\",\"603098e2edb8e.jpg\",\"603098e32f2a4.jpg\",\"6030a370be32f.jpg\",\"6030a37118b3f.jpg\"]', 'event-601e3309793e5.mp4', 169, 7, '2021-02-05 13:11:46', '2021-03-21 00:12:52'),
-(61, 'Joy & Connection - with Chude Jideonwou', 'Joy-&-Connection---with-Chude-Jideonwou', '<p>zdmd</p>', '2021-03-13', '21:59:00', 33, 18, 'Organizer Name', NULL, NULL, NULL, 'California', NULL, NULL, NULL, NULL, '[\"605d70e69e0f0.jpg\",\"605d70e6a4e25.jpg\",\"605d70e6a8875.jpg\"]', 'http://localhost/plusagency/plusagency-3.1/core/storage/app/public/files/shares/videos/Earth.mp4', 169, 9, '2021-03-16 09:55:38', '2021-04-16 05:09:35');
+(61, 'Joy & Connection - with Chude Jideonwou', 'Joy-&-Connection---with-Chude-Jideonwou', '<p>zdmd</p>', '2021-03-13', '21:59:00', 33, 18, 'Organizer Name', NULL, NULL, NULL, 'California', NULL, NULL, NULL, NULL, '[\"605d70e69e0f0.jpg\",\"605d70e6a4e25.jpg\",\"605d70e6a8875.jpg\"]', 'http://localhost/plusagency/plusagency-3.1/core/storage/app/public/files/shares/videos/Earth.mp4', 169, 9, '2021-03-16 09:55:38', '2021-04-16 05:09:35'),
+(62, 'test', 'test', '<p><br></p>', '2025-03-12', '09:16:00', 89, 879, 'fdasfa', NULL, NULL, NULL, 'NYC', NULL, NULL, NULL, NULL, '[\"67dc108d34ff3.tmp\"]', 'assets/front/img/events/videos/67dc108d35540.mp4', 169, 7, '2025-03-20 12:56:45', '2025-03-20 12:56:45');
 
 -- --------------------------------------------------------
 
@@ -1049,7 +1054,8 @@ CREATE TABLE `event_categories` (
 INSERT INTO `event_categories` (`id`, `name`, `slug`, `status`, `lang_id`, `created_at`, `updated_at`) VALUES
 (7, 'Concert', 'Concert', '1', 169, '2021-02-05 16:57:35', '2021-02-19 19:09:21'),
 (9, 'Conference', 'Conference', '1', 169, '2021-02-05 19:10:56', '2021-02-05 19:10:56'),
-(10, 'Seminar', 'Seminar', '1', 169, '2021-02-19 18:31:24', '2021-02-19 18:31:24');
+(10, 'Seminar', 'Seminar', '1', 169, '2021-02-19 18:31:24', '2021-02-19 18:31:24'),
+(11, 'test', 'test', '1', 169, '2025-03-20 12:40:41', '2025-03-20 12:40:41');
 
 -- --------------------------------------------------------
 
@@ -1091,39 +1097,6 @@ INSERT INTO `event_details` (`id`, `user_id`, `name`, `email`, `phone`, `amount`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `e_governance`
---
-
-CREATE TABLE `e_governance` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `title` varchar(255) NOT NULL,
-  `status` tinytext NOT NULL DEFAULT '1',
-  `deleted_at` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `e_governance`
---
-
-INSERT INTO `e_governance` (`id`, `language_id`, `image`, `title`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 169, '6641d4bd4aa3b.jpg', 'Asset Management System(AMS)', '1', NULL, '2024-05-13 08:52:13', '2024-05-13 08:52:13'),
-(2, 170, '6641d4d63132a.jpg', 'मालमत्ता व्यवस्थापन प्रणाली (AMS)', '1', NULL, '2024-05-13 08:52:38', '2024-05-13 08:52:38'),
-(3, 169, '6641d4e66647b.jpg', 'Human Resource Management System(HRMS)', '1', NULL, '2024-05-13 08:52:54', '2024-05-13 08:52:54'),
-(4, 170, '6641d4f451005.jpg', 'मानव संसाधन व्यवस्थापन प्रणाली (HRMS)', '1', NULL, '2024-05-13 08:53:08', '2024-05-13 08:53:08'),
-(5, 169, '6641d50652cb7.jpg', 'Letter And File management System(LFMS)', '1', NULL, '2024-05-13 08:53:26', '2024-05-13 08:53:26'),
-(6, 170, '6641d5125a4b3.jpg', 'पत्र आणि फाइल व्यवस्थापन प्रणाली (LFMS)', '1', NULL, '2024-05-13 08:53:38', '2024-05-13 08:53:38'),
-(7, 169, '6641d525deb54.jpg', 'Integrated Infrastructure Management System(IIMS)', '1', NULL, '2024-05-13 08:53:57', '2024-05-13 08:53:57'),
-(8, 170, '6641d532e43bf.jpg', 'इंटिग्रेटेड इन्फ्रास्ट्रक्चर मॅनेजमेंट सिस्टम (IIMS)', '1', NULL, '2024-05-13 08:54:10', '2024-05-13 08:54:10'),
-(9, 169, '6641d5463c25c.jpg', 'Stem-Flow Monitoring System(S-FMS)', '1', NULL, '2024-05-13 08:54:30', '2024-05-13 08:57:21'),
-(10, 170, '6641d552ca6e3.jpg', 'स्टेम-फ्लो मॉनिटरिंग सिस्टम (एस-एफएमएस)', '1', NULL, '2024-05-13 08:54:42', '2024-05-13 08:54:42');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `faqs`
 --
 
@@ -1135,6 +1108,13 @@ CREATE TABLE `faqs` (
   `serial_number` int(11) NOT NULL DEFAULT 0,
   `category_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `language_id`, `question`, `answer`, `serial_number`, `category_id`) VALUES
+(2, 169, 'Bhuvan', 'Answer', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -1151,6 +1131,13 @@ CREATE TABLE `faq_categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faq_categories`
+--
+
+INSERT INTO `faq_categories` (`id`, `language_id`, `name`, `status`, `serial_number`, `created_at`, `updated_at`) VALUES
+(2, 169, 'SZA', 1, 2, '2025-03-21 13:10:16', '2025-03-21 13:10:16');
 
 -- --------------------------------------------------------
 
@@ -1243,9 +1230,8 @@ INSERT INTO `galleries` (`id`, `language_id`, `title`, `image`, `serial_number`,
 (19, 170, '', '6641cf4484db8.jpg', 1, '2024-05-13 08:28:52', '2024-05-13 08:28:52', 4),
 (20, 170, '', '6641cf525c1c6.jpg', 1, '2024-05-13 08:29:06', '2024-05-13 08:29:06', NULL),
 (21, 170, '', '6641cf65a61ed.jpg', 1, '2024-05-13 08:29:25', '2024-05-13 08:29:25', 4),
-(22, 170, '', '6641cf7f268c4.jpg', 1, '2024-05-13 08:29:51', '2024-05-13 08:29:51', 4),
-(23, 169, '1', '67c159d312617.webp', 1, '2025-02-28 06:15:04', '2025-02-28 06:38:11', 1),
-(24, 169, 'Title', '67c159b8743a1.webp', 2, '2025-02-28 06:36:36', '2025-02-28 06:37:44', 1);
+(24, 169, 'Title', '67dd63fa8a828.webp', 2, '2025-02-28 06:36:36', '2025-03-21 13:04:58', 1),
+(25, 170, 'Title', '67dd641c73980.webp', 4, '2025-03-21 13:05:34', '2025-03-21 13:05:34', 2);
 
 -- --------------------------------------------------------
 
@@ -1271,7 +1257,7 @@ CREATE TABLE `gallery_categories` (
 INSERT INTO `gallery_categories` (`id`, `language_id`, `name`, `slug`, `status`, `serial_number`, `created_at`, `updated_at`) VALUES
 (1, 169, '13th Foundation Day Celebration', '13th-foundation-day-celebration-1906', 1, 1, '2024-05-07 13:18:15', '2024-05-07 13:18:15'),
 (2, 170, '13 वा स्थापना दिन सोहळा', '13-va-sathapana-thana-sahali-5696', 1, 1, '2024-05-07 13:19:11', '2024-05-07 13:19:11'),
-(3, 169, '53th NATIONAL SAFETY WEEK CAMPAIGN', '53th-national-safety-week-campaign-2917', 1, 1, '2024-05-07 13:19:21', '2024-05-07 13:19:21'),
+(3, 169, '53th NATIONAL SAFETY WEEK CAMPAIGN', '53th-national-safety-week-campaign-2917', 0, 1, '2024-05-07 13:19:21', '2025-03-21 12:51:20'),
 (4, 170, '५३ वा राष्ट्रीय सुरक्षा सप्ताह मोहीम', 'va-rashhataraya-sarakashha-sapataha-mahama-4828', 1, 1, '2024-05-07 13:19:32', '2024-05-07 13:19:32');
 
 -- --------------------------------------------------------
@@ -1290,37 +1276,6 @@ CREATE TABLE `guests` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `history`
---
-
-CREATE TABLE `history` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `image` varchar(255) NOT NULL,
-  `years` varchar(255) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` longtext DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `history`
---
-
-INSERT INTO `history` (`id`, `language_id`, `image`, `years`, `title`, `description`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 169, '6641d8d83d495.jpg', '1980', 'Inception to Impact: Our Water Supply Legacy Since 1980', 'Our journey began in 1980 when the Maharashtra Water Supply & Sewerage Board (MWSSB) initiated the Maharashtra Water Supply & Sewerage Project Stage-I. Since then, we have been entrusted with the operation and maintenance of the Shahad Temghar Water Works, serving six towns and 104 villages in the northern zone.', 1, NULL, '2024-05-13 09:09:44', '2024-05-13 09:09:44'),
-(2, 170, '6641d90236a46.jpg', '1980', 'प्रभावाची सुरुवात: 1980 पासून आमचा पाणीपुरवठ्याचा वारसा', 'आमचा प्रवास 1980 मध्ये महाराष्ट्र पाणी पुरवठा आणि मलनिस्सारण ​​मंडळाने (MWSSB) महाराष्ट्र पाणीपुरवठा आणि मलनिस्सारण ​​प्रकल्प टप्पा-I सुरू केला तेव्हा सुरू झाला. तेव्हापासून, आमच्याकडे शहाड टेमघर वॉटर वर्क्सचे संचालन आणि देखभाल करण्याची जबाबदारी सोपविण्यात आली आहे, जी उत्तर विभागातील सहा शहरे आणि 104 गावांना सेवा देत आहे.', 1, NULL, '2024-05-13 09:10:26', '2024-05-13 09:10:26'),
-(3, 169, '6641d92280a7c.jpg', '2000', 'The Genesis of STEM: Shaping Water Supply History in 2000', 'On March 3, 2000, Thane Municipal Corporation, Bhiwandi Nizampur City (formerly known as Municipal Council), and Mira-Bhayander Municipal Corporation (formerly known as Municipal Council) jointly entered into a Memorandum of Understanding (MoU) to establish the Maharashtra Water Supply and Sewerage Board under Section 32 of the Maharashtra Municipal Corporations Act, 1949. On March 23, 2000, the Maharashtra Jeevan Pradhikaran transferred the existing water supply scheme to Shahad Temghar Water Supply Authority (STEM).', 1, NULL, '2024-05-13 09:10:58', '2024-05-13 09:10:58'),
-(4, 170, '6641d93d2b3f4.jpg', '2000', 'द जेनेसिस ऑफ स्टेम: शेपिंग वॉटर सप्लाय हिस्ट्री इन 2000', '3 मार्च 2000 रोजी, ठाणे महानगरपालिका, भिवंडी निजामपूर शहर (पूर्वी नगर परिषद म्हणून ओळखले जाणारे) आणि मीरा-भाईंदर महानगरपालिका (पूर्वी नगर परिषद म्हणून ओळखले जाणारे) यांनी संयुक्तपणे महाराष्ट्र पाणीपुरवठा स्थापन करण्यासाठी सामंजस्य करार (एमओयू) केला. आणि सीवरेज बोर्ड महाराष्ट्र महानगरपालिका अधिनियम, 1949 च्या कलम 32 अंतर्गत. 23 मार्च 2000 रोजी, महाराष्ट्र जीवन प्राधिकरणाने विद्यमान पाणीपुरवठा योजना शहाड टेमघर पाणीपुरवठा प्राधिकरणाकडे (STEM) हस्तांतरित केली.', 1, NULL, '2024-05-13 09:11:25', '2024-05-13 09:11:25'),
-(5, 169, '6641d95f485b2.jpg', '2010', 'Crafting Our Licit Governance Framework', 'Our legal status and organizational structure were established through the collective efforts of Thane Municipal Corporation, Thane, Mira-Bhayander Municipal Corporation, Bhayander, Bhiwandi Nizampur City (formerly known as Municipal Council), Bhiwandi, and Thane Zilla Parishad, Thane. A pivotal resolution was passed during their respective general meetings.Following Government Decision No. PAPUYOHA (पापुयो)-2008/PR.CR.28/PAPU-22 on February 27, 2009, and in compliance with the Indian Companies Act, 1956, we obtained authorization to become a private company.We diligently followed the outlined procedures and officially registered the company on December 10, 2010. This marked the beginning of our operational journey, driven by our commitment to serving the community.\"', 1, NULL, '2024-05-13 09:11:59', '2024-05-13 09:13:28'),
-(6, 170, '6641d97c182bc.jpg', '2010', 'आमची कायदेशीर गव्हर्नन्स फ्रेमवर्क तयार करणे', 'ठाणे महानगरपालिका, ठाणे, मीरा-भाईंदर महानगरपालिका, भाईंदर, भिवंडी निजामपूर शहर (पूर्वीची नगरपरिषद म्हणून ओळखली जाणारी), भिवंडी, आणि ठाणे जिल्हा परिषद, ठाणे यांच्या एकत्रित प्रयत्नातून आमची कायदेशीर स्थिती आणि संघटनात्मक रचना स्थापन झाली. त्यांच्या संबंधित सर्वसाधारण सभेत महत्त्वपूर्ण ठराव मंजूर करण्यात आला.\r\n\r\n27 फेब्रुवारी 2009 रोजी शासन निर्णय क्रमांक PAPUOHA (पापुयो)-2008/PR.CR.28/PAPU-22 आणि भारतीय कंपनी कायदा, 1956 चे पालन करून, आम्ही खाजगी कंपनी होण्यासाठी अधिकृतता प्राप्त केली.\r\n\r\nआम्ही आउटलाइन केलेल्या प्रक्रियेचे काटेकोरपणे पालन केले आणि 10 डिसेंबर 2010 रोजी कंपनीची अधिकृतपणे नोंदणी केली. यामुळे आमच्या कार्यप्रणालीच्या प्रवासाची सुरुवात झाली, जी समाजाची सेवा करण्याच्या आमच्या वचनबद्धतेमुळे प्रेरित झाली.\"', 1, NULL, '2024-05-13 09:12:28', '2024-05-13 09:12:28');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `homes`
 --
 
@@ -1333,6 +1288,14 @@ CREATE TABLE `homes` (
   `components` longtext DEFAULT NULL,
   `styles` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `homes`
+--
+
+INSERT INTO `homes` (`id`, `language_id`, `theme`, `html`, `css`, `components`, `styles`) VALUES
+(1, 169, 'default', '<script type=\'text/javascript\' src=\'http://127.0.0.1:8000/assets/customeJs/1.js\'></script><div class=\'pagebuilder-content\'></div>', '* { box-sizing: border-box; } body {margin: 0;}', '[]', '[]'),
+(2, 170, 'default', '<script type=\'text/javascript\' src=\'http://127.0.0.1:8000/assets/customeJs/2.js\'></script><div class=\'pagebuilder-content\'><p>Hello</p></div>', '* { box-sizing: border-box; } body {margin: 0;}*{box-sizing:border-box;}body{margin:0;}', '[{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"Hello\"}]}]', '[{\"selectors\":[],\"selectorsAdd\":\"*\",\"style\":{\"box-sizing\":\"border-box\"}},{\"selectors\":[],\"selectorsAdd\":\"body\",\"style\":{\"margin\":\"0\"}}]');
 
 -- --------------------------------------------------------
 
@@ -1349,6 +1312,13 @@ CREATE TABLE `jcategories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `jcategories`
+--
+
+INSERT INTO `jcategories` (`id`, `language_id`, `name`, `status`, `serial_number`, `created_at`, `updated_at`) VALUES
+(1, 169, 'Kendrik Lamar (Reincarnated)', 1, 1, '2025-03-20 10:48:09', '2025-03-21 13:15:57');
 
 -- --------------------------------------------------------
 
@@ -1382,6 +1352,13 @@ CREATE TABLE `jobs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `jcategory_id`, `language_id`, `title`, `slug`, `vacancy`, `deadline`, `experience`, `job_responsibilities`, `employment_status`, `educational_requirements`, `experience_requirements`, `additional_requirements`, `job_location`, `salary`, `benefits`, `read_before_apply`, `email`, `serial_number`, `meta_keywords`, `meta_description`, `created_at`, `updated_at`) VALUES
+(1, 1, 169, 'Test', 'Test', 2, '03/11/2025', '5', 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e4a6f6220526573706f6e736962696c69746965733c2f7370616e3e3c2f703e, 'a,b,c', 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e456475636174696f6e616c20526571756972656d656e74733c2f7370616e3e3c2f703e, 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e457870657269656e636520526571756972656d656e74733c2f7370616e3e3c2f703e, 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e4164646974696f6e616c20526571756972656d656e74733c2f7370616e3e3c2f703e, 'Banglore', 0x3c703e32353030303c2f703e, 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e42656e65666974733c2f7370616e3e3c2f703e, 0x3c703e3c7370616e207374796c653d22636f6c6f723a207267622837332c2038302c203837293b20666f6e742d73697a653a20313470783b20666f6e742d7765696768743a203630303b20746578742d777261702d6d6f64653a206e6f777261703b223e52656164204265666f7265204170706c793c2f7370616e3e3c2f703e, 'admin@staging.com', 1, NULL, NULL, '2025-03-20 10:52:58', '2025-03-20 10:52:58');
+
 -- --------------------------------------------------------
 
 --
@@ -1405,67 +1382,6 @@ CREATE TABLE `languages` (
 INSERT INTO `languages` (`id`, `name`, `code`, `is_default`, `rtl`, `created_at`, `updated_at`) VALUES
 (169, 'English', 'en', 1, 0, '2019-12-20 02:16:35', '2020-10-03 01:34:08'),
 (170, 'Marathi', 'mr', 0, 0, '2019-12-20 02:16:43', '2020-10-02 23:30:03');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `leadership`
---
-
-CREATE TABLE `leadership` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `post` varchar(255) DEFAULT NULL,
-  `status` tinyint(3) DEFAULT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `leadership`
---
-
-INSERT INTO `leadership` (`id`, `language_id`, `category_id`, `name`, `post`, `status`, `image`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 169, 1, 'Smt. Varsha Deshmukh', 'Principal Secretary , W.S. Dept, Govt. of Maharashtra', 1, '6641d0805a35f.jpg', '2024-05-07 23:30:38', '2024-05-13 08:34:08', NULL),
-(2, 169, 1, 'Mr.Sanjay Mukherjee (IAS)', 'Metro Commissioner, M.M.R.D.A.', 1, '6641d08b09d30.jpg', '2024-05-07 23:31:29', '2024-05-13 08:34:19', NULL),
-(3, 169, 3, 'Mr. Abhijit Bangar (IAS)', 'Commissioner , T.M.C., Chairman', 1, '6641d0737a422.jpg', '2024-05-07 23:32:25', '2024-05-13 08:33:55', NULL),
-(4, 169, 3, 'Mr. Sanjay Katkar (IAS)', 'Commissioner, M.B.M.C', 1, '6641d0671fde5.jpg', '2024-05-07 23:33:48', '2024-05-13 08:33:43', NULL),
-(5, 170, 4, 'श्रीमती. वर्षा देशमुख', 'प्रधान सचिव डब्ल्यू.एस. विभाग, शासन. महाराष्ट्राचा', 1, '6641d0805a35f.jpg', '2024-05-07 23:30:38', '2024-05-13 08:38:27', NULL),
-(6, 170, 4, 'श्री.संजय मुखर्जी (IAS)', 'मेट्रो आयुक्त, एम.एम.आर.डी.ए.', 1, '6641d08b09d30.jpg', '2024-05-07 23:31:29', '2024-05-13 08:38:15', NULL),
-(7, 170, 2, 'श्री अभिजित बांगर (IAS)', 'आयुक्त, T.M.C., अध्यक्ष', 1, '6641d0737a422.jpg', '2024-05-07 23:32:25', '2024-05-13 08:37:59', NULL),
-(8, 170, 2, 'श्री.संजय काटकर (IAS)', 'आयुक्त, M.B.M.C', 1, '6641d0671fde5.jpg', '2024-05-07 23:33:48', '2024-05-13 08:37:45', NULL),
-(9, 169, 1, 'Mr. Ajay Vaidya (IAS)', 'Commissioner, B.N.C.M.C.', 1, '6641d1d5f1564.jpg', '2024-05-13 08:39:50', '2024-05-13 08:39:50', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `lead_categories`
---
-
-CREATE TABLE `lead_categories` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) DEFAULT NULL,
-  `status` tinyint(3) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `lead_categories`
---
-
-INSERT INTO `lead_categories` (`id`, `language_id`, `name`, `slug`, `status`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 169, 'STRUCTURE OF GOVERNING COUNCIL', 'structure-of-governing-council-9698', 1, '2024-05-07 13:34:01', '2024-05-07 13:34:01', NULL),
-(2, 170, 'गव्हर्निंग कौन्सिलची रचना', 'gavaharanaga-kanasalca-racana-4967', 1, '2024-05-07 13:34:14', '2024-05-07 13:34:14', NULL),
-(3, 169, 'BOARD OF DIRECTORS', 'board-of-directors-5990', 1, '2024-05-07 13:34:32', '2024-05-07 13:34:32', NULL),
-(4, 170, 'संचालक मंडळ', 'sacalka-madali-7484', 1, '2024-05-07 13:34:45', '2024-05-07 13:34:45', NULL);
 
 -- --------------------------------------------------------
 
@@ -1969,7 +1885,8 @@ INSERT INTO `lessons` (`id`, `module_id`, `name`, `video_file`, `video_link`, `d
 (483, 102, 'Course Introduction', '1613817009.mp4', NULL, '6m 39s', '2021-02-20 07:28:17', '2021-02-20 07:28:17'),
 (484, 102, 'Course Curriculum', NULL, 'https://www.youtube.com/embed/hEgO047GxaQ', '4m 0s', '2021-02-20 07:28:17', '2021-02-20 07:28:17'),
 (485, 102, 'Why Python', NULL, 'https://www.youtube.com/embed/hEgO047GxaQ', '5m 18s', '2021-02-20 07:28:17', '2021-02-20 07:28:17'),
-(486, 102, 'Course FAQs', '1613817126.mp4', NULL, '2m 33s', '2021-02-20 07:28:17', '2021-02-20 07:28:17');
+(486, 102, 'Course FAQs', '1613817126.mp4', NULL, '2m 33s', '2021-02-20 07:28:17', '2021-02-20 07:28:17'),
+(487, 104, 'Lesson Name', NULL, 'https://www.youtube.com/watch?v=7KB_VYp9X5c', '20m', '2025-03-26 07:23:41', '2025-03-26 07:23:41');
 
 -- --------------------------------------------------------
 
@@ -1990,7 +1907,7 @@ CREATE TABLE `megamenus` (
 --
 
 INSERT INTO `megamenus` (`id`, `language_id`, `menus`, `type`, `category`) VALUES
-(5, 169, '{\"54\":[131,132,133,134,135,136],\"55\":[137,138,139,140,141,142],\"56\":[143,144,145,146,147],\"57\":[148,149,150,151,152,153],\"58\":[154,155,156,157],\"59\":[158,159,160,161],\"60\":[162,163,164,165],\"61\":[166,167,168,169]}', 'services', 1),
+(5, 169, '[]', 'services', 1),
 (6, 169, '[\"131\",\"134\",\"135\",\"143\",\"154\",\"162\",\"164\",\"166\"]', 'services', 0),
 (7, 169, '{\"1\":[4,10,16,47],\"3\":[5,13,46],\"4\":[6,14],\"7\":[7,15]}', 'products', 1),
 (15, 169, '[\"39\",\"40\",\"45\",\"46\"]', 'portfolios', 0),
@@ -2025,13 +1942,10 @@ CREATE TABLE `members` (
 --
 
 INSERT INTO `members` (`id`, `language_id`, `name`, `rank`, `image`, `url`, `facebook`, `twitter`, `instagram`, `linkedin`, `feature`) VALUES
-(1, 169, 'Mr. Kanye West', 'Managing Director', '67c03e2d76783.webp', NULL, NULL, NULL, NULL, NULL, 0),
 (2, 170, 'श्री.संकेत घरत', 'व्यवस्थापकीय संचालक', '6641a7b2d3715.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(3, 169, 'Mr. Saurabh Rao (I.A.S)', 'Commissioner', '6641a096e32ae.jpg', NULL, NULL, NULL, NULL, NULL, 0),
 (4, 170, 'श्री सौरभ राव (I.A.S)', 'आयुक्त', '6641a7e103ffe.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(5, 169, 'Mr.sir', 'Mayor , T.M.C., Chairman', '6641a0a72f290.jpg', NULL, NULL, NULL, NULL, NULL, 0),
 (6, 170, 'साहेब', 'महापौर, T.M.C., अध्यक्ष', '6641a80d38f8a.jpg', NULL, NULL, NULL, NULL, NULL, 0),
-(7, 169, 'SZA', '2', '67c03be8690fe.webp', NULL, 'https://www.facebook.com/', 'https://x.com/?lang=en', 'https://www.instagram.com/accounts/login/?hl=en', 'https://in.linkedin.com/', 0);
+(9, 169, 'Sun God (Nika)', 'Sun God', '67e68b44e895b.webp', NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2052,8 +1966,8 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `language_id`, `menus`, `created_at`, `updated_at`) VALUES
-(247, 169, '[{\"text\":\"Home\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"About Us\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"About Us\",\"href\":\"http:\\/\\/localhost:8002\\/Aboute-Us\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"History\",\"href\":\"http:\\/\\/localhost:8002\\/history\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Budget Report\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"Profit\",\"href\":\"http:\\/\\/localhost:8002\\/budget\\/report\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"Leadership\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"Structure of Governing Council\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/structure-of-governing-council-9698\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Executive Committee\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/board-of-directors-5990\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"Gallery\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"13th Foundation Day Celebration\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/13th-foundation-day-celebration-1906\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"53th NATIONAL SAFETY WEEK CAMPAIGN\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/53th-national-safety-week-campaign-2917\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]}]},{\"text\":\"Department\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"Administration\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Engineering\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"Project\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Operation\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"Finance and Accounts\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Technical Documents\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/technical-documents-896\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Circulars\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/circulars-2717\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Water Tariff and Charges\",\"href\":\"http:\\/\\/localhost:8002\\/Water-Tariff-And-Charges\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"e-Governance\",\"href\":\"http:\\/\\/localhost:8002\\/egovernance\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Tender & Advertisement\",\"href\":\"http:\\/\\/localhost:8002\\/tenders\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]', '2024-05-13 12:40:42', '2024-05-13 12:40:42'),
-(248, 170, '[{\"text\":\"\\u092e\\u0941\\u0916\\u094d\\u092f\\u092a\\u0943\\u0937\\u094d\\u0920\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"href\":\"http:\\/\\/localhost:8002\\/\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0907\\u0924\\u093f\\u0939\\u093e\\u0938\",\"href\":\"http:\\/\\/localhost:8002\\/history\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092c\\u091c\\u0947\\u091f \\u0905\\u0939\\u0935\\u093e\\u0932\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0928\\u092b\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/budget\\/report\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0928\\u0947\\u0924\\u0943\\u0924\\u094d\\u0935\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0917\\u0935\\u094d\\u0939\\u0930\\u094d\\u0928\\u093f\\u0902\\u0917 \\u0915\\u094c\\u0928\\u094d\\u0938\\u093f\\u0932\\u091a\\u0940 \\u0930\\u091a\\u0928\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/gavaharanaga-kanasalca-racana-4967\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0915\\u093e\\u0930\\u094d\\u092f\\u0915\\u093e\\u0930\\u0940 \\u0938\\u092e\\u093f\\u0924\\u0940\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/sacalka-madali-7484\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0917\\u0945\\u0932\\u0930\\u0940\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"13 \\u0935\\u093e \\u0938\\u094d\\u0925\\u093e\\u092a\\u0928\\u093e \\u0926\\u093f\\u0928 \\u0938\\u094b\\u0939\\u0933\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/13-va-sathapana-thana-sahali-5696\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u096b\\u0969 \\u0935\\u093e \\u0930\\u093e\\u0937\\u094d\\u091f\\u094d\\u0930\\u0940\\u092f \\u0938\\u0941\\u0930\\u0915\\u094d\\u0937\\u093e \\u0938\\u092a\\u094d\\u0924\\u093e\\u0939 \\u092e\\u094b\\u0939\\u0940\\u092e\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/va-rashhataraya-sarakashha-sapataha-mahama-4828\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]}]},{\"text\":\"\\u0935\\u093f\\u092d\\u093e\\u0917\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u092a\\u094d\\u0930\\u0936\\u093e\\u0938\\u0928\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0905\\u092d\\u093f\\u092f\\u093e\\u0902\\u0924\\u094d\\u0930\\u093f\\u0915\\u0940\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u092a\\u094d\\u0930\\u0915\\u0932\\u094d\\u092a\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0911\\u092a\\u0930\\u0947\\u0936\\u0928\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0935\\u093f\\u0924\\u094d\\u0924 \\u0906\\u0923\\u093f \\u0932\\u0947\\u0916\\u093e\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0924\\u093e\\u0902\\u0924\\u094d\\u0930\\u093f\\u0915 \\u0915\\u093e\\u0917\\u0926\\u092a\\u0924\\u094d\\u0930\\u0947\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/technical-documents-896\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092a\\u0930\\u093f\\u092a\\u0924\\u094d\\u0930\\u0915\\u0947\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/circulars-2717\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092a\\u093e\\u0923\\u0940 \\u0926\\u0930 \\u0906\\u0923\\u093f \\u0936\\u0941\\u0932\\u094d\\u0915\",\"href\":\"http:\\/\\/localhost:8002\\/Water-Tariff-And-Charges---MR\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0908-\\u0936\\u093e\\u0938\\u0928\",\"href\":\"http:\\/\\/localhost:8002\\/egovernance\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0928\\u093f\\u0935\\u093f\\u0926\\u093e \\u0906\\u0923\\u093f \\u091c\\u093e\\u0939\\u093f\\u0930\\u093e\\u0924\",\"href\":\"http:\\/\\/localhost:8002\\/tenders\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]', '2024-05-13 12:41:32', '2024-05-13 12:41:32');
+(248, 170, '[{\"text\":\"\\u092e\\u0941\\u0916\\u094d\\u092f\\u092a\\u0943\\u0937\\u094d\\u0920\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"href\":\"http:\\/\\/localhost:8002\\/\\u0906\\u092e\\u091a\\u094d\\u092f\\u093e\\u092c\\u0926\\u094d\\u0926\\u0932\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0907\\u0924\\u093f\\u0939\\u093e\\u0938\",\"href\":\"http:\\/\\/localhost:8002\\/history\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092c\\u091c\\u0947\\u091f \\u0905\\u0939\\u0935\\u093e\\u0932\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0928\\u092b\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/budget\\/report\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0928\\u0947\\u0924\\u0943\\u0924\\u094d\\u0935\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u0917\\u0935\\u094d\\u0939\\u0930\\u094d\\u0928\\u093f\\u0902\\u0917 \\u0915\\u094c\\u0928\\u094d\\u0938\\u093f\\u0932\\u091a\\u0940 \\u0930\\u091a\\u0928\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/gavaharanaga-kanasalca-racana-4967\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0915\\u093e\\u0930\\u094d\\u092f\\u0915\\u093e\\u0930\\u0940 \\u0938\\u092e\\u093f\\u0924\\u0940\",\"href\":\"http:\\/\\/localhost:8002\\/committee\\/sacalka-madali-7484\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0917\\u0945\\u0932\\u0930\\u0940\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"13 \\u0935\\u093e \\u0938\\u094d\\u0925\\u093e\\u092a\\u0928\\u093e \\u0926\\u093f\\u0928 \\u0938\\u094b\\u0939\\u0933\\u093e\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/13-va-sathapana-thana-sahali-5696\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u096b\\u0969 \\u0935\\u093e \\u0930\\u093e\\u0937\\u094d\\u091f\\u094d\\u0930\\u0940\\u092f \\u0938\\u0941\\u0930\\u0915\\u094d\\u0937\\u093e \\u0938\\u092a\\u094d\\u0924\\u093e\\u0939 \\u092e\\u094b\\u0939\\u0940\\u092e\",\"href\":\"http:\\/\\/localhost:8002\\/galleries\\/va-rashhataraya-sarakashha-sapataha-mahama-4828\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]}]},{\"text\":\"\\u0935\\u093f\\u092d\\u093e\\u0917\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u092a\\u094d\\u0930\\u0936\\u093e\\u0938\\u0928\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0905\\u092d\\u093f\\u092f\\u093e\\u0902\\u0924\\u094d\\u0930\\u093f\\u0915\\u0940\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"\\u092a\\u094d\\u0930\\u0915\\u0932\\u094d\\u092a\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0911\\u092a\\u0930\\u0947\\u0936\\u0928\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0935\\u093f\\u0924\\u094d\\u0924 \\u0906\\u0923\\u093f \\u0932\\u0947\\u0916\\u093e\",\"href\":\"http:\\/\\/localhost:8002\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0924\\u093e\\u0902\\u0924\\u094d\\u0930\\u093f\\u0915 \\u0915\\u093e\\u0917\\u0926\\u092a\\u0924\\u094d\\u0930\\u0947\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/technical-documents-896\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092a\\u0930\\u093f\\u092a\\u0924\\u094d\\u0930\\u0915\\u0947\",\"href\":\"http:\\/\\/localhost:8002\\/documents\\/circulars-2717\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u092a\\u093e\\u0923\\u0940 \\u0926\\u0930 \\u0906\\u0923\\u093f \\u0936\\u0941\\u0932\\u094d\\u0915\",\"href\":\"http:\\/\\/localhost:8002\\/Water-Tariff-And-Charges---MR\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]},{\"text\":\"\\u0908-\\u0936\\u093e\\u0938\\u0928\",\"href\":\"http:\\/\\/localhost:8002\\/egovernance\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"\\u0928\\u093f\\u0935\\u093f\\u0926\\u093e \\u0906\\u0923\\u093f \\u091c\\u093e\\u0939\\u093f\\u0930\\u093e\\u0924\",\"href\":\"http:\\/\\/localhost:8002\\/tenders\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"}]', '2024-05-13 12:41:32', '2024-05-13 12:41:32'),
+(251, 169, '[]', '2025-03-21 07:24:45', '2025-03-21 07:24:45');
 
 -- --------------------------------------------------------
 
@@ -2495,7 +2409,8 @@ INSERT INTO `modules` (`id`, `course_id`, `name`, `duration`, `created_at`, `upd
 (100, 30, 'Python Setup', '0h 54m', '2021-02-20 07:26:40', '2021-02-20 07:26:40'),
 (101, 30, 'Python Object & Data Structure Basics', '2h 2m', '2021-02-20 07:26:40', '2021-02-20 07:26:40'),
 (102, 30, 'Python Comparison Operators', '0h 9m', '2021-02-20 07:26:40', '2021-02-20 07:26:40'),
-(103, 33, 'Arabic', '10h 60m', '2021-11-13 23:43:23', '2021-11-13 23:43:23');
+(103, 33, 'Arabic', '10h 60m', '2021-11-13 23:43:23', '2021-11-13 23:43:23'),
+(104, 1, 'test', '10h', '2025-03-20 12:38:00', '2025-03-20 12:38:00');
 
 -- --------------------------------------------------------
 
@@ -2558,7 +2473,8 @@ CREATE TABLE `offline_gateways` (
 --
 
 INSERT INTO `offline_gateways` (`id`, `language_id`, `name`, `short_description`, `instructions`, `product_checkout_status`, `serial_number`, `is_receipt`, `created_at`, `updated_at`, `package_order_status`, `course_checkout_status`, `donation_checkout_status`, `event_checkout_status`) VALUES
-(7, 169, 'Bank America', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 0x3c703e3c7370616e207374796c653d22666f6e742d66616d696c793a202671756f743b4f70656e2053616e732671756f743b2c20417269616c2c2073616e732d73657269663b20666f6e742d73697a653a20313470783b20746578742d616c69676e3a206a7573746966793b223e436f6e747261727920746f20706f70756c61722062656c6965662c204c6f72656d20497073756d206973206e6f742073696d706c792072616e646f6d20746578742e2049742068617320726f6f747320696e2061207069656365206f6620636c6173736963616c204c6174696e206c6974657261747572652066726f6d2034352042432c206d616b696e67206974206f7665722032303030207965617273206f6c642e2052696368617264204d63436c696e746f636b3c2f7370616e3e3c62723e3c2f703e, 1, 2, 0, '2021-03-23 11:45:28', '2021-04-25 10:07:11', 1, 1, 1, 1);
+(7, 169, 'Bank America', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 0x3c703e3c7370616e207374796c653d22666f6e742d66616d696c793a202671756f743b4f70656e2053616e732671756f743b2c20417269616c2c2073616e732d73657269663b20666f6e742d73697a653a20313470783b20746578742d616c69676e3a206a7573746966793b223e436f6e747261727920746f20706f70756c61722062656c6965662c204c6f72656d20497073756d206973206e6f742073696d706c792072616e646f6d20746578742e2049742068617320726f6f747320696e2061207069656365206f6620636c6173736963616c204c6174696e206c6974657261747572652066726f6d2034352042432c206d616b696e67206974206f7665722032303030207965617273206f6c642e2052696368617264204d63436c696e746f636b3c2f7370616e3e3c62723e3c2f703e, 1, 2, 0, '2021-03-23 11:45:28', '2021-04-25 10:07:11', 1, 1, 1, 1),
+(8, 169, 'test', 'short', 0x3c703e3c62723e3c2f703e, 1, 1, 1, '2025-03-20 13:21:41', '2025-03-20 13:21:52', 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2669,8 +2585,7 @@ INSERT INTO `packages` (`id`, `language_id`, `title`, `price`, `description`, `i
 (1, 169, 'Basic Package', 100.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e372048544d4c2050616765733c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3120486f6d6520506167653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e434d532056657273696f6e204e6f7420417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4c6f676f2044657369676e20496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e31205265766973696f6e20417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4e6f20537570706f727420417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e536f7572636520436f646520496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f666f6e743e3c2f6469763e, '6062f530aac5d.png', 1, NULL, NULL, 'E4E8F9', '2019-12-21 04:30:50', '2024-04-23 09:35:09', 1, NULL, 1, 'yearly', 1),
 (7, 169, 'Golden Package', 180.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e31352048544d4c2050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3320486f6d652050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e434d532056657273696f6e204e6f7420417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4c6f676f2044657369676e20496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e32205265766973696f6e20417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4e6f20537570706f727420417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e536f7572636520436f646520496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f6469763e, '1589386726.png', 2, NULL, NULL, 'F9E4E4', '2019-12-21 04:31:15', '2021-04-26 02:57:48', 1, NULL, 1, 'monthly', 7),
 (43, 169, 'Plutinum Package', 350.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e32352048544d4c2050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3520486f6d652050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e434d532056657273696f6e20417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4c6f676f2044657369676e20496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e32205265766973696f6e20417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4e6f20537570706f727420417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e536f7572636520436f646520496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f6469763e, '1589386733.png', 3, NULL, NULL, 'DAF2DB', '2019-12-21 04:32:37', '2021-04-26 02:59:12', 1, NULL, 1, 'yearly', 8),
-(44, 169, 'E-commerce', 700.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e53686f7070696e67204361727420776974682052656163743c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e416476616e636564205365617263682046696c7465723c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e53696e676c652056656e646f723c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4c6f676f2044657369676e20496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e32205265766973696f6e20417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e537570706f727420417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e536f7572636520436f646520496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f666f6e743e3c2f6469763e, '6078020a1a25c.png', 4, NULL, NULL, NULL, '2019-12-21 04:33:04', '2021-04-26 02:59:12', 1, NULL, 1, 'monthly', 1),
-(45, 169, 'Advanced Plutinum', 900.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e35302048544d4c2050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e313020486f6d652050616765733c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e434d532056657273696f6e20417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4c6f676f2044657369676e20496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e32205265766973696f6e20417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e537570706f727420417661696c61626c653c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e536f7572636520436f646520496e636c756465643c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c62723e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f6469763e, NULL, 5, NULL, NULL, NULL, '2019-12-21 04:33:43', '2021-04-26 02:59:12', 0, NULL, 1, 'yearly', 7);
+(44, 169, 'E-commerce', 700.00, 0x3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e53686f7070696e67204361727420776974682052656163743c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e416476616e636564205365617263682046696c7465723c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e53696e676c652056656e646f723c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4c6f676f2044657369676e20496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e32205265766973696f6e20417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e537570706f727420417661696c61626c653c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e536f7572636520436f646520496e636c756465643c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e3c62723e3c2f666f6e743e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a2063656e7465723b223e3c666f6e742073697a653d2233223e4f6e6c79204f6e6520446f6d61696e20416c6c6f7765643c2f666f6e743e3c2f6469763e, '6078020a1a25c.png', 4, NULL, NULL, NULL, '2019-12-21 04:33:04', '2021-04-26 02:59:12', 1, NULL, 1, 'monthly', 1);
 
 -- --------------------------------------------------------
 
@@ -2695,7 +2610,8 @@ CREATE TABLE `package_categories` (
 INSERT INTO `package_categories` (`id`, `language_id`, `name`, `status`, `serial_number`, `created_at`, `updated_at`) VALUES
 (1, 169, 'Web Development', 1, 1, '2021-04-20 03:35:48', '2021-04-20 03:35:48'),
 (7, 169, 'Mobile App', 1, 2, '2021-04-26 02:37:04', '2021-04-26 02:37:04'),
-(8, 169, 'Marketting', 1, 3, '2021-04-26 02:37:15', '2021-04-26 02:37:15');
+(8, 169, 'Marketting', 1, 3, '2021-04-26 02:37:15', '2021-04-26 02:37:15'),
+(9, 169, 'test', 1, 6, '2025-03-20 11:40:18', '2025-03-20 11:40:18');
 
 -- --------------------------------------------------------
 
@@ -2860,7 +2776,9 @@ INSERT INTO `pages` (`id`, `language_id`, `name`, `title`, `subtitle`, `slug`, `
 (2, 170, 'आमच्याबद्दल', 'STEM च्या पाण्याची कथा', 'STEM च्या पाण्याची कथा', 'आमच्याबद्दल', 1, 0, NULL, NULL, '2024-05-10 01:23:10', '2024-05-10 02:15:25', '[{\"type\":\"custom-code\",\"droppable\":1,\"attributes\":{\"id\":\"i0h6\"},\"components\":[{\"tagName\":\"section\",\"classes\":[\"page-title-section\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"col-xl-12\",\"text-center\"],\"components\":[{\"classes\":[\"page-title-content\"],\"components\":[{\"tagName\":\"h3\",\"type\":\"text\",\"classes\":[\"title\",\"text-white\",\"bud-title\"],\"components\":[{\"type\":\"textnode\",\"content\":\"STEM च्या पाण्याची कथा\"}]},{\"tagName\":\"nav\",\"attributes\":{\"aria-label\":\"breadcrumb\"},\"components\":[{\"tagName\":\"ol\",\"classes\":[\"breadcrumb\"],\"components\":[{\"tagName\":\"li\",\"classes\":[\"breadcrumb-item\"],\"components\":[{\"type\":\"link\",\"attributes\":{\"href\":\"index.html\"},\"components\":[{\"type\":\"textnode\",\"content\":\"मुख्यपृष्ठ\"}]}]},{\"tagName\":\"li\",\"type\":\"text\",\"classes\":[\"breadcrumb-item\",\"active\"],\"attributes\":{\"aria-current\":\"page\"},\"components\":[{\"type\":\"textnode\",\"content\":\"STEM च्या पाण्याची कथा\"}]}]}]}]}]}]}]}]},{\"classes\":[\"section-content\"],\"components\":[{\"tagName\":\"section\",\"classes\":[\"project-details-page\",\"pdt-60\",\"pdb-60\"],\"attributes\":{\"data-background\":\"images/bg/abs-bg5.png\"},\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\",\"stem_tale\"],\"components\":[{\"type\":\"textnode\",\"content\":\"STEM च्या पाण्याची कथा\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"स्टेम वॉटर डिस्ट्रिब्युशन अँड इन्फ्रास्ट्रक्चर कंपनी प्रा. मर्यादित. ठाणे महानगरपालिका, भिवंडी निजामपूर महानगरपालिका, मीरा भाईंदर महानगरपालिका आणि ठाणे जिल्हा परिषद यांच्या संयुक्त मालकीची खाजगी मर्यादित कंपनी आहे. जल क्षेत्रातील अनेक दशकांच्या अनुभवासह, आम्ही आमच्या मौल्यवान लाभार्थ्यांना अखंड पाणीपुरवठा सुनिश्चित करण्यासाठी समर्पित आहोत.\"}]},{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h3\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"मुख्य उद्दिष्टे\"}]}]},{\"classes\":[\"col-xl-12\",\"text-center\"],\"components\":[{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"tagName\":\"span\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"१. \"}]},{\"type\":\"textnode\",\"content\":\"महाराष्ट्रातील आणि बाहेरील नगरपालिका आणि प्रदेशांना पाणी वाटप आणि विकणे.\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"tagName\":\"span\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"२. \"}]},{\"type\":\"textnode\",\"content\":\"जगभरातील पाणी वितरण, पुरवठा आणि संबंधित पायाभूत सुविधा प्रकल्पांमध्ये व्यस्त रहा.\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"tagName\":\"span\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"३. \"}]},{\"type\":\"textnode\",\"content\":\"शहरी भागात पर्यावरण आणि पायाभूत सुविधा पुरवणे.\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"tagName\":\"span\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"४. \"}]},{\"type\":\"textnode\",\"content\":\"विविध भौगोलिक प्रदेशांमध्ये सल्लामसलत सेवा देतात\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"components\":[{\"tagName\":\"span\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"५. \"}]},{\"type\":\"textnode\",\"content\":\"स्वच्छता, आरोग्य, कचरा व्यवस्थापन आणि पायाभूत सुविधांच्या विकासाशी संबंधित प्रकल्प हाती घ्या.\"}]}]}]}]},{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-6\",\"with-divider\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"आमची अंतर्दृष्टी\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"text-center\",\"pdt-20\",\"pdb-20\"],\"components\":[{\"type\":\"textnode\",\"content\":\"\\\"शाश्वत पाणी वितरण आणि पायाभूत सुविधांचे समाधान देणारे अग्रगण्य प्रदाता बनणे, आमच्या भागधारकांना विश्वासार्ह पाणीपुरवठा सुनिश्चित करणे आणि आम्ही सेवा देत असलेल्या समुदायांच्या कल्याण आणि विकासासाठी योगदान देणे.\\\"\"}]}]},{\"classes\":[\"col-xl-6\",\"with-divider\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"आमची प्रतिज्ञा\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"text-center\",\"pdt-20\",\"pdb-20\"],\"components\":[{\"type\":\"textnode\",\"content\":\"\\\"आमचे ध्येय समुदायांना विश्वासार्ह, शाश्वत आणि प्रवेशयोग्य पाणी सेवा प्रदान करणे, त्यांचे कल्याण आणि समृद्धी सुनिश्चित करणे हे आहे. आम्ही नावीन्य, जबाबदार संसाधन व्यवस्थापन आणि अपवादात्मक ग्राहक सेवा देण्यासाठी वचनबद्ध आहोत.\\\"\"}]}]}]}]}]}]},{\"tagName\":\"section\",\"classes\":[\"about-section\",\"anim-object\",\"pdt-40\",\"pdb-40\",\"pdb-lg-80\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"align-items-center\"],\"components\":[{\"classes\":[\"col-md-12\",\"col-xl-6\"],\"components\":[{\"classes\":[\"about-image-block\",\"mrb-lg-60\"],\"components\":[{\"type\":\"image\",\"classes\":[\"img-full\"],\"attributes\":{\"src\":\"{{asset(\'assets/stem/intro/5.png\')}}\",\"alt\":\"\",\"loading\":\"lazy\"}}]}]},{\"classes\":[\"col-md-12\",\"col-xl-6\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"mrb-30\",\"text-primary-color\"],\"components\":[{\"type\":\"textnode\",\"content\":\"एमडी संदेश\"}]},{\"type\":\"table\",\"classes\":[\"table\",\"table-bordered\",\"table-striped\",\"table-hover\",\"text-center\"],\"components\":[{\"type\":\"thead\",\"components\":[{\"type\":\"row\",\"components\":[{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"नाव\"}]},{\"type\":\"cell\",\"attributes\":{\"rowspan\":\"1\"},\"components\":[{\"type\":\"textnode\",\"content\":\"श्री.संकेत मोहन घरत\"}]}]},{\"type\":\"row\",\"components\":[{\"tagName\":\"th\",\"type\":\"cell\",\"attributes\":{\"id\":\"iiuil\"},\"components\":[{\"type\":\"textnode\",\"content\":\"शैक्षणिक अर्हता\"}]},{\"type\":\"cell\",\"components\":[{\"tagName\":\"ul\",\"components\":[{\"tagName\":\"span\",\"components\":[{\"tagName\":\"i\",\"classes\":[\"fa-solid\",\"fa-caret-right\",\"fa-2xs\"]}]},{\"type\":\"textnode\",\"content\":\" \"},{\"tagName\":\"li\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"एम. टेक (अभ्यास करणे) अर्बन स्टडीज/ अफेयर्स, आयआयटी बॉम्बे\"}]},{\"tagName\":\"br\",\"void\":true},{\"tagName\":\"span\",\"components\":[{\"tagName\":\"i\",\"classes\":[\"fa-solid\",\"fa-caret-right\",\"fa-2xs\"]}]},{\"type\":\"textnode\",\"content\":\" \"},{\"tagName\":\"li\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"एमबीए (मार्केटिंग), सिक्कीम मणिपाल विद्यापीठ\"}]},{\"tagName\":\"br\",\"void\":true},{\"tagName\":\"span\",\"components\":[{\"tagName\":\"i\",\"classes\":[\"fa-solid\",\"fa-caret-right\",\"fa-2xs\"]}]},{\"type\":\"textnode\",\"content\":\" \"},{\"tagName\":\"li\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"बी.ई. सिव्हिल, दत्ता मेघे कॉलेज ऑफ इंजिनीअरिंग\"}]}]}]}]}]}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"mrb-40\",\"Msg\"],\"attributes\":{\"id\":\"iddpi\"},\"components\":[{\"type\":\"textnode\",\"content\":\"STEM मध्ये, आम्ही शाश्वत पाणी व्यवस्थापन सुनिश्चित करणे आणि आम्ही सेवा करत असलेल्या समुदायांच्या कल्याणास प्रोत्साहन देण्याचे महत्त्व समजतो. आमच्या नाविन्यपूर्ण उपाय आणि समर्पणाद्वारे, आम्ही ज्या प्रदेशात काम करतो त्या प्रदेशांच्या विकासात आणि वाढीसाठी आम्ही योगदान देण्याचा प्रयत्न करतो.\\n\\t\\t\\t\\t\\tमी आमच्या संस्थेमध्ये सहयोग, सर्जनशीलता आणि ग्राहक-केंद्रित दृष्टीकोन प्रोत्साहित करतो. एकत्रितपणे, आम्ही आमची ऑपरेशनल उत्कृष्टता वाढवणे आणि आमच्या ग्राहकांच्या विकसित गरजा पूर्ण करणाऱ्या उच्च-गुणवत्तेच्या सेवा प्रदान करणे सुरू ठेवू.\\n\\t\\t\\t\\t\\tमी आमच्या मौल्यवान ग्राहक आणि भागीदारांचा विश्वास आणि समर्थनाबद्दल त्यांचे आभार मानतो. आम्ही तुमच्या अपेक्षा ओलांडण्यासाठी आणि जल उद्योगातील प्रगतीमध्ये आघाडीवर राहण्यासाठी वचनबद्ध आहोत.\\n\\t\\t\\t\\t\\tकार्यक्षम पाणी वितरण आणि पायाभूत सुविधांच्या विकासासाठी आम्ही काम करत असताना आमच्या प्रवासाचा एक भाग असल्याबद्दल धन्यवाद.\"}]},{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"col-lg-6\"],\"components\":[{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"ceomsg\"],\"components\":[{\"type\":\"textnode\",\"content\":\"प्रामाणिकपणे,\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"ceomsg\"],\"components\":[{\"type\":\"textnode\",\"content\":\"संकेत मोहन घरत.\"}]},{\"tagName\":\"p\",\"type\":\"text\",\"classes\":[\"ceomsg\"],\"components\":[{\"type\":\"textnode\",\"content\":\"व्यवस्थापकीय संचालक.\"}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <div class=\\\"col-lg-6\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"signature mrb-30\\\"><img src=\\\"images/about/signature.png\\\" alt=\\\"\\\"></div>\\n\\t\\t\\t\\t\\t\\t\\t</div> \"}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <div class=\\\"signature mrb-30\\\"><img src=\\\"images/about/signature.png\\\" alt=\\\"\\\"></div> \"},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <a href=\\\"page-about.html\\\" class=\\\"cs-btn-one btn-gradient-color btn-lg\\\">Know more about STEM</a> \"}]}]}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Page Title End \"},{\"tagName\":\"section\",\"classes\":[\"content\",\"pdt-60\",\"pdb-50\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"dt-20\",\"pdb-20\",\"text-center\",\"stem-info\"],\"components\":[{\"type\":\"textnode\",\"content\":\"STEM क्षेत्र आणि महानगरपालिका बद्दल माहिती\"}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> \"}]}]},{\"classes\":[\"table-responsive\"],\"components\":[{\"type\":\"table\",\"classes\":[\"table\",\"table-bordered\",\"table-striped\",\"table-hover\",\"text-center\"],\"components\":[{\"type\":\"thead\",\"classes\":[\"back_color\"],\"components\":[{\"type\":\"row\",\"components\":[{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <th> Sr. No.</th> \"},{\"tagName\":\"th\",\"type\":\"cell\",\"attributes\":{\"colspan\":\"2\"},\"components\":[{\"type\":\"textnode\",\"content\":\"भागधारकांचे नाव\"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"शेअरहोल्डर स्टेक\"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"पाटबंधारे विभागाचा पाणी मंजूर कोटा\"}]}]}]},{\"type\":\"tbody\",\"components\":[{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"१. \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"ठाणे महानगरपालिका, ठाणे.\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"४९.७८℅\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"११९ एमएलडी\"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"२. \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"मीरा भाईंदर महानगरपालिका.\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"३२.५५℅\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"८६ एमएलडी\"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"३. \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"भिवंडी निजामपूर शहर महानगरपालिका, भिवंडी\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"१४.६८℅\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"७१ एमएलडी\"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"४. \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"भिवंडी तालुका आणि ठाणे जिल्ह्यातील ३४ गावे\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"२.९९℅\"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"४० एमएलडी\"}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Add more rows as needed \"}]}]}]}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Footer Area Start \"}]}],\"activeOnRender\":0,\"custom-code-plugin__code\":\"<section class=\\\"page-title-section\\\">\\n\\t\\t<div class=\\\"container\\\">\\n\\t\\t\\t<div class=\\\"row\\\">\\n\\t\\t\\t\\t<div class=\\\"col-xl-12 text-center\\\">\\n\\t\\t\\t\\t\\t<div class=\\\"page-title-content\\\">\\n\\t\\t\\t\\t\\t\\t<h3 class=\\\"title text-white bud-title\\\">STEM च्या पाण्याची कथा</h3>\\n\\t\\t\\t\\t\\t\\t<nav aria-label=\\\"breadcrumb\\\">\\n\\t\\t\\t\\t\\t\\t\\t<ol class=\\\"breadcrumb\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t<li class=\\\"breadcrumb-item\\\"><a href=\\\"index.html\\\">मुख्यपृष्ठ</a></li>\\n\\t\\t\\t\\t\\t\\t\\t\\t<li class=\\\"breadcrumb-item active\\\" aria-current=\\\"page\\\">STEM च्या पाण्याची कथा</li>\\n\\t\\t\\t\\t\\t\\t\\t</ol>\\n\\t\\t\\t\\t\\t\\t</nav>\\n\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t</div>\\n\\t\\t</div>\\n\\t</section>\\n<div class=\\\"section-content\\\">\\n<section class=\\\"project-details-page pdt-60 pdb-60\\\" data-background=\\\"images/bg/abs-bg5.png\\\">\\n\\n\\t\\t<div class=\\\"container\\\">\\n\\t\\t\\t<div class=\\\"row mrb-60\\\">\\n\\t\\t\\t\\t <div class=\\\"col-xl-12\\\">\\n\\t\\t\\t\\t\\t<h2 class=\\\" pdt-20 pdb-20 text-center stem_tale\\\">STEM च्या पाण्याची कथा</h2>\\n\\t\\t\\t\\t\\t<p class=\\\"text-center\\\">स्टेम वॉटर डिस्ट्रिब्युशन अँड इन्फ्रास्ट्रक्चर कंपनी प्रा. मर्यादित. ठाणे महानगरपालिका, भिवंडी निजामपूर महानगरपालिका, मीरा भाईंदर महानगरपालिका आणि ठाणे जिल्हा परिषद यांच्या संयुक्त मालकीची खाजगी मर्यादित कंपनी आहे. जल क्षेत्रातील अनेक दशकांच्या अनुभवासह, आम्ही आमच्या मौल्यवान लाभार्थ्यांना अखंड पाणीपुरवठा सुनिश्चित करण्यासाठी समर्पित आहोत.</p>\\n\\t\\t\\t\\t\\t<div class=\\\"col-xl-12\\\">\\n\\t\\t\\t\\t\\t\\t<h3 class=\\\" pdt-20 pdb-20 text-center\\\">मुख्य उद्दिष्टे</h3>\\n\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t\\t<div class=\\\"col-xl-12 text-center\\\">\\n\\t\\t\\n\\t\\t\\t\\t\\t\\t<p><span>१. </span>महाराष्ट्रातील आणि बाहेरील नगरपालिका आणि प्रदेशांना पाणी वाटप आणि विकणे.</p>\\n\\t\\t\\t\\t\\t\\t<p><span>२. </span>जगभरातील पाणी वितरण, पुरवठा आणि संबंधित पायाभूत सुविधा प्रकल्पांमध्ये व्यस्त रहा.</p>\\n\\t\\t\\t\\t\\t\\t<p><span>३. </span>शहरी भागात पर्यावरण आणि पायाभूत सुविधा पुरवणे.</p>\\n\\t\\t\\t\\t\\t\\t<p><span>४. </span>विविध भौगोलिक प्रदेशांमध्ये सल्लामसलत सेवा देतात</p>\\n\\t\\t\\t\\t\\t\\t<p><span>५. </span>स्वच्छता, आरोग्य, कचरा व्यवस्थापन आणि पायाभूत सुविधांच्या विकासाशी संबंधित प्रकल्प हाती घ्या.</p>\\n\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t</div>\\n\\t\\t\\t<div class=\\\"row\\\">\\n\\t\\t\\t\\t<div class=\\\"row mrb-60\\\">\\n\\t\\t\\t\\t\\t<div class=\\\"col-xl-6 with-divider\\\">\\n\\t\\t\\t\\t\\t   <h2 class=\\\" pdt-20 pdb-20 text-center\\\">आमची अंतर्दृष्टी</h2>\\n\\t\\t\\t\\t\\t   <p class=\\\"text-center  pdt-20 pdb-20\\\">\\\"शाश्वत पाणी वितरण आणि पायाभूत सुविधांचे समाधान देणारे अग्रगण्य प्रदाता बनणे, आमच्या भागधारकांना विश्वासार्ह पाणीपुरवठा सुनिश्चित करणे आणि आम्ही सेवा देत असलेल्या समुदायांच्या कल्याण आणि विकासासाठी योगदान देणे.\\\"</p>\\n\\t\\t\\t\\t   </div>\\n\\t\\t\\t\\t\\t<div class=\\\"col-xl-6  with-divider\\\">\\n\\t\\t\\t\\t\\t\\t<h2 class=\\\" pdt-20 pdb-20 text-center\\\">आमची प्रतिज्ञा</h2>\\n\\t\\t\\t\\t\\t\\t<p class=\\\"text-center pdt-20 pdb-20\\\">\\\"आमचे ध्येय समुदायांना विश्वासार्ह, शाश्वत आणि प्रवेशयोग्य पाणी सेवा प्रदान करणे, त्यांचे कल्याण आणि समृद्धी सुनिश्चित करणे हे आहे. आम्ही नावीन्य, जबाबदार संसाधन व्यवस्थापन आणि अपवादात्मक ग्राहक सेवा देण्यासाठी वचनबद्ध आहोत.\\\"</p>\\n\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t   </div>\\n\\t\\t\\t</div>\\n\\t\\t</div>\\n\\t</section>\\n    <section class=\\\"about-section anim-object pdt-40 pdb-40 pdb-lg-80\\\">\\n\\t\\t<div class=\\\"container\\\">\\n\\t\\t\\t\\n\\t\\t\\t<div class=\\\"row align-items-center\\\">\\n\\t\\t\\t\\t<div class=\\\"col-md-12 col-xl-6\\\">\\n\\t\\t\\t\\t\\t<div class=\\\"about-image-block mrb-lg-60\\\">\\n\\t\\t\\t\\t\\t\\t<img class=\\\"img-full\\\" src=\\\"{{asset(\'assets/stem/intro/5.png\')}}\\\" alt=\\\"\\\" loading=\\\"lazy\\\">\\n                      \\n\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t<div class=\\\"col-md-12 col-xl-6\\\">\\n\\t\\t\\t\\t\\t<h2 class=\\\"mrb-30 text-primary-color\\\">एमडी संदेश</h2>\\n\\t\\t\\t\\t\\t<table  class=\\\"table table-bordered table-striped table-hover text-center\\\">\\n\\t\\t\\t\\t\\t\\t<thead>\\n\\t\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<th>नाव</th>\\n\\t\\t\\t\\t\\t\\t\\t<td rowspan=\\\"1\\\">श्री.संकेत मोहन घरत</td>\\n\\t\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t\\t<th style=\\\"vertical-align: text-top !important;\\\">शैक्षणिक अर्हता</th>\\n\\t\\t\\t\\t\\t\\t\\t<td><ul>\\n\\t\\t\\t\\t\\t\\t\\t\\t<span><i class=\\\"fa-solid fa-caret-right fa-2xs\\\"></i></span> <li>एम. टेक (अभ्यास करणे) अर्बन स्टडीज/ अफेयर्स, आयआयटी बॉम्बे</li>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t<br>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t<span><i class=\\\"fa-solid fa-caret-right fa-2xs\\\"></i></span> <li>एमबीए (मार्केटिंग), सिक्कीम मणिपाल विद्यापीठ</li>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t<br>\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t<span><i class=\\\"fa-solid fa-caret-right fa-2xs\\\"></i></span> <li>बी.ई. सिव्हिल, दत्ता मेघे कॉलेज ऑफ इंजिनीअरिंग</li>\\n\\n\\t\\t\\t\\t\\t\\t\\t</ul>\\n\\t\\t\\t\\t\\t\\t</td>\\t\\n\\t\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t</thead>\\n\\t\\t\\t\\t\\t</table>\\n\\t\\t\\t\\t\\t<p class=\\\"mrb-40 Msg\\\" style=\\\"text-align: justify;\\\">STEM मध्ये, आम्ही शाश्वत पाणी व्यवस्थापन सुनिश्चित करणे आणि आम्ही सेवा करत असलेल्या समुदायांच्या कल्याणास प्रोत्साहन देण्याचे महत्त्व समजतो. आमच्या नाविन्यपूर्ण उपाय आणि समर्पणाद्वारे, आम्ही ज्या प्रदेशात काम करतो त्या प्रदेशांच्या विकासात आणि वाढीसाठी आम्ही योगदान देण्याचा प्रयत्न करतो.\\n\\t\\t\\t\\t\\tमी आमच्या संस्थेमध्ये सहयोग, सर्जनशीलता आणि ग्राहक-केंद्रित दृष्टीकोन प्रोत्साहित करतो. एकत्रितपणे, आम्ही आमची ऑपरेशनल उत्कृष्टता वाढवणे आणि आमच्या ग्राहकांच्या विकसित गरजा पूर्ण करणाऱ्या उच्च-गुणवत्तेच्या सेवा प्रदान करणे सुरू ठेवू.\\n\\t\\t\\t\\t\\tमी आमच्या मौल्यवान ग्राहक आणि भागीदारांचा विश्वास आणि समर्थनाबद्दल त्यांचे आभार मानतो. आम्ही तुमच्या अपेक्षा ओलांडण्यासाठी आणि जल उद्योगातील प्रगतीमध्ये आघाडीवर राहण्यासाठी वचनबद्ध आहोत.\\n\\t\\t\\t\\t\\tकार्यक्षम पाणी वितरण आणि पायाभूत सुविधांच्या विकासासाठी आम्ही काम करत असताना आमच्या प्रवासाचा एक भाग असल्याबद्दल धन्यवाद.</p>\\n\\t\\t\\t\\t\\t\\t<div class=\\\"row\\\">\\n\\t\\t\\t\\t\\t\\t\\t<div class=\\\"col-lg-6\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t<p class=\\\"ceomsg\\\">प्रामाणिकपणे,</p>\\n\\t\\t\\t\\t\\t\\t\\t\\t<p class=\\\"ceomsg\\\">संकेत मोहन घरत.</p>\\n\\t\\t\\t\\t\\t\\t\\t\\t<p class=\\\"ceomsg\\\">व्यवस्थापकीय संचालक.</p>\\n\\t\\t\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t\\t\\t\\t<!-- <div class=\\\"col-lg-6\\\">\\n\\t\\t\\t\\t\\t\\t\\t\\t<div class=\\\"signature mrb-30\\\"><img src=\\\"images/about/signature.png\\\" alt=\\\"\\\"></div>\\n\\t\\t\\t\\t\\t\\t\\t</div> -->\\n\\t\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t\\t</div>\\n\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t<!-- <div class=\\\"signature mrb-30\\\"><img src=\\\"images/about/signature.png\\\" alt=\\\"\\\"></div> -->\\n\\t\\t\\t\\t\\t<!-- <a href=\\\"page-about.html\\\" class=\\\"cs-btn-one btn-gradient-color btn-lg\\\">Know more about STEM</a> -->\\n\\t\\t\\t\\t</div>\\n\\t\\t\\t</div>\\n\\t\\t</div>\\n\\t</section>\\n    \\t<!-- Page Title End -->\\n\\t<section class=\\\"content pdt-60 pdb-50\\\">\\n\\t\\t<div class=\\\"container\\\">\\n\\t\\t\\t<div class=\\\"row mrb-60\\\">\\n\\t\\t\\t\\t<div class=\\\"col-xl-12\\\">\\n\\t\\t\\t\\t   <h2 class=\\\"dt-20 pdb-20 text-center stem-info\\\">STEM क्षेत्र आणि महानगरपालिका बद्दल माहिती</h2>\\n\\t\\t\\t\\t   <!-- <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> -->\\n\\t\\t\\t   </div>\\n\\t\\t   </div>\\n\\t\\t\\t<div class=\\\"table-responsive\\\">\\n\\t\\t\\t\\t<table class=\\\"table table-bordered table-striped table-hover text-center\\\">\\n\\t\\t\\t\\t\\t<thead class=\\\"back_color\\\">\\n\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<!-- <th> Sr. No.</th> -->\\n\\t\\t\\t\\t\\t\\t\\t<th colspan=\\\"2\\\">भागधारकांचे नाव</th>\\n\\t\\t\\t\\t\\t\\t\\t<th>शेअरहोल्डर स्टेक</th>\\n\\t\\t\\t\\t\\t\\t\\t<th>पाटबंधारे विभागाचा पाणी मंजूर कोटा</th>\\n\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t</thead>\\n\\t\\t\\t\\t\\t<tbody>\\n\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">१. </td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">ठाणे महानगरपालिका, ठाणे.</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">४९.७८&incare;</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">११९ एमएलडी</td>\\n\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">२. </td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">मीरा भाईंदर महानगरपालिका.</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">३२.५५&incare;</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">८६ एमएलडी</td>\\n\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">३. </td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">भिवंडी निजामपूर शहर महानगरपालिका, भिवंडी</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">१४.६८&incare;</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">७१ एमएलडी</td>\\n\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t<tr>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">४. </td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">भिवंडी तालुका आणि ठाणे जिल्ह्यातील ३४ गावे</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">२.९९&incare;</td>\\n\\t\\t\\t\\t\\t\\t\\t<td class=\\\"text-center\\\">४० एमएलडी</td>\\n\\t\\t\\t\\t\\t\\t</tr>\\n\\t\\t\\t\\t\\t\\t\\n\\t\\t\\t\\t\\t\\t<!-- Add more rows as needed -->\\n\\t\\t\\t\\t\\t</tbody>\\n\\t\\t\\t\\t</table>\\n\\t\\t\\t</div>\\n\\t\\t</div>\\n\\t</section>\\n\\t<!-- Footer Area Start -->\\n  </div>\"}]', '[{\"selectors\":[\"#i0h6\"]},{\"selectors\":[\"#iiuil\"],\"style\":{\"vertical-align\":\"text-top !important\"}},{\"selectors\":[\"#iddpi\"],\"style\":{\"text-align\":\"justify\"}}]', '<script type=\'text/javascript\' src=\'http://localhost:8001/assets/customeJs/2.js\'></script><div class=\'pagebuilder-content\'><div id=\"i0h6\"><section class=\"page-title-section\"><div class=\"container\"><div class=\"row\"><div class=\"col-xl-12 text-center\"><div class=\"page-title-content\"><h3 class=\"title text-white bud-title\">STEM च्या पाण्याची कथा</h3><nav aria-label=\"breadcrumb\"><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"index.html\">मुख्यपृष्ठ</a></li><li aria-current=\"page\" class=\"breadcrumb-item active\">STEM च्या पाण्याची कथा</li></ol></nav></div></div></div></div></section><div class=\"section-content\"><section data-background=\"images/bg/abs-bg5.png\" class=\"project-details-page pdt-60 pdb-60\"><div class=\"container\"><div class=\"row mrb-60\"><div class=\"col-xl-12\"><h2 class=\"pdt-20 pdb-20 text-center stem_tale\">STEM च्या पाण्याची कथा</h2><p class=\"text-center\">स्टेम वॉटर डिस्ट्रिब्युशन अँड इन्फ्रास्ट्रक्चर कंपनी प्रा. मर्यादित. ठाणे महानगरपालिका, भिवंडी निजामपूर महानगरपालिका, मीरा भाईंदर महानगरपालिका आणि ठाणे जिल्हा परिषद यांच्या संयुक्त मालकीची खाजगी मर्यादित कंपनी आहे. जल क्षेत्रातील अनेक दशकांच्या अनुभवासह, आम्ही आमच्या मौल्यवान लाभार्थ्यांना अखंड पाणीपुरवठा सुनिश्चित करण्यासाठी समर्पित आहोत.</p><div class=\"col-xl-12\"><h3 class=\"pdt-20 pdb-20 text-center\">मुख्य उद्दिष्टे</h3></div><div class=\"col-xl-12 text-center\"><p><span>१. </span>महाराष्ट्रातील आणि बाहेरील नगरपालिका आणि प्रदेशांना पाणी वाटप आणि विकणे.</p><p><span>२. </span>जगभरातील पाणी वितरण, पुरवठा आणि संबंधित पायाभूत सुविधा प्रकल्पांमध्ये व्यस्त रहा.</p><p><span>३. </span>शहरी भागात पर्यावरण आणि पायाभूत सुविधा पुरवणे.</p><p><span>४. </span>विविध भौगोलिक प्रदेशांमध्ये सल्लामसलत सेवा देतात</p><p><span>५. </span>स्वच्छता, आरोग्य, कचरा व्यवस्थापन आणि पायाभूत सुविधांच्या विकासाशी संबंधित प्रकल्प हाती घ्या.</p></div></div></div><div class=\"row\"><div class=\"row mrb-60\"><div class=\"col-xl-6 with-divider\"><h2 class=\"pdt-20 pdb-20 text-center\">आमची अंतर्दृष्टी</h2><p class=\"text-center pdt-20 pdb-20\">&quot;शाश्वत पाणी वितरण आणि पायाभूत सुविधांचे समाधान देणारे अग्रगण्य प्रदाता बनणे, आमच्या भागधारकांना विश्वासार्ह पाणीपुरवठा सुनिश्चित करणे आणि आम्ही सेवा देत असलेल्या समुदायांच्या कल्याण आणि विकासासाठी योगदान देणे.&quot;</p></div><div class=\"col-xl-6 with-divider\"><h2 class=\"pdt-20 pdb-20 text-center\">आमची प्रतिज्ञा</h2><p class=\"text-center pdt-20 pdb-20\">&quot;आमचे ध्येय समुदायांना विश्वासार्ह, शाश्वत आणि प्रवेशयोग्य पाणी सेवा प्रदान करणे, त्यांचे कल्याण आणि समृद्धी सुनिश्चित करणे हे आहे. आम्ही नावीन्य, जबाबदार संसाधन व्यवस्थापन आणि अपवादात्मक ग्राहक सेवा देण्यासाठी वचनबद्ध आहोत.&quot;</p></div></div></div></div></section><section class=\"about-section anim-object pdt-40 pdb-40 pdb-lg-80\"><div class=\"container\"><div class=\"row align-items-center\"><div class=\"col-md-12 col-xl-6\"><div class=\"about-image-block mrb-lg-60\"><img src=\"{{asset(\'assets/stem/intro/5.png\')}}\" alt=\"\" loading=\"lazy\" class=\"img-full\"/></div></div><div class=\"col-md-12 col-xl-6\"><h2 class=\"mrb-30 text-primary-color\">एमडी संदेश</h2><table class=\"table table-bordered table-striped table-hover text-center\"><thead><tr><th>नाव</th><td rowspan=\"1\">श्री.संकेत मोहन घरत</td></tr><tr><th id=\"iiuil\">शैक्षणिक अर्हता</th><td><ul><span><i class=\"fa-solid fa-caret-right fa-2xs\"></i></span> <li>एम. टेक (अभ्यास करणे) अर्बन स्टडीज/ अफेयर्स, आयआयटी बॉम्बे</li><br/><span><i class=\"fa-solid fa-caret-right fa-2xs\"></i></span> <li>एमबीए (मार्केटिंग), सिक्कीम मणिपाल विद्यापीठ</li><br/><span><i class=\"fa-solid fa-caret-right fa-2xs\"></i></span> <li>बी.ई. सिव्हिल, दत्ता मेघे कॉलेज ऑफ इंजिनीअरिंग</li></ul></td></tr></thead></table><p id=\"iddpi\" class=\"mrb-40 Msg\">STEM मध्ये, आम्ही शाश्वत पाणी व्यवस्थापन सुनिश्चित करणे आणि आम्ही सेवा करत असलेल्या समुदायांच्या कल्याणास प्रोत्साहन देण्याचे महत्त्व समजतो. आमच्या नाविन्यपूर्ण उपाय आणि समर्पणाद्वारे, आम्ही ज्या प्रदेशात काम करतो त्या प्रदेशांच्या विकासात आणि वाढीसाठी आम्ही योगदान देण्याचा प्रयत्न करतो.\r\n					मी आमच्या संस्थेमध्ये सहयोग, सर्जनशीलता आणि ग्राहक-केंद्रित दृष्टीकोन प्रोत्साहित करतो. एकत्रितपणे, आम्ही आमची ऑपरेशनल उत्कृष्टता वाढवणे आणि आमच्या ग्राहकांच्या विकसित गरजा पूर्ण करणाऱ्या उच्च-गुणवत्तेच्या सेवा प्रदान करणे सुरू ठेवू.\r\n					मी आमच्या मौल्यवान ग्राहक आणि भागीदारांचा विश्वास आणि समर्थनाबद्दल त्यांचे आभार मानतो. आम्ही तुमच्या अपेक्षा ओलांडण्यासाठी आणि जल उद्योगातील प्रगतीमध्ये आघाडीवर राहण्यासाठी वचनबद्ध आहोत.\r\n					कार्यक्षम पाणी वितरण आणि पायाभूत सुविधांच्या विकासासाठी आम्ही काम करत असताना आमच्या प्रवासाचा एक भाग असल्याबद्दल धन्यवाद.</p><div class=\"row\"><div class=\"col-lg-6\"><p class=\"ceomsg\">प्रामाणिकपणे,</p><p class=\"ceomsg\">संकेत मोहन घरत.</p><p class=\"ceomsg\">व्यवस्थापकीय संचालक.</p></div><!-- <div class=\"col-lg-6\">\r\n								<div class=\"signature mrb-30\"><img src=\"images/about/signature.png\" alt=\"\"></div>\r\n							</div> --></div><!-- <div class=\"signature mrb-30\"><img src=\"images/about/signature.png\" alt=\"\"></div> --><!-- <a href=\"page-about.html\" class=\"cs-btn-one btn-gradient-color btn-lg\">Know more about STEM</a> --></div></div></div></section><!-- Page Title End --><section class=\"content pdt-60 pdb-50\"><div class=\"container\"><div class=\"row mrb-60\"><div class=\"col-xl-12\"><h2 class=\"dt-20 pdb-20 text-center stem-info\">STEM क्षेत्र आणि महानगरपालिका बद्दल माहिती</h2><!-- <p class=\"text-center\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> --></div></div><div class=\"table-responsive\"><table class=\"table table-bordered table-striped table-hover text-center\"><thead class=\"back_color\"><tr><!-- <th> Sr. No.</th> --><th colspan=\"2\">भागधारकांचे नाव</th><th>शेअरहोल्डर स्टेक</th><th>पाटबंधारे विभागाचा पाणी मंजूर कोटा</th></tr></thead><tbody><tr><td class=\"text-center\">१. </td><td class=\"text-center\">ठाणे महानगरपालिका, ठाणे.</td><td class=\"text-center\">४९.७८℅</td><td class=\"text-center\">११९ एमएलडी</td></tr><tr><td class=\"text-center\">२. </td><td class=\"text-center\">मीरा भाईंदर महानगरपालिका.</td><td class=\"text-center\">३२.५५℅</td><td class=\"text-center\">८६ एमएलडी</td></tr><tr><td class=\"text-center\">३. </td><td class=\"text-center\">भिवंडी निजामपूर शहर महानगरपालिका, भिवंडी</td><td class=\"text-center\">१४.६८℅</td><td class=\"text-center\">७१ एमएलडी</td></tr><tr><td class=\"text-center\">४. </td><td class=\"text-center\">भिवंडी तालुका आणि ठाणे जिल्ह्यातील ३४ गावे</td><td class=\"text-center\">२.९९℅</td><td class=\"text-center\">४० एमएलडी</td></tr><!-- Add more rows as needed --></tbody></table></div></div></section><!-- Footer Area Start --></div></div></div>', '* { box-sizing: border-box; } body {margin: 0;}#iiuil{vertical-align:text-top !important;}#iddpi{text-align:justify;}', NULL),
 (3, 169, 'Water Tariff And Charges - MR', 'Water Tariff And Charges', NULL, 'Water-Tariff-And-Charges---MR', 1, 0, NULL, NULL, '2024-05-13 12:23:38', '2024-05-13 12:32:31', '[{\"type\":\"custom-code\",\"droppable\":1,\"attributes\":{\"id\":\"itm6\"},\"components\":[{\"tagName\":\"section\",\"classes\":[\"page-title-section_1\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"col-xl-12\",\"text-center\"],\"components\":[{\"classes\":[\"page-title-content\"],\"components\":[{\"tagName\":\"h3\",\"type\":\"text\",\"classes\":[\"title\",\"text-white\",\"water-title\"],\"components\":[{\"type\":\"textnode\",\"content\":\"पाणी दर आणि शुल्क\\n          \"}]},{\"tagName\":\"nav\",\"attributes\":{\"aria-label\":\"breadcrumb\"},\"components\":[{\"tagName\":\"ol\",\"classes\":[\"breadcrumb\"],\"components\":[{\"tagName\":\"li\",\"classes\":[\"breadcrumb-item\"],\"components\":[{\"type\":\"link\",\"attributes\":{\"href\":\"/\"},\"components\":[{\"type\":\"textnode\",\"content\":\"मुख्यपृष्ठ\"}]}]},{\"tagName\":\"li\",\"type\":\"text\",\"classes\":[\"breadcrumb-item\",\"active\"],\"attributes\":{\"aria-current\":\"page\"},\"components\":[{\"type\":\"textnode\",\"content\":\"पाणी दर आणि शुल्क\\n              \"}]}]}]}]}]}]}]}]},{\"tagName\":\"section\",\"classes\":[\"content\",\"pdt-60\",\"pdb-50\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\",\"table_padding\"],\"components\":[{\"type\":\"textnode\",\"content\":\"पाणी दर आणि शुल्क\\n        \"}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> \"}]}]},{\"classes\":[\"table-responsive\"],\"components\":[{\"type\":\"table\",\"classes\":[\"table\",\"table-bordered\",\"table-striped\",\"table-hover\",\"text-center\"],\"components\":[{\"type\":\"thead\",\"classes\":[\"back_color\"],\"components\":[{\"type\":\"row\",\"components\":[{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <th> Sr. No.</th> \"},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"अ.क्र.\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"संस्था\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"पाणी दर (दि. ०१.०४.२०२३ पासून)\\n            \"}]}]}]},{\"type\":\"tbody\",\"components\":[{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"१. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"tagName\":\"b\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"ठाणे महानगरपालिका \\n              \"}]},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              ठाणे एम बी आर \\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"आझादनगर, डोंगरीपाडा, बीएसयुपी, गायमुख\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"११,९००\\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              १३,०००\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"2. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\"मिरा भाईंदर महानगरपालिका\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"१२,६००\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"3. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" भिवंडी निजामपूर शहर महानगरपालिका\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"११,९००\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"4. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" जिल्हा परिषद (३६ ग्रामपंचायती)\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"९६००\\n            \"}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Add more rows as needed \"}]}]}]}]}]}],\"activeOnRender\":0,\"custom-code-plugin__code\":\"<section class=\\\"page-title-section_1\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row\\\">\\n      <div class=\\\"col-xl-12 text-center\\\">\\n        <div class=\\\"page-title-content\\\">\\n          <h3 class=\\\"title text-white water-title\\\">पाणी दर आणि शुल्क\\n          </h3>\\n          <nav aria-label=\\\"breadcrumb\\\">\\n            <ol class=\\\"breadcrumb\\\">\\n              <li class=\\\"breadcrumb-item\\\">\\n                <a href=\\\"/\\\">मुख्यपृष्ठ</a>\\n              </li>\\n              <li class=\\\"breadcrumb-item active\\\" aria-current=\\\"page\\\">पाणी दर आणि शुल्क\\n              </li>\\n            </ol>\\n          </nav>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n<section class=\\\"content pdt-60 pdb-50\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row mrb-60\\\">\\n      <div class=\\\"col-xl-12\\\">\\n        <h2 class=\\\" pdt-20 pdb-20 text-center table_padding\\\">पाणी दर आणि शुल्क\\n        </h2>\\n        <!-- <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> -->\\n      </div>\\n    </div>\\n    <div class=\\\"table-responsive\\\">\\n      <table class=\\\"table table-bordered table-striped table-hover text-center\\\">\\n        <thead class=\\\"back_color\\\">\\n          <tr>\\n            <!-- <th> Sr. No.</th> -->\\n            <th>अ.क्र.\\n            </th>\\n            <th>संस्था\\n            </th>\\n            <th>पाणी दर (दि. ०१.०४.२०२३ पासून)\\n            </th>\\n          </tr>\\n        </thead>\\n        <tbody>\\n          <tr>\\n            <td class=\\\"text-center\\\">१. \\n            </td>\\n            <td class=\\\"text-left\\\">\\n              <b>ठाणे महानगरपालिका \\n              </b>\\n              <br>\\n              ठाणे एम बी आर \\n              <br>आझादनगर, डोंगरीपाडा, बीएसयुपी, गायमुख\\n            </td>\\n            <td class=\\\"text-center\\\">\\n              <br>११,९००\\n              <br>\\n              १३,०००\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">2. \\n            </td>\\n            <td class=\\\"text-left\\\">मिरा भाईंदर महानगरपालिका\\n            </td>\\n            <td class=\\\"text-center\\\">१२,६००\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">3. \\n            </td>\\n            <td class=\\\"text-left\\\"> भिवंडी निजामपूर शहर महानगरपालिका\\n            </td>\\n            <td class=\\\"text-center\\\">११,९००\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">4. \\n            </td>\\n            <td class=\\\"text-left\\\"> जिल्हा परिषद (३६ ग्रामपंचायती)\\n            </td>\\n            <td class=\\\"text-center\\\">९६००\\n            </td>\\n          </tr>\\n          <!-- Add more rows as needed -->\\n        </tbody>\\n      </table>\\n    </div>\\n  </div>\\n</section>\"}]', '[{\"selectors\":[\"#itm6\"]}]', '<script type=\'text/javascript\' src=\'http://localhost:8002/assets/customeJs/3.js\'></script><div class=\'pagebuilder-content\'><div id=\"itm6\"><section class=\"page-title-section_1\"><div class=\"container\"><div class=\"row\"><div class=\"col-xl-12 text-center\"><div class=\"page-title-content\"><h3 class=\"title text-white water-title\">पाणी दर आणि शुल्क\r\n          </h3><nav aria-label=\"breadcrumb\"><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"/\">मुख्यपृष्ठ</a></li><li aria-current=\"page\" class=\"breadcrumb-item active\">पाणी दर आणि शुल्क\r\n              </li></ol></nav></div></div></div></div></section><section class=\"content pdt-60 pdb-50\"><div class=\"container\"><div class=\"row mrb-60\"><div class=\"col-xl-12\"><h2 class=\"pdt-20 pdb-20 text-center table_padding\">पाणी दर आणि शुल्क\r\n        </h2><!-- <p class=\"text-center\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> --></div></div><div class=\"table-responsive\"><table class=\"table table-bordered table-striped table-hover text-center\"><thead class=\"back_color\"><tr><!-- <th> Sr. No.</th> --><th>अ.क्र.\r\n            </th><th>संस्था\r\n            </th><th>पाणी दर (दि. ०१.०४.२०२३ पासून)\r\n            </th></tr></thead><tbody><tr><td class=\"text-center\">१. \r\n            </td><td class=\"text-left\"><b>ठाणे महानगरपालिका \r\n              </b><br/>\r\n              ठाणे एम बी आर \r\n              <br/>आझादनगर, डोंगरीपाडा, बीएसयुपी, गायमुख\r\n            </td><td class=\"text-center\"><br/>११,९००\r\n              <br/>\r\n              १३,०००\r\n            </td></tr><tr><td class=\"text-center\">2. \r\n            </td><td class=\"text-left\">मिरा भाईंदर महानगरपालिका\r\n            </td><td class=\"text-center\">१२,६००\r\n            </td></tr><tr><td class=\"text-center\">3. \r\n            </td><td class=\"text-left\"> भिवंडी निजामपूर शहर महानगरपालिका\r\n            </td><td class=\"text-center\">११,९००\r\n            </td></tr><tr><td class=\"text-center\">4. \r\n            </td><td class=\"text-left\"> जिल्हा परिषद (३६ ग्रामपंचायती)\r\n            </td><td class=\"text-center\">९६००\r\n            </td></tr><!-- Add more rows as needed --></tbody></table></div></div></section></div></div>', '* { box-sizing: border-box; } body {margin: 0;}', NULL);
 INSERT INTO `pages` (`id`, `language_id`, `name`, `title`, `subtitle`, `slug`, `status`, `serial_number`, `meta_keywords`, `meta_description`, `created_at`, `updated_at`, `components`, `styles`, `html`, `css`, `body`) VALUES
-(4, 169, 'Water Tariff And Charges', 'Water Tariff And Charges', NULL, 'Water-Tariff-And-Charges', 1, 0, NULL, NULL, '2024-05-13 12:35:25', '2024-05-13 12:40:17', '[{\"type\":\"custom-code\",\"droppable\":1,\"attributes\":{\"id\":\"ih5z\"},\"components\":[{\"tagName\":\"section\",\"classes\":[\"page-title-section_1\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"col-xl-12\",\"text-center\"],\"components\":[{\"classes\":[\"page-title-content\"],\"components\":[{\"tagName\":\"h3\",\"type\":\"text\",\"classes\":[\"title\",\"text-white\",\"water-title\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n          \"}]},{\"tagName\":\"nav\",\"attributes\":{\"aria-label\":\"breadcrumb\"},\"components\":[{\"tagName\":\"ol\",\"classes\":[\"breadcrumb\"],\"components\":[{\"tagName\":\"li\",\"classes\":[\"breadcrumb-item\"],\"components\":[{\"type\":\"link\",\"attributes\":{\"href\":\"/\"},\"components\":[{\"type\":\"textnode\",\"content\":\"Home\"}]}]},{\"tagName\":\"li\",\"type\":\"text\",\"classes\":[\"breadcrumb-item\",\"active\"],\"attributes\":{\"aria-current\":\"page\"},\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n              \"}]}]}]}]}]}]}]}]},{\"tagName\":\"section\",\"classes\":[\"content\",\"pdt-60\",\"pdb-50\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\",\"table_padding\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n        \"}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> \"}]}]},{\"classes\":[\"table-responsive\"],\"components\":[{\"type\":\"table\",\"classes\":[\"table\",\"table-bordered\",\"table-striped\",\"table-hover\",\"text-center\"],\"components\":[{\"type\":\"thead\",\"classes\":[\"back_color\"],\"components\":[{\"type\":\"row\",\"components\":[{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <th> Sr. No.</th> \"},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Sr.No.\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Institution\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff (from 01.04.2023)\\n            \"}]}]}]},{\"type\":\"tbody\",\"components\":[{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"1. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"tagName\":\"b\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"Thane Municipal Corporation\\n              \"}]},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              Thane MB R \\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"Azadnagar, Dongripada, BSUP, Gaymukh\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"11,900\\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              13000\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"2. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Mira Bhayander Municipal Corporation\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"12,600\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"3. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" Bhiwandi Nizampur City Municipal Corporation\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"11,900\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"4. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" Zilla Parishad (36 Gram Panchayats)\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"9600\\n            \"}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Add more rows as needed \"}]}]}]}]}]}],\"activeOnRender\":0,\"custom-code-plugin__code\":\"<section class=\\\"page-title-section_1\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row\\\">\\n      <div class=\\\"col-xl-12 text-center\\\">\\n        <div class=\\\"page-title-content\\\">\\n          <h3 class=\\\"title text-white water-title\\\">Water Tariff And Charges\\n          </h3>\\n          <nav aria-label=\\\"breadcrumb\\\">\\n            <ol class=\\\"breadcrumb\\\">\\n              <li class=\\\"breadcrumb-item\\\">\\n                <a href=\\\"/\\\">Home</a>\\n              </li>\\n              <li class=\\\"breadcrumb-item active\\\" aria-current=\\\"page\\\">Water Tariff And Charges\\n              </li>\\n            </ol>\\n          </nav>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n<section class=\\\"content pdt-60 pdb-50\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row mrb-60\\\">\\n      <div class=\\\"col-xl-12\\\">\\n        <h2 class=\\\" pdt-20 pdb-20 text-center table_padding\\\">Water Tariff And Charges\\n        </h2>\\n        <!-- <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> -->\\n      </div>\\n    </div>\\n    <div class=\\\"table-responsive\\\">\\n      <table class=\\\"table table-bordered table-striped table-hover text-center\\\">\\n        <thead class=\\\"back_color\\\">\\n          <tr>\\n            <!-- <th> Sr. No.</th> -->\\n            <th>Sr.No.\\n            </th>\\n            <th>Institution\\n            </th>\\n            <th>Water Tariff (from 01.04.2023)\\n            </th>\\n          </tr>\\n        </thead>\\n        <tbody>\\n          <tr>\\n            <td class=\\\"text-center\\\">1. \\n            </td>\\n            <td class=\\\"text-left\\\">\\n              <b>Thane Municipal Corporation\\n              </b>\\n              <br>\\n              Thane MB R \\n              <br>Azadnagar, Dongripada, BSUP, Gaymukh\\n            </td>\\n            <td class=\\\"text-center\\\">\\n              <br>11,900\\n              <br>\\n              13000\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">2. \\n            </td>\\n            <td class=\\\"text-left\\\">Mira Bhayander Municipal Corporation\\n            </td>\\n            <td class=\\\"text-center\\\">12,600\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">3. \\n            </td>\\n            <td class=\\\"text-left\\\"> Bhiwandi Nizampur City Municipal Corporation\\n            </td>\\n            <td class=\\\"text-center\\\">11,900\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">4. \\n            </td>\\n            <td class=\\\"text-left\\\"> Zilla Parishad (36 Gram Panchayats)\\n            </td>\\n            <td class=\\\"text-center\\\">9600\\n            </td>\\n          </tr>\\n          <!-- Add more rows as needed -->\\n        </tbody>\\n      </table>\\n    </div>\\n  </div>\\n</section>\"}]', '[{\"selectors\":[\"#ih5z\"]}]', '<script type=\'text/javascript\' src=\'http://localhost:8002/assets/customeJs/4.js\'></script><div class=\'pagebuilder-content\'><div id=\"ih5z\"><section class=\"page-title-section_1\"><div class=\"container\"><div class=\"row\"><div class=\"col-xl-12 text-center\"><div class=\"page-title-content\"><h3 class=\"title text-white water-title\">Water Tariff And Charges\r\n          </h3><nav aria-label=\"breadcrumb\"><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"/\">Home</a></li><li aria-current=\"page\" class=\"breadcrumb-item active\">Water Tariff And Charges\r\n              </li></ol></nav></div></div></div></div></section><section class=\"content pdt-60 pdb-50\"><div class=\"container\"><div class=\"row mrb-60\"><div class=\"col-xl-12\"><h2 class=\"pdt-20 pdb-20 text-center table_padding\">Water Tariff And Charges\r\n        </h2><!-- <p class=\"text-center\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> --></div></div><div class=\"table-responsive\"><table class=\"table table-bordered table-striped table-hover text-center\"><thead class=\"back_color\"><tr><!-- <th> Sr. No.</th> --><th>Sr.No.\r\n            </th><th>Institution\r\n            </th><th>Water Tariff (from 01.04.2023)\r\n            </th></tr></thead><tbody><tr><td class=\"text-center\">1. \r\n            </td><td class=\"text-left\"><b>Thane Municipal Corporation\r\n              </b><br/>\r\n              Thane MB R \r\n              <br/>Azadnagar, Dongripada, BSUP, Gaymukh\r\n            </td><td class=\"text-center\"><br/>11,900\r\n              <br/>\r\n              13000\r\n            </td></tr><tr><td class=\"text-center\">2. \r\n            </td><td class=\"text-left\">Mira Bhayander Municipal Corporation\r\n            </td><td class=\"text-center\">12,600\r\n            </td></tr><tr><td class=\"text-center\">3. \r\n            </td><td class=\"text-left\"> Bhiwandi Nizampur City Municipal Corporation\r\n            </td><td class=\"text-center\">11,900\r\n            </td></tr><tr><td class=\"text-center\">4. \r\n            </td><td class=\"text-left\"> Zilla Parishad (36 Gram Panchayats)\r\n            </td><td class=\"text-center\">9600\r\n            </td></tr><!-- Add more rows as needed --></tbody></table></div></div></section></div></div>', '* { box-sizing: border-box; } body {margin: 0;}', NULL);
+(4, 169, 'Water Tariff And Charges', 'Water Tariff And Charges', NULL, 'Water-Tariff-And-Charges', 1, 0, NULL, NULL, '2024-05-13 12:35:25', '2024-05-13 12:40:17', '[{\"type\":\"custom-code\",\"droppable\":1,\"attributes\":{\"id\":\"ih5z\"},\"components\":[{\"tagName\":\"section\",\"classes\":[\"page-title-section_1\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\"],\"components\":[{\"classes\":[\"col-xl-12\",\"text-center\"],\"components\":[{\"classes\":[\"page-title-content\"],\"components\":[{\"tagName\":\"h3\",\"type\":\"text\",\"classes\":[\"title\",\"text-white\",\"water-title\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n          \"}]},{\"tagName\":\"nav\",\"attributes\":{\"aria-label\":\"breadcrumb\"},\"components\":[{\"tagName\":\"ol\",\"classes\":[\"breadcrumb\"],\"components\":[{\"tagName\":\"li\",\"classes\":[\"breadcrumb-item\"],\"components\":[{\"type\":\"link\",\"attributes\":{\"href\":\"/\"},\"components\":[{\"type\":\"textnode\",\"content\":\"Home\"}]}]},{\"tagName\":\"li\",\"type\":\"text\",\"classes\":[\"breadcrumb-item\",\"active\"],\"attributes\":{\"aria-current\":\"page\"},\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n              \"}]}]}]}]}]}]}]}]},{\"tagName\":\"section\",\"classes\":[\"content\",\"pdt-60\",\"pdb-50\"],\"components\":[{\"classes\":[\"container\"],\"components\":[{\"classes\":[\"row\",\"mrb-60\"],\"components\":[{\"classes\":[\"col-xl-12\"],\"components\":[{\"tagName\":\"h2\",\"type\":\"text\",\"classes\":[\"pdt-20\",\"pdb-20\",\"text-center\",\"table_padding\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff And Charges\\n        \"}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> \"}]}]},{\"classes\":[\"table-responsive\"],\"components\":[{\"type\":\"table\",\"classes\":[\"table\",\"table-bordered\",\"table-striped\",\"table-hover\",\"text-center\"],\"components\":[{\"type\":\"thead\",\"classes\":[\"back_color\"],\"components\":[{\"type\":\"row\",\"components\":[{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" <th> Sr. No.</th> \"},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Sr.No.\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Institution\\n            \"}]},{\"tagName\":\"th\",\"type\":\"cell\",\"components\":[{\"type\":\"textnode\",\"content\":\"Water Tariff (from 01.04.2023)\\n            \"}]}]}]},{\"type\":\"tbody\",\"components\":[{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"1. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"tagName\":\"b\",\"type\":\"text\",\"components\":[{\"type\":\"textnode\",\"content\":\"Thane Municipal Corporation\\n              \"}]},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              Thane MB R \\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"Azadnagar, Dongripada, BSUP, Gaymukh\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"11,900\\n              \"},{\"tagName\":\"br\",\"void\":true},{\"type\":\"textnode\",\"content\":\"\\n              13000\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"2. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\"Mira Bhayander Municipal Corporation\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"12,600\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"3. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" Bhiwandi Nizampur City Municipal Corporation\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"11,900\\n            \"}]}]},{\"type\":\"row\",\"components\":[{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"4. \\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-left\"],\"components\":[{\"type\":\"textnode\",\"content\":\" Zilla Parishad (36 Gram Panchayats)\\n            \"}]},{\"type\":\"cell\",\"classes\":[\"text-center\"],\"components\":[{\"type\":\"textnode\",\"content\":\"9600\\n            \"}]}]},{\"tagName\":\"NULL\",\"type\":\"comment\",\"content\":\" Add more rows as needed \"}]}]}]}]}]}],\"activeOnRender\":0,\"custom-code-plugin__code\":\"<section class=\\\"page-title-section_1\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row\\\">\\n      <div class=\\\"col-xl-12 text-center\\\">\\n        <div class=\\\"page-title-content\\\">\\n          <h3 class=\\\"title text-white water-title\\\">Water Tariff And Charges\\n          </h3>\\n          <nav aria-label=\\\"breadcrumb\\\">\\n            <ol class=\\\"breadcrumb\\\">\\n              <li class=\\\"breadcrumb-item\\\">\\n                <a href=\\\"/\\\">Home</a>\\n              </li>\\n              <li class=\\\"breadcrumb-item active\\\" aria-current=\\\"page\\\">Water Tariff And Charges\\n              </li>\\n            </ol>\\n          </nav>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n</section>\\n<section class=\\\"content pdt-60 pdb-50\\\">\\n  <div class=\\\"container\\\">\\n    <div class=\\\"row mrb-60\\\">\\n      <div class=\\\"col-xl-12\\\">\\n        <h2 class=\\\" pdt-20 pdb-20 text-center table_padding\\\">Water Tariff And Charges\\n        </h2>\\n        <!-- <p class=\\\"text-center\\\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> -->\\n      </div>\\n    </div>\\n    <div class=\\\"table-responsive\\\">\\n      <table class=\\\"table table-bordered table-striped table-hover text-center\\\">\\n        <thead class=\\\"back_color\\\">\\n          <tr>\\n            <!-- <th> Sr. No.</th> -->\\n            <th>Sr.No.\\n            </th>\\n            <th>Institution\\n            </th>\\n            <th>Water Tariff (from 01.04.2023)\\n            </th>\\n          </tr>\\n        </thead>\\n        <tbody>\\n          <tr>\\n            <td class=\\\"text-center\\\">1. \\n            </td>\\n            <td class=\\\"text-left\\\">\\n              <b>Thane Municipal Corporation\\n              </b>\\n              <br>\\n              Thane MB R \\n              <br>Azadnagar, Dongripada, BSUP, Gaymukh\\n            </td>\\n            <td class=\\\"text-center\\\">\\n              <br>11,900\\n              <br>\\n              13000\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">2. \\n            </td>\\n            <td class=\\\"text-left\\\">Mira Bhayander Municipal Corporation\\n            </td>\\n            <td class=\\\"text-center\\\">12,600\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">3. \\n            </td>\\n            <td class=\\\"text-left\\\"> Bhiwandi Nizampur City Municipal Corporation\\n            </td>\\n            <td class=\\\"text-center\\\">11,900\\n            </td>\\n          </tr>\\n          <tr>\\n            <td class=\\\"text-center\\\">4. \\n            </td>\\n            <td class=\\\"text-left\\\"> Zilla Parishad (36 Gram Panchayats)\\n            </td>\\n            <td class=\\\"text-center\\\">9600\\n            </td>\\n          </tr>\\n          <!-- Add more rows as needed -->\\n        </tbody>\\n      </table>\\n    </div>\\n  </div>\\n</section>\"}]', '[{\"selectors\":[\"#ih5z\"]}]', '<script type=\'text/javascript\' src=\'http://localhost:8002/assets/customeJs/4.js\'></script><div class=\'pagebuilder-content\'><div id=\"ih5z\"><section class=\"page-title-section_1\"><div class=\"container\"><div class=\"row\"><div class=\"col-xl-12 text-center\"><div class=\"page-title-content\"><h3 class=\"title text-white water-title\">Water Tariff And Charges\r\n          </h3><nav aria-label=\"breadcrumb\"><ol class=\"breadcrumb\"><li class=\"breadcrumb-item\"><a href=\"/\">Home</a></li><li aria-current=\"page\" class=\"breadcrumb-item active\">Water Tariff And Charges\r\n              </li></ol></nav></div></div></div></div></section><section class=\"content pdt-60 pdb-50\"><div class=\"container\"><div class=\"row mrb-60\"><div class=\"col-xl-12\"><h2 class=\"pdt-20 pdb-20 text-center table_padding\">Water Tariff And Charges\r\n        </h2><!-- <p class=\"text-center\">STEM Water Distribution & Infrastructure Co. Pvt. Ltd. is a private limited company jointly owned by Thane Municipal Corporation, Bhiwandi Nizampur Municipal Corporation, Mira Bhayander Municipal Corporation, and Thane Zilla Parishad. With decades of experience in the water sector, we are dedicated to ensuring uninterrupted water supply to our valued beneficiaries.</p> --></div></div><div class=\"table-responsive\"><table class=\"table table-bordered table-striped table-hover text-center\"><thead class=\"back_color\"><tr><!-- <th> Sr. No.</th> --><th>Sr.No.\r\n            </th><th>Institution\r\n            </th><th>Water Tariff (from 01.04.2023)\r\n            </th></tr></thead><tbody><tr><td class=\"text-center\">1. \r\n            </td><td class=\"text-left\"><b>Thane Municipal Corporation\r\n              </b><br/>\r\n              Thane MB R \r\n              <br/>Azadnagar, Dongripada, BSUP, Gaymukh\r\n            </td><td class=\"text-center\"><br/>11,900\r\n              <br/>\r\n              13000\r\n            </td></tr><tr><td class=\"text-center\">2. \r\n            </td><td class=\"text-left\">Mira Bhayander Municipal Corporation\r\n            </td><td class=\"text-center\">12,600\r\n            </td></tr><tr><td class=\"text-center\">3. \r\n            </td><td class=\"text-left\"> Bhiwandi Nizampur City Municipal Corporation\r\n            </td><td class=\"text-center\">11,900\r\n            </td></tr><tr><td class=\"text-center\">4. \r\n            </td><td class=\"text-left\"> Zilla Parishad (36 Gram Panchayats)\r\n            </td><td class=\"text-center\">9600\r\n            </td></tr><!-- Add more rows as needed --></tbody></table></div></div></section></div></div>', '* { box-sizing: border-box; } body {margin: 0;}', NULL),
+(5, 169, 'test', 'विकास प्रशासन संकुल', 'Centers', 'test', 1, 1, NULL, NULL, '2025-03-20 10:54:11', '2025-03-20 10:54:11', NULL, NULL, NULL, NULL, NULL),
+(6, 169, 'Kendrik Lamar', 'विकास प्रशासन संकुल', 'Centers', 'Kendrik-Lamar', 1, 1, NULL, NULL, '2025-05-20 05:58:31', '2025-05-20 05:59:33', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2882,15 +2800,12 @@ CREATE TABLE `partners` (
 --
 
 INSERT INTO `partners` (`id`, `language_id`, `image`, `url`, `title`, `serial_number`) VALUES
-(1, 169, '6641a120da5d9.png', 'https://stemwater.org/', 'Thane Municipal Corporation, Thane', 1),
 (2, 170, '6641a84c37cdd.png', 'https://stemwater.org/', 'ठाणे महानगरपालिका, ठाणे', 1),
-(3, 169, '6641a10e61423.png', 'https://stemwater.org/', 'Mira Bhayandar Municipal Corporation', 2),
 (4, 170, '6641a86aac647.png', 'https://stemwater.org/', 'मीरा भाईंदर महानगरपालिका', 2),
-(5, 169, '67c043d15567d.webp', 'www.kdot.com', 'Bhiwandi Nizampur City Municipal Corporation, Bhiwandi', 3),
-(6, 169, '67c0439faad9e.webp', 'www.facebook.com', 'Thane Zilla Parishad, Thane', 4),
+(6, 169, '67dd3a248d402.webp', 'www.x.com', 'Thane Zilla Parishad, Thane', 4),
 (7, 170, '6641a88021ed6.png', NULL, 'भिवंडी निजामपूर शहर महानगरपालिका, भिवंडी', 3),
 (8, 170, '6641a8b88188f.png', NULL, 'ठाणे जिल्हा परिषद, ठाणे', 4),
-(9, 169, '67c0438b0468a.webp', 'www.facebook.com', NULL, 1);
+(9, 169, '67e68cc637967.webp', 'www.x.com', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2920,7 +2835,7 @@ INSERT INTO `payment_gateways` (`id`, `subtitle`, `title`, `details`, `name`, `t
 (11, NULL, NULL, NULL, 'Paytm', 'automatic', '{\"merchant\":\"tkogux49985047638244\",\"secret\":\"LhNGUUKE9xCQ9xY8\",\"website\":\"WEBSTAGING\",\"industry\":\"Retail\",\"text\":\"Pay via your paytm account.\"}', 'paytm', 1),
 (12, NULL, NULL, NULL, 'Paystack', 'automatic', '{\"key\":\"pk_test_3a92490cb518c1b0d4c5f5273ea5cd67d5b4ea61\",\"secret_key\":\"sk_test_4ac9f2c43514e3cc08ab68f922201549ebda1bfd\",\"email\":\"test@test.com\",\"text\":\"Pay via your Paystack account.\"}', 'paystack', 1),
 (13, NULL, NULL, NULL, 'Instamojo', 'automatic', '{\"key\":\"test_172371aa837ae5cad6047dc3052\",\"token\":\"test_4ac5a785e25fc596b67dbc5c267\",\"sandbox_check\":\"1\",\"text\":\"Pay via your Instamojo account.\"}', 'instamojo', 1),
-(14, NULL, NULL, NULL, 'Stripe', 'automatic', '{\"key\":\"pk_test_UnU1Coi1p5qFGwtpjZMRMgJM\",\"secret\":\"sk_test_QQcg3vGsKRPlW6T3dXcNJsor\",\"text\":\"Pay via your Credit Card.\"}', 'stripe', 1),
+(14, NULL, NULL, NULL, 'Stripe', 'automatic', '{\"key\":\"pk_test_UnU1Coi1p5qFGwtpjZMRMgJM\",\"secret\":\"sk_test_QQcg3vGsKRPlW6T3dXcNJsor\",\"text\":\"Pay via your Credit account.\"}', 'stripe', 1),
 (15, NULL, NULL, NULL, 'Paypal', 'automatic', '{\"client_id\":\"Aal5j466_JNRtBI3Yc-ADcseTX4Cnt25cTeIvvr0aWVvbSBAoFfBe2FnxetYxgId7WGKXyRRM2QHyAKM\",\"client_secret\":\"EO96wJdrs8HfT_cKeXtLmvJNGcau3GkuWr_Pv7RfDYQtjlH0F9Zei5T4_Ehbhl7i14TQPRV8ZzN6U7Wb\",\"sandbox_check\":\"1\",\"text\":\"Pay via your PayPal account.\"}', 'paypal', 1),
 (17, NULL, NULL, NULL, 'Mollie Payment', 'automatic', '{\"key\":\"test_5HcWVs9qc5pzy36H9Tu9mwAyats33J\",\"text\":\"Pay via your Mollie Payment account.\"}', 'mollie', 1),
 (18, NULL, NULL, NULL, 'PayUmoney', 'automatic', '{\"key\":\"gtKFFx\",\"salt\":\"eCwWELxi\",\"text\":\"Pay via your PayUmoney account.\",\"sandbox_check\":\"1\"}', 'payumoney', 1),
@@ -2954,7 +2869,8 @@ INSERT INTO `pcategories` (`id`, `name`, `slug`, `language_id`, `image`, `status
 (3, 'Pants', 'Pants', 169, NULL, 1, 0, 1, '2020-04-18 04:21:27', '2021-11-14 02:16:47'),
 (4, 'Shoes', 'Shoes', 169, '6190e24c6ede7.png', 1, 1, 0, '2020-05-01 04:05:24', '2021-11-14 05:17:48'),
 (7, 'Shirts', 'Shirts', 169, '6190e263bcc1f.png', 1, 1, 1, '2020-05-13 14:22:32', '2021-11-14 05:18:11'),
-(25, 'About', 'About', 169, '6190d42bf2b81.jpg', 1, 0, 0, '2021-11-14 04:17:31', '2021-11-14 04:17:31');
+(25, 'About', 'About', 169, '6190d42bf2b81.jpg', 1, 0, 0, '2021-11-14 04:17:31', '2021-11-14 04:17:31'),
+(26, 'test', 'test', 169, NULL, 1, 0, 0, '2025-03-20 11:51:23', '2025-03-20 11:51:23');
 
 -- --------------------------------------------------------
 
@@ -3163,161 +3079,6 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `group_name`, `status`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions_old`
---
-
-CREATE TABLE `permissions_old` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `guard_name` varchar(255) NOT NULL DEFAULT 'admin',
-  `group_name` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT 1,
-  `basic` int(11) NOT NULL DEFAULT 0,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `permissions_old`
---
-
-INSERT INTO `permissions_old` (`id`, `name`, `guard_name`, `group_name`, `status`, `basic`, `created_at`, `updated_at`) VALUES
-(1, 'dashboard', 'admin', 'dashboard', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(2, 'theme-setting', 'admin', 'theme_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(3, 'mega-menus', 'admin', 'website_menu_builder_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(4, 'main-menus', 'admin', 'website_menu_builder_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(5, 'permalinks', 'admin', 'website_menu_builder_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(6, 'hero-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(7, 'features', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:25', '2024-04-19 09:15:25'),
-(8, 'intro-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(9, 'service-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(10, 'approach-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(11, 'statistics-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(12, 'call-to-action-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(13, 'portfolio-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(14, 'testimonials-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(15, 'team-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(16, 'blog-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(17, 'partners-section', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(18, 'sections-customization', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(19, 'portfolios', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(20, 'logo-text', 'admin', 'footer_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(21, 'useful-links', 'admin', 'footer_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(22, 'settings-services', 'admin', 'services_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(23, 'category-services', 'admin', 'services_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(24, 'services', 'admin', 'services_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(25, 'category-blog', 'admin', 'blog_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(26, 'blogs', 'admin', 'blog_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(27, 'archives', 'admin', 'blog_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(28, 'settings-gallery', 'admin', 'gallery_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(29, 'categories-gallery', 'admin', 'gallery_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(30, 'galleries', 'admin', 'gallery_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(31, 'settings-faq', 'admin', 'faq_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(32, 'categories-faq', 'admin', 'faq_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(33, 'faqs', 'admin', 'faq_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(34, 'categories-career', 'admin', 'career_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(35, 'post-job', 'admin', 'career_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(36, 'job-management', 'admin', 'career_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(37, 'settings-page', 'admin', 'custome_page_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(38, 'create-page', 'admin', 'custome_page_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(39, 'pages', 'admin', 'custome_page_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(40, 'calendars', 'admin', 'event_calendars_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(41, 'settings-package', 'admin', 'package_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(42, 'categories-package', 'admin', 'package_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(43, 'form-builder-package', 'admin', 'package_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(44, 'packages', 'admin', 'package_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(45, 'subscriptions', 'admin', 'subscription_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(46, 'subscription-request', 'admin', 'subscription_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(47, 'visibility', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(48, 'form-builder-quote', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(49, 'all-quotes', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(50, 'pending-quotes', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(51, 'processing-quotes', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(52, 'completed-quotes', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(53, 'rejected-quotes', 'admin', 'quote_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(54, 'settings-shop', 'admin', 'shop_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(55, 'popular-tags', 'admin', 'shop_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(56, 'shipping-charges', 'admin', 'shop_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(57, 'coupons', 'admin', 'shop_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(58, 'category-product', 'admin', 'product_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(59, 'products', 'admin', 'product_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(60, 'all-orders', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(61, 'pending-orders', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(62, 'processing-orders', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(63, 'completed-orders', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(64, 'rejected-orders', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(65, 'report-order', 'admin', 'order_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(66, 'settings-course', 'admin', 'course_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(67, 'categories-course', 'admin', 'course_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(68, 'courses', 'admin', 'course_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(69, 'enrolls', 'admin', 'course_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(70, 'report-course', 'admin', 'course_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(71, 'settings-event', 'admin', 'event_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(72, 'categories-event', 'admin', 'event_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(73, 'all-events', 'admin', 'event_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(74, 'booking', 'admin', 'event_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(75, 'report-event', 'admin', 'event_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(76, 'settings-donation', 'admin', 'donation_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(77, 'all-cause', 'admin', 'donation_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(78, 'donations', 'admin', 'donation_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(79, 'report-donation', 'admin', 'donation_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(80, 'categories-acknowledged', 'admin', 'acknowledged_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(81, 'articles', 'admin', 'acknowledged_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(82, 'settings-tickets', 'admin', 'support_tickets_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(83, 'all-tickets', 'admin', 'support_tickets_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(84, 'pending-tickets', 'admin', 'support_tickets_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(85, 'open-tickets', 'admin', 'support_tickets_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(86, 'close-tickets', 'admin', 'support_tickets_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(87, 'import-rss', 'admin', 'rss_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(88, 'rss-feeds', 'admin', 'rss_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(89, 'rss-posts', 'admin', 'rss_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(90, 'register-users', 'admin', 'users_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(91, 'push-notification', 'admin', 'users_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(92, 'subscribers', 'admin', 'users_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(93, 'popups', 'admin', 'announcement_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(94, 'general-settings', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(95, 'email-settings', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(96, 'file-manager', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(97, 'logo-text-header', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(98, 'preloader', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(99, 'preferences', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(100, 'support-information', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(101, 'social-links', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(102, 'page-headings', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(103, 'payment-gateways', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(104, 'language', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(105, 'plugins', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(106, 'seo-information', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(107, 'maintenance-mode', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(108, 'cookies-alert', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(109, 'misc', 'admin', 'settings', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(110, 'profile', 'admin', 'profile_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(111, 'change-password', 'admin', 'profile_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(112, 'roles', 'admin', 'admin_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(113, 'admins', 'admin', 'admin_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(114, 'client-feedback', 'admin', 'feedbacks_management', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(116, 'audit-trail', 'admin', 'audit_trail', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(117, 'contact', 'admin', 'contact', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(118, 'package-background', 'admin', 'home_page_section_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(119, 'about-us-links', 'admin', 'footer_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(120, 'department-links', 'admin', 'footer_management', 1, 0, '2024-04-19 09:15:26', '2024-04-19 09:15:26'),
-(121, 'tenders', 'admin', 'tenders', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(122, 'categories-tender', 'admin', 'tenders', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(123, 'categories-document', 'admin', 'documents', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(124, 'documents', 'admin', 'documents', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(125, 'e-governance', 'admin', 'e-governance', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(126, 'categories-leadership', 'admin', 'leadership', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(127, 'leadership', 'admin', 'leadership', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(128, 'history', 'admin', 'history', 1, 0, '2024-04-19 09:15:27', '2024-04-19 09:15:27'),
-(0, 'package-background', 'admin', 'home_page_section_management', 1, 0, '2025-02-06 06:23:00', '2025-02-06 06:23:00'),
-(0, 'contact', 'admin', 'contact', 1, 0, '2025-02-06 06:23:00', '2025-02-06 06:23:00'),
-(0, 'audit-trail', 'admin', 'audit_trail', 1, 0, '2025-02-06 06:23:00', '2025-02-06 06:23:00'),
-(0, 'about-us-links', 'admin', 'footer_management', 1, 0, '2025-02-06 06:23:00', '2025-02-06 06:23:00'),
-(0, 'department-links', 'admin', 'footer_management', 1, 0, '2025-02-06 06:23:00', '2025-02-06 06:23:00');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `personal_access_tokens`
 --
 
@@ -3349,6 +3110,13 @@ CREATE TABLE `points` (
   `serial_number` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `points`
+--
+
+INSERT INTO `points` (`id`, `language_id`, `icon`, `color`, `title`, `short_text`, `serial_number`) VALUES
+(1, 169, 'fab fa-accessible-icon', '39498a', 'Test', 'K dot', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -3377,6 +3145,14 @@ CREATE TABLE `popups` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 - active, 0 - deactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `popups`
+--
+
+INSERT INTO `popups` (`id`, `language_id`, `name`, `image`, `background_image`, `background_color`, `background_opacity`, `title`, `text`, `button_text`, `button_url`, `button_color`, `end_date`, `end_time`, `delay`, `serial_number`, `type`, `created_at`, `updated_at`, `status`) VALUES
+(1, 169, 'Kendrik Lamar', '67dcf32d51987.webp', NULL, NULL, 1.00, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10000, 5, 1, '2025-03-21 05:03:41', '2025-03-21 05:03:41', 1),
+(2, 169, 'test', NULL, '67dcfdde05f28.webp', '451D53', 0.00, 'test', 'test', 'test', 'test.com', '451D53', NULL, NULL, 1000, 6, 2, '2025-03-21 05:49:19', '2025-03-21 05:49:19', 1);
 
 -- --------------------------------------------------------
 
@@ -3411,12 +3187,11 @@ CREATE TABLE `portfolios` (
 --
 
 INSERT INTO `portfolios` (`id`, `language_id`, `title`, `slug`, `start_date`, `submission_date`, `client_name`, `tags`, `featured_image`, `service_id`, `content`, `status`, `feature`, `serial_number`, `meta_keywords`, `meta_description`, `created_at`, `updated_at`, `website_link`) VALUES
-(1, 169, 'K dot (SZA)', 'K-dot-(SZA)', '02/19/2025', '02/28/2025', 'Kendrik', 'p', NULL, 1, 0x3c703e436f6e74656e743c2f703e, 'In Progress', 0, 1, 'content', 'content', '2025-02-28 04:50:06', '2025-02-28 04:50:06', 'test.com'),
+(1, 169, 'K dot (SZA)', 'K-dot-(SZA)', '02/19/2025', '02/28/2025', 'Kendrik', 'p', '67dd4bae4768d.webp', 1, 0x3c703e436f6e74656e743c2f703e, 'In Progress', 0, 1, 'content', 'content', '2025-02-28 04:50:06', '2025-03-21 11:21:18', 'test.com'),
 (2, 169, 'Kendrik (SZA)', 'Kendrik-(SZA)', '02/19/2025', '02/28/2025', 'Kendrik', 'p', NULL, 1, 0x3c703e436f6e74656e743c2f703e, 'In Progress', 0, 1, 'content', 'content', '2025-02-28 05:03:32', '2025-02-28 05:03:32', 'test.com'),
 (3, 169, 'New Kanye', 'New-Kanye', '02/26/2025', '02/28/2025', 'Drake', 'Ye', NULL, 1, 0x3c703e617364666466736166643c2f703e, 'In Progress', 0, 2, NULL, NULL, '2025-02-28 05:09:11', '2025-02-28 05:09:32', 'test.com'),
 (4, 169, 'dfsa', 'dfsa', NULL, NULL, 'Kendrik', 'dfas', NULL, 1, 0x3c703e6473666173643c2f703e, 'In Progress', 0, 1, NULL, NULL, '2025-03-03 05:27:21', '2025-03-03 05:27:21', NULL),
-(5, 169, 'Kanye West', 'Kanye-West', NULL, NULL, 'Kendrik', 'SZA', '67c5458f6ab0e.webp', 1, 0x3c703e43756c747572653c2f703e, 'In Progress', 0, 1, NULL, NULL, '2025-03-03 06:00:47', '2025-03-03 06:00:47', NULL),
-(6, 169, 'SZA Gloria', 'SZA-Gloria', NULL, NULL, 'Kendrik', 'sdf', '67c54a9b06a76.webp', 1, 0x3c703e4e6f74204c696b652055733c2f703e, 'In Progress', 0, 2, NULL, NULL, '2025-03-03 06:02:49', '2025-03-03 06:22:19', NULL);
+(7, 169, 'Title', 'Title', '03/21/2025', '03/21/2025', 'Kendrik', 'a, b', '67dd4e7114eed.webp', 1, 0x3c703e636f6e746578743c2f703e, 'In Progress', 0, 1, NULL, NULL, '2025-03-21 11:32:47', '2025-03-21 11:33:05', 'test.com');
 
 -- --------------------------------------------------------
 
@@ -3439,8 +3214,7 @@ CREATE TABLE `portfolio_images` (
 INSERT INTO `portfolio_images` (`id`, `portfolio_id`, `image`, `created_at`, `updated_at`) VALUES
 (1, 2, '67c143a45fe16.tmp', '2025-02-28 05:03:32', '2025-02-28 05:03:32'),
 (3, 3, '67c145cbb215d.tmp', '2025-02-28 05:12:43', '2025-02-28 05:12:43'),
-(4, 4, '67c53db9648e2.tmp', '2025-03-03 05:27:21', '2025-03-03 05:27:21'),
-(5, 5, '67c5458fd4c64.tmp', '2025-03-03 06:00:47', '2025-03-03 06:00:47');
+(4, 4, '67c53db9648e2.tmp', '2025-03-03 05:27:21', '2025-03-03 05:27:21');
 
 -- --------------------------------------------------------
 
@@ -3473,6 +3247,14 @@ CREATE TABLE `products` (
   `download_file` varchar(100) DEFAULT NULL,
   `download_link` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `slug`, `language_id`, `stock`, `sku`, `category_id`, `tags`, `feature_image`, `summary`, `description`, `current_price`, `previous_price`, `is_feature`, `status`, `created_at`, `updated_at`, `rating`, `meta_keywords`, `meta_description`, `type`, `download_file`, `download_link`) VALUES
+(1, 'test', 'test', 169, 0, NULL, 1, NULL, '67dc0422853db.tmp', NULL, '<p><br></p>', 123.00, 12.00, 0, 1, '2025-03-20 12:03:46', '2025-03-20 12:03:46', 0.00, NULL, NULL, 'digital', 'test-67dc042285b3d.zip', NULL),
+(2, 'Tissot', 'Tissot', 169, 0, NULL, 1, NULL, '67dc04492d5ad.tmp', NULL, '<p><br></p>', 123.00, 12.00, 0, 1, '2025-03-20 12:04:25', '2025-03-20 12:04:25', 0.00, NULL, NULL, 'digital', 'Tissot-67dc04492db9a.zip', NULL);
 
 -- --------------------------------------------------------
 
@@ -3764,7 +3546,8 @@ INSERT INTO `product_images` (`id`, `product_id`, `image`, `created_at`, `update
 (372, 54, '5f006ffde7ce0.jpg', '2020-07-04 06:03:09', '2020-07-04 06:07:18'),
 (373, 54, '5f006ffd15442.jpg', '2020-07-04 06:03:09', '2020-07-04 06:07:18'),
 (374, 54, '5f006ffd18542.jpg', '2020-07-04 06:03:09', '2020-07-04 06:07:18'),
-(375, 54, '5f006ffd7884b.jpg', '2020-07-04 06:03:09', '2020-07-04 06:07:18');
+(375, 54, '5f006ffd7884b.jpg', '2020-07-04 06:03:09', '2020-07-04 06:07:18'),
+(376, 2, '67dc04492ff94.tmp', '2025-03-20 12:04:25', '2025-03-20 12:04:25');
 
 -- --------------------------------------------------------
 
@@ -3835,7 +3618,7 @@ INSERT INTO `product_orders` (`id`, `user_id`, `billing_country`, `billing_fname
 (210, 26, 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '262332', 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '3636237', 560.00, 0.00, 28.00, 598.00, 'Instamojo', 'online', 'INR', 'SDcd1636439991', 'Same Day Shipping', 10.00, 'Completed', 'pending', 'txn_eHbI1a711636439991', 'ch_ct1LcPdUD1636439991', '2021-11-09 01:39:51', '2021-11-09 01:41:06', 'Idhi1636440056.pdf', NULL),
 (211, 26, 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '262332', 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '3636237', 290.00, 0.00, 14.50, 314.50, 'Razorpay', 'online', 'INR', 'tY391636440119', 'Same Day Shipping', 10.00, 'Completed', 'pending', 'txn_plrPBcKN1636440119', 'ch_EO2HDJ5SK1636440119', '2021-11-09 01:41:59', '2021-11-09 01:42:33', 'KNG51636440148.pdf', NULL),
 (213, 26, 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '262332', 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '3636237', 240.00, 0.00, 12.00, 262.00, 'mercadopago', 'online', 'BRL', 'oM0Y1636440305', 'Same Day Shipping', 10.00, 'Pending', 'pending', 'txn_qNPaFrrx1636440305', 'ch_GpBEjWiWg1636440305', '2021-11-09 01:45:05', '2021-11-09 01:45:05', NULL, NULL),
-(214, 26, 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '262332', 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '3636237', 560.00, 0.00, 28.00, 598.00, 'stripe', 'online', 'NGN', 'OWdC1636443010', 'Same Day Shipping', 10.00, 'Completed', 'pending', 'txn_3JtomUJlIV5dN9n70jU3H2fH', 'ch_3JtomUJlIV5dN9n70EY1qI8L', '2021-11-09 02:30:10', '2021-11-09 02:30:15', 'GQuW1636443010.pdf', NULL);
+(214, 26, 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '262332', 'Australia', 'John', 'Doe', 'Melbourne, Australia', 'Melbourne', 'geniustest11@gmail.com', '3636237', 560.00, 0.00, 28.00, 598.00, 'stripe', 'online', 'NGN', 'OWdC1636443010', 'Same Day Shipping', 10.00, 'Completed', 'processing', 'txn_3JtomUJlIV5dN9n70jU3H2fH', 'ch_3JtomUJlIV5dN9n70EY1qI8L', '2021-11-09 02:30:10', '2025-03-20 12:32:07', 'GQuW1636443010.pdf', NULL);
 
 -- --------------------------------------------------------
 
@@ -4083,7 +3866,6 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (7, 1),
 (8, 1),
 (9, 1),
-(10, 1),
 (11, 1),
 (12, 1),
 (13, 1),
@@ -4200,7 +3982,8 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (128, 1),
 (129, 1),
 (130, 1),
-(131, 1);
+(131, 1),
+(139, 1);
 
 -- --------------------------------------------------------
 
@@ -4218,6 +4001,13 @@ CREATE TABLE `rss_feeds` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rss_feeds`
+--
+
+INSERT INTO `rss_feeds` (`id`, `language_id`, `feed_name`, `feed_url`, `post_limit`, `read_more_button`, `created_at`, `updated_at`) VALUES
+(1, 169, 'dfsa', 'dfa', 5, 'Read More', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4302,14 +4092,12 @@ CREATE TABLE `scategories` (
 --
 
 INSERT INTO `scategories` (`id`, `language_id`, `name`, `image`, `short_text`, `status`, `serial_number`, `feature`) VALUES
-(1, 169, 'Uninterrupted Water Supply', NULL, 'We ensure a consistent and reliable water supply to our beneficiaries as per their allocated shares, meeting their needs efficiently.', 0, 1, 0),
 (2, 170, 'अखंड पाणीपुरवठा', NULL, 'आम्ही आमच्या लाभार्थ्यांना त्यांच्या वाटप केलेल्या समभागांनुसार सातत्यपूर्ण आणि विश्वासार्ह पाणीपुरवठा सुनिश्चित करतो, त्यांच्या गरजा कार्यक्षमतेने पूर्ण करतो.', 1, 1, 0),
-(3, 169, 'Industry and Commercial Supply', NULL, 'In addition to urban areas, we offer water supply solutions to industries and commercial establishments.', 1, 2, 0),
+(3, 169, 'Industry and Commercial Supply', NULL, 'In addition to urban areas, we offer water supply solutions to industries and commercial establishments.', 0, 2, 1),
 (4, 170, 'उद्योग आणि व्यावसायिक पुरवठा', NULL, 'शहरी भागांव्यतिरिक्त, आम्ही उद्योग आणि व्यावसायिक आस्थापनांना पाणीपुरवठा उपाय ऑफर करतो', 1, 2, 0),
-(5, 169, 'Consultancy', NULL, 'We engage in contracts with urban local bodies for environmental and infrastructure services, including land-fill sites', 1, 3, 0),
+(5, 169, 'Consultancy', '67dd40fff02bf.webp', 'We engage in contracts with urban local bodies for environmental and infrastructure services, including land-fill sites', 1, 3, 0),
 (6, 170, 'कन्सल्टन्सी', NULL, 'आम्ही शहरी स्थानिक स्वराज्य संस्थांसोबत पर्यावरण आणि पायाभूत सेवांसाठी करारांमध्ये गुंतलो आहोत, ज्यामध्ये जमीन भरण्याची जागा समाविष्ट आहे', 1, 3, 0),
-(8, 170, 'पर्यावरण आणि पायाभूत सुविधा सेवा', NULL, 'आम्ही शहरी स्थानिक स्वराज्य संस्थांसोबत पर्यावरण आणि पायाभूत सेवांसाठी करारांमध्ये गुंतलो आहोत, ज्यामध्ये जमीन भरण्याची जागा समाविष्ट आहे...', 1, 2, 0),
-(9, 169, 'Kendrik Lamar', '67c04d8c11ad6.webp', 'K dot', 1, 1, 1);
+(8, 170, 'पर्यावरण आणि पायाभूत सुविधा सेवा', NULL, 'आम्ही शहरी स्थानिक स्वराज्य संस्थांसोबत पर्यावरण आणि पायाभूत सेवांसाठी करारांमध्ये गुंतलो आहोत, ज्यामध्ये जमीन भरण्याची जागा समाविष्ट आहे...', 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -4339,7 +4127,7 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `language_id`, `scategory_id`, `main_image`, `title`, `slug`, `content`, `summary`, `serial_number`, `meta_keywords`, `meta_description`, `feature`, `details_page_status`, `sidebar`) VALUES
-(1, 169, 3, '67c05c3478e1a.webp', 'Count Me Out', 'Count-Me-Out', 0x3c703e4974277320676f6e272074616b65206d6f7265207468616e20707269646520746f2073746f70266e6273703b3c2f703e3c703e43616c6c20393131204920636175676874206120626f64793c2f703e3c703e53756e207570206e6f772079657374657264617920697320666164696e67266e6273703b3c2f703e3c703e4865616c696e6773206f6e6c792027626f75742061206d696c6520617761793c2f703e, 'K dot', 1, NULL, NULL, 0, 1, 1);
+(4, 169, 5, '682c2bdd97b22.webp', 'beanie', 'beanie', 0x3c703e3c62723e3c2f703e, 'test', 1, NULL, NULL, 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -4363,7 +4151,8 @@ CREATE TABLE `shipping_charges` (
 --
 
 INSERT INTO `shipping_charges` (`id`, `title`, `language_id`, `text`, `days`, `charge`, `created_at`, `updated_at`) VALUES
-(6, 'Same Day Shipping', 169, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', NULL, 10.00, '2021-04-23 06:15:15', '2021-04-23 06:15:15');
+(6, 'Same Day Shipping', 169, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry', NULL, 10.00, '2021-04-23 06:15:15', '2021-04-23 06:15:15'),
+(7, 'test', 169, 'Academic Resource', NULL, 10.00, '2025-03-20 11:49:03', '2025-03-20 11:49:03');
 
 -- --------------------------------------------------------
 
@@ -4416,8 +4205,8 @@ INSERT INTO `sliders` (`id`, `language_id`, `title`, `title_font_size`, `bold_te
 (2, 170, 'पाण्याद्वारे सशक्त जीवन', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6641a6de90514.jpg', NULL, 1, '2024-05-07 10:56:46', '2024-05-13 05:36:32', NULL, NULL, NULL),
 (3, 170, 'पाण्याद्वारे सशक्त जीवन', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6641a6c916011.jpg', NULL, 2, '2024-05-07 10:56:59', '2024-05-13 05:36:10', NULL, NULL, NULL),
 (6, 170, 'पाण्याद्वारे सशक्त जीवन', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '6641a6ae3ed4e.jpg', NULL, 3, '2024-05-07 10:58:27', '2024-05-13 05:35:43', NULL, NULL, NULL),
-(7, 169, 'Test', 24, NULL, NULL, NULL, 'Test', 24, '24', 24, 'test.com', '67c019c010a42.webp', NULL, 1, '2025-02-27 07:52:34', '2025-02-27 07:52:34', NULL, NULL, NULL),
-(8, 169, 'Luther', 24, NULL, NULL, NULL, 'SZA', 12, 'Test', 12, 'test.com', '67c0502a62696.webp', NULL, 1, '2025-02-27 11:44:42', '2025-02-27 11:44:42', NULL, NULL, NULL);
+(8, 169, 'Luther', 24, NULL, NULL, NULL, 'SZA', 12, 'Test', 12, 'test.com', '67dd173b39899.webp', NULL, 1, '2025-02-27 11:44:42', '2025-03-21 07:37:31', NULL, NULL, NULL),
+(9, 169, 'Luffy', 5, NULL, NULL, NULL, 'Luffy', 8, 'Test', 2, 'https://mahad.barti.in/about-us', '67dd1725a5d73.webp', NULL, 1, '2025-03-21 07:37:11', '2025-03-21 07:37:11', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4440,7 +4229,8 @@ INSERT INTO `socials` (`id`, `icon`, `url`, `serial_number`) VALUES
 (20, 'fab fa-facebook-f', 'https://www.facebook.com/', 1),
 (21, 'fab fa-twitter', 'https://www.twitter.com/', 2),
 (24, 'fab fa-google-plus-g iconpicker-component', 'https://www.google.com/', 4),
-(25, 'fab fa-instagram iconpicker-component', 'https://www.instagram.com/', 3);
+(25, 'fab fa-instagram iconpicker-component', 'https://www.instagram.com/', 3),
+(26, 'fa fa-fw fa-heart iconpicker-component', 'www.facebook.com', 1);
 
 -- --------------------------------------------------------
 
@@ -4458,6 +4248,13 @@ CREATE TABLE `statistics` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `statistics`
+--
+
+INSERT INTO `statistics` (`id`, `language_id`, `title`, `quantity`, `icon`, `serial_number`, `created_at`, `updated_at`) VALUES
+(3, 169, 'Title', 2, 'fas fa-heart', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4500,58 +4297,6 @@ CREATE TABLE `subscriptions` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tenders`
---
-
-CREATE TABLE `tenders` (
-  `id` int(11) NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `title_mr` varchar(255) DEFAULT NULL,
-  `description` longtext DEFAULT NULL,
-  `description_mr` longtext DEFAULT NULL,
-  `deadline` varchar(255) DEFAULT NULL,
-  `tender_link` text DEFAULT NULL,
-  `files` text DEFAULT NULL,
-  `tender_category` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT 0,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tenders`
---
-
-INSERT INTO `tenders` (`id`, `title`, `title_mr`, `description`, `description_mr`, `deadline`, `tender_link`, `files`, `tender_category`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Summer Internship for MTech (Urban System/Civil/Electrical/Mechanical) Students.', 'एमटेक (अर्बन सिस्टम/सिव्हिल/इलेक्ट्रिकल/मेकॅनिकल) विद्यार्थ्यांसाठी समर इंटर्नशिप.', 'Lorem ipsum dolor sit amet. Sit harum ratione sed rerum voluptates 33 deserunt excepturi quo minima vero id earum porro aut accusamus voluptate vel ratione incidunt. Eos inventore corrupti qui aliquam iste non alias neque vel consectetur provident est internos velit qui voluptas debitis sit veritatis ipsum! Ea itaque veritatis id assumenda quia et quis galisum qui unde modi ut nostrum possimus et sint omnis. Ut deleniti alias aut ipsam fugit non omnis reprehenderit aut earum dolores non nisi atque quo impedit sint est voluptas perspiciatis.', 'Lorem ipsum dolor sit amet. Sit harum ratione sed rerum voluptates 33 deserunt excepturi quo minima vero id earum porro or accusamus voluptate or ratione incidunt. Eos inventore corrupti qui aliquam iste non alias neque vel consectetur provident est internos velit qui voluptas debitis sit veritatis ipsum! Ea itaque veritatis id assumenda quia et quis galisum qui unde modi ut nostrum possimus et sint sint sint. Ut deleniti aka aut ipsam fugit non omnis reprehenderit ut earum dolores non nisi atque quo impedit sint est voluptas perspiciatis.', NULL, 'http://localhost:8002/tenders', '317-1715590835.pdf', 1, 1, NULL, '2024-05-13 09:00:35', '2024-05-13 09:00:35');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tender_category`
---
-
-CREATE TABLE `tender_category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `name_mr` varchar(255) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0,
-  `deleted_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tender_category`
---
-
-INSERT INTO `tender_category` (`id`, `name`, `name_mr`, `status`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'General', 'सामान्य', 1, NULL, '2024-05-13 08:57:59', '2024-05-13 08:57:59');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `testimonials`
 --
 
@@ -4570,9 +4315,8 @@ CREATE TABLE `testimonials` (
 --
 
 INSERT INTO `testimonials` (`id`, `language_id`, `image`, `comment`, `name`, `rank`, `serial_number`) VALUES
-(1, 0, '66419fe52867a.jpg', 'Under The Influence', 'Chris Brown', '1', 0),
-(3, 169, '67c025033041a.webp', 'Count Me Out', 'Kendrik Lamar', '1', 1),
-(4, 169, '67c0509c69289.webp', '30 for 30', 'SZA', '1', 1);
+(1, 169, '66419fe52867a.jpg', 'Under The Influence', 'Chris Brown', '1', 0),
+(4, 169, '67dd31b485d88.webp', '30 for 30', 'SZA (Kendrik)', '2', 2);
 
 -- --------------------------------------------------------
 
@@ -5051,7 +4795,7 @@ CREATE TABLE `ulinks` (
 --
 
 INSERT INTO `ulinks` (`id`, `language_id`, `name`, `url`) VALUES
-(1, 169, 'Home', 'http://localhost:8002/'),
+(1, 169, 'Home', 'http://localhost:8000/'),
 (2, 170, 'मुख्यपृष्ठ', 'http://localhost:8002/'),
 (3, 169, 'About Us', 'http://localhost:8002/Aboute-Us'),
 (4, 169, 'Department', 'http://localhost:8002/'),
@@ -5062,7 +4806,8 @@ INSERT INTO `ulinks` (`id`, `language_id`, `name`, `url`) VALUES
 (9, 170, 'विभाग', 'http://localhost:8002/'),
 (10, 170, 'ई-शासन', 'http://localhost:8002/egovernance'),
 (11, 170, 'निविदा आणि जाहिरात', 'http://localhost:8002/tenders'),
-(12, 170, 'आमच्याशी संपर्क साधा', 'http://localhost:8002/contactus');
+(12, 170, 'आमच्याशी संपर्क साधा', 'http://localhost:8002/contactus'),
+(15, 169, 'Adolf', 'www.x.com');
 
 -- --------------------------------------------------------
 
@@ -5110,6 +4855,15 @@ CREATE TABLE `users` (
   `provider` varchar(255) DEFAULT NULL,
   `provider_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fname`, `lname`, `photo`, `username`, `email`, `password`, `number`, `city`, `state`, `address`, `country`, `remember_token`, `billing_fname`, `billing_lname`, `billing_photo`, `billing_email`, `billing_number`, `billing_city`, `billing_state`, `billing_address`, `billing_country`, `shpping_fname`, `shpping_lname`, `shpping_photo`, `shpping_email`, `shpping_number`, `shpping_city`, `shpping_state`, `shpping_address`, `shpping_country`, `created_at`, `updated_at`, `status`, `verification_link`, `email_verified`, `provider`, `provider_id`) VALUES
+(1, 'John', 'Doe', NULL, 'johndoe', 'johndoe@example.com', 'password123', '1234567890', 'New York', 'NY', '123 Main St', 'USA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-27 06:23:54', '2025-03-27 06:23:54', 1, NULL, 'yes', NULL, NULL),
+(11, 'John', 'Doe', NULL, 'johndoe', 'johndoe@example.com', 'password123', '1234567890', 'New York', 'NY', '123 Main St', 'USA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-27 06:52:04', '2025-03-27 06:52:04', 1, NULL, 'yes', NULL, NULL),
+(12, 'Jane', 'Smith', NULL, 'janesmith', 'janesmith@example.com', 'password123', '9876543210', 'Los Angeles', 'CA', '456 Elm St', 'USA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-03-27 06:52:04', '2025-03-27 06:52:04', 1, NULL, 'yes', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -5192,15 +4946,9 @@ ALTER TABLE `blogs`
   ADD KEY `blogs_language_id_foreign` (`language_id`);
 
 --
--- Indexes for table `budgets`
+-- Indexes for table `calendar_events`
 --
-ALTER TABLE `budgets`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `contact_query`
---
-ALTER TABLE `contact_query`
+ALTER TABLE `calendar_events`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5255,6 +5003,30 @@ ALTER TABLE `donations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `event_categories`
+--
+ALTER TABLE `event_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `faq_categories`
+--
+ALTER TABLE `faq_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `galleries`
 --
 ALTER TABLE `galleries`
@@ -5268,9 +5040,33 @@ ALTER TABLE `gallery_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `homes`
+--
+ALTER TABLE `homes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jcategories`
+--
+ALTER TABLE `jcategories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `languages`
 --
 ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lessons`
+--
+ALTER TABLE `lessons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5280,15 +5076,69 @@ ALTER TABLE `members`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `modules`
+--
+ALTER TABLE `modules`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `offline_gateways`
+--
+ALTER TABLE `offline_gateways`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package_categories`
+--
+ALTER TABLE `package_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pages`
+--
+ALTER TABLE `pages`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `partners`
 --
 ALTER TABLE `partners`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pcategories`
+--
+ALTER TABLE `pcategories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `points`
+--
+ALTER TABLE `points`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `popups`
+--
+ALTER TABLE `popups`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5305,6 +5155,24 @@ ALTER TABLE `portfolio_images`
   ADD KEY `portfolio_images_portfolio_id_foreign` (`portfolio_id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rss_feeds`
+--
+ALTER TABLE `rss_feeds`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `scategories`
 --
 ALTER TABLE `scategories`
@@ -5317,15 +5185,51 @@ ALTER TABLE `services`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `shipping_charges`
+--
+ALTER TABLE `shipping_charges`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sitemaps`
+--
+ALTER TABLE `sitemaps`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `socials`
+--
+ALTER TABLE `socials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `statistics`
+--
+ALTER TABLE `statistics`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `testimonials`
 --
 ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ulinks`
+--
+ALTER TABLE `ulinks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -5339,22 +5243,40 @@ ALTER TABLE `admins`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `alink`
+--
+ALTER TABLE `alink`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `archives`
 --
 ALTER TABLE `archives`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `articles`
+--
+ALTER TABLE `articles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `article_categories`
+--
+ALTER TABLE `article_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `bcategories`
 --
 ALTER TABLE `bcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -5363,10 +5285,22 @@ ALTER TABLE `blogs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `calendar_events`
+--
+ALTER TABLE `calendar_events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `course_categories`
@@ -5375,22 +5309,70 @@ ALTER TABLE `course_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `dlink`
+--
+ALTER TABLE `dlink`
+  MODIFY `id` bigint(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT for table `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `event_categories`
+--
+ALTER TABLE `event_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `faq_categories`
+--
+ALTER TABLE `faq_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `galleries`
 --
 ALTER TABLE `galleries`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `gallery_categories`
 --
 ALTER TABLE `gallery_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `homes`
+--
+ALTER TABLE `homes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `jcategories`
+--
+ALTER TABLE `jcategories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -5399,10 +5381,52 @@ ALTER TABLE `languages`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
+-- AUTO_INCREMENT for table `lessons`
+--
+ALTER TABLE `lessons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
+
+--
 -- AUTO_INCREMENT for table `members`
 --
 ALTER TABLE `members`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+
+--
+-- AUTO_INCREMENT for table `modules`
+--
+ALTER TABLE `modules`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+
+--
+-- AUTO_INCREMENT for table `offline_gateways`
+--
+ALTER TABLE `offline_gateways`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT for table `package_categories`
+--
+ALTER TABLE `package_categories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `pages`
+--
+ALTER TABLE `pages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `partners`
@@ -5411,22 +5435,58 @@ ALTER TABLE `partners`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
+-- AUTO_INCREMENT for table `pcategories`
+--
+ALTER TABLE `pcategories`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
 
 --
+-- AUTO_INCREMENT for table `points`
+--
+ALTER TABLE `points`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `popups`
+--
+ALTER TABLE `popups`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `portfolios`
 --
 ALTER TABLE `portfolios`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `portfolio_images`
 --
 ALTER TABLE `portfolio_images`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=377;
+
+--
+-- AUTO_INCREMENT for table `rss_feeds`
+--
+ALTER TABLE `rss_feeds`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `scategories`
@@ -5438,19 +5498,55 @@ ALTER TABLE `scategories`
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `shipping_charges`
+--
+ALTER TABLE `shipping_charges`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `sitemaps`
+--
+ALTER TABLE `sitemaps`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `sliders`
 --
 ALTER TABLE `sliders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `socials`
+--
+ALTER TABLE `socials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `statistics`
+--
+ALTER TABLE `statistics`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ulinks`
+--
+ALTER TABLE `ulinks`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
