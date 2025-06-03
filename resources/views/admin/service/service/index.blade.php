@@ -109,8 +109,10 @@
                                                     </td>
                                                     <td>
                                                         @php
-                                                            $imagePath = public_path('cms/services/' .$service->main_image);
-                                                                 
+                                                            $imagePath = public_path(
+                                                                'cms/services/' . $service->main_image,
+                                                            );
+
                                                         @endphp
                                                         @if (!empty($service->main_image) && file_exists(public_path('cms/services/' . $service->main_image)))
                                                             <img src="{{ asset('cms/services/' . $service->main_image) }}"
@@ -184,12 +186,13 @@
                                                             </span>
                                                             Edit
                                                         </a>
-                                                        <form class="deleteform d-inline-block"
+                                                        <form class="delete-service-form d-inline-block"
                                                             action="{{ route('admin.service.delete') }}" method="post">
                                                             @csrf
                                                             <input type="hidden" name="service_id"
                                                                 value="{{ $service->id }}">
-                                                            <button type="submit" class="btn btn-danger btn-sm deletebtn">
+                                                            <button type="submit"
+                                                                class="btn btn-danger btn-sm confirm-delete-btn">
                                                                 <span class="btn-label">
                                                                     <i class="fas fa-trash"></i>
                                                                 </span>
@@ -332,19 +335,49 @@
     </div>
 
     <!-- JavaScript for image preview -->
-<script>
-    document.getElementById('fileInput1').addEventListener('change', function (event) {
-        const input = event.target;
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById('thumbPreview1').innerHTML =
-                    '<img src="' + e.target.result + '" alt="Image">';
+    <script>
+        document.getElementById('fileInput1').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('thumbPreview1').innerHTML =
+                        '<img src="' + e.target.result + '" alt="Image">';
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            reader.readAsDataURL(input.files[0]);
-        }
-    });
-</script>
+        });
+    </script>
+    <!-- Include jQuery (if not already included) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.confirm-delete-btn', function(e) {
+                e.preventDefault();
+
+                let form = $(this).closest(".delete-service-form");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
 
 @section('scripts')
