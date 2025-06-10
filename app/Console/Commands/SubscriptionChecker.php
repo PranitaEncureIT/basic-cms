@@ -2,13 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Models\BasicExtended;
-use App\Models\BasicExtra;
-use App\Models\BasicSetting;
-use App\Models\Jobs\SubscriptionExpiredMail;
-use App\Models\Jobs\SubscriptionReminderMail;
-use App\Models\Subscription;
-use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class SubscriptionChecker extends Command
@@ -18,31 +11,23 @@ class SubscriptionChecker extends Command
      *
      * @var string
      */
-    protected $signature = 'subscription:check';
+    // protected $signature = 'app:subscription-checker';
+       protected $signature = 'subscription:check';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Checks for subscription expire date, activate next package (if any) or expire the subscription';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    protected $description = 'Command description';
+public function __construct()
     {
         parent::__construct();
     }
-
     /**
      * Execute the console command.
-     *
-     * @return mixed
      */
-    public function handle()
+      public function handle()
     {
         $activeSubs = Subscription::where('status', 1)->get();
         $be = BasicExtended::first();

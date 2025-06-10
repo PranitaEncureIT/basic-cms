@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Front;
+use App\Http\Controllers\Controller;
 
 use App\Models\Donation;
 use App\Models\DonationDetail;
 use App\Models\Event;
 use App\Models\EventCategory;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -80,6 +80,7 @@ class FrontendController extends Controller
             $currentLang = Language::where('is_default', 1)->first();
         }
         $data['currentLang'] = $currentLang;
+
 
         $be = $currentLang->basic_extended;
         $bex = $currentLang->basic_extra;
@@ -164,7 +165,7 @@ class FrontendController extends Controller
             }
         }elseif ($version == 'default' || $version == 'dark') {
             if ($bex->home_page_pagebuilder == 1) {
-                return view('front.default.index', $data);
+                return view('front.default.index', $data,compact('be'));
             } else {
                 return view('front.default.index1', $data);
             }
@@ -1113,6 +1114,7 @@ class FrontendController extends Controller
 
     public function faq()
     {
+        dd('in');
       if (session()->has('lang')) {
         $currentLang = Language::where('code', session()->get('lang'))->first();
       } else {
@@ -1465,4 +1467,6 @@ class FrontendController extends Controller
     {
         return redirect()->route('front.packageorder.index', $packageid)->with('success', __('Pament Compelted!'));
     }
+
+    
 }

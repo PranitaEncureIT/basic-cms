@@ -6,8 +6,100 @@ use UniSharp\LaravelFilemanager\Lfm;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\Front\FrontendController;
 
+use App\Http\Controllers\AuditReportController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\AlinkController;
+use App\Http\Controllers\Admin\ArchiveController;
+use App\Http\Controllers\Admin\ApproachController;
+use App\Http\Controllers\Admin\ArticleCategoryController;
+use App\Http\Controllers\Admin\BcategoryController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BasicController;
+use App\Http\Controllers\Admin\BlogsectionController;
+use App\Http\Controllers\Admin\CacheController;
+use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CtaController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DlinkController;
+use App\Http\Controllers\Admin\EmailController;
+use App\Http\Controllers\Admin\EventCategoryController;
+use App\Http\Controllers\Admin\FAQCategoryController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\FeatureController;
+use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\FooterController;
+use App\Http\Controllers\Admin\ForgetController;
+use App\Http\Controllers\Admin\GalleryCategoryController;
+use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\HerosectionController;
+use App\Http\Controllers\Admin\IntrosectionController;
+use App\Http\Controllers\Admin\JcategoryController;
+use App\Http\Controllers\Admin\JobController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\LessonController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\Admin\MenuBuilderController;
+use App\Http\Controllers\Admin\ModuleController;
+use App\Http\Controllers\Admin\PageBuilderController;
+use App\Http\Controllers\Admin\PackageCategoryController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\PopupController;
+use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\ProductCategory;
+use App\Http\Controllers\Admin\PortfoliosectionController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductOrderController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PushController;
+use App\Http\Controllers\Admin\QuoteController;
+use App\Http\Controllers\Admin\RegisterUserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\RssFeedsController;
+use App\Http\Controllers\Admin\ScategoryController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\ServicesectionController;
+use App\Http\Controllers\Admin\ShopSettingController;
+use App\Http\Controllers\Admin\SitemapController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SocialController;
+use App\Http\Controllers\Admin\SsubcategoryController;
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\Admin\SubscriberController;
+use App\Http\Controllers\Admin\SubscriptionController;
+use App\Http\Controllers\Admin\SummernoteController;
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\TicketController;
+use App\Http\Controllers\Admin\UlinkController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\damidataController;
 
+use App\Http\Controllers\User\CourseOrderController;
+use App\Http\Controllers\User\DonationController;
+use App\Http\Controllers\User\EventController;
+use App\Http\Controllers\User\ForgotController;
+// use App\Http\Controllers\User\LoginController;
+// use App\Http\Controllers\User\OrderController;
+// use App\Http\Controllers\User\PackageController;
+use App\Http\Controllers\User\RegisterController;
+// use App\Http\Controllers\User\SummernoteController;
+// use App\Http\Controllers\User\TicketController;
+// use App\Http\Controllers\User\UserController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
+// use App\Http\Controllers\NewRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,15 +131,16 @@ Route::fallback(function () {
   return view('errors.404');
 });
 
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth:admin', 'setLfmPath']], function () {
-  Route::controller(App\Http\Controllers\Admin\SummernoteController::class)->group(function () {
-    Lfm::routes();
-    Route::post('summernote/upload', 'uploadFileManager')->name('lfm.summernote.upload');
-  });
-});
+// Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth:admin', 'setLfmPath']], function () {
+//   Route::controller(App\Http\Controllers\Admin\SummernoteController::class)->group(function () {
+//     // Lfm::routes();
+//     Route::post('summernote/upload', 'uploadFileManager')->name('lfm.summernote.upload');
+//   });
+// });
 
 Route::controller(App\Http\Controllers\Front\FrontendController::class)->group(function () {
   Route::get('/backup', 'backup');
+
 });
 
 /*=======================================================
@@ -57,8 +150,7 @@ Route::controller(App\Http\Controllers\Front\FrontendController::class)->group(f
 Route::post('/push', 'Front\PushController@store');
 
 Route::group(['middleware' => 'setlang'], function () {
-
-  Route::controller(App\Http\Controllers\Front\FrontendController::class)->group(function () {
+   Route::controller(\App\Http\Controllers\Front\FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('front.index');
     Route::post('/payment/instructions', 'paymentInstruction')->name('front.payment.instructions');
     Route::post('/sendmail', 'sendmail')->name('front.sendmail');
@@ -77,6 +169,11 @@ Route::group(['middleware' => 'setlang'], function () {
 
   Route::controller(App\Http\Controllers\Front\CausesController::class)->group(function () {
     Route::post('/cause/payment', 'makePayment')->name('front.causes.payment');
+  });
+
+
+    Route::controller(App\Http\Controllers\damidataController::class)->group(function () {
+    Route::get('/data', 'name')->name('data');
   });
 
   Route::controller(App\Http\Controllers\Payment\Causes\PaystackController::class)->group(function () {
@@ -1365,27 +1462,27 @@ Route::group(['middleware' => ['setlang']], function () {
     $permalink = $pl->permalink;
 
     if ($type == 'package_order') {
-      Route::get("$permalink/{id}", 'Front\FrontendController@packageorder')->name('front.packageorder.index');
+      Route::get("$permalink/{id}", 'App\Http\Controllers\Front\FrontendController@packageorder')->name('front.packageorder.index');
     } elseif ($type == 'service_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@servicedetails')->name('front.servicedetails');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@servicedetails')->name('front.servicedetails');
     } elseif ($type == 'portfolio_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@portfoliodetails')->name('front.portfoliodetails');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@portfoliodetails')->name('front.portfoliodetails');
     } elseif ($type == 'product_details') {
       Route::get("$permalink/{slug}", 'Front\ProductController@productDetails')->name('front.product.details');
     } elseif ($type == 'course_details') {
       Route::get("$permalink/{slug}", 'Front\CourseController@courseDetails')->name('course_details');
     } elseif ($type == 'cause_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@causeDetails')->name('front.cause_details');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@causeDetails')->name('front.cause_details');
     } elseif ($type == 'event_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@eventDetails')->name('front.event_details');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@eventDetails')->name('front.event_details');
     } elseif ($type == 'career_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@careerdetails')->name('front.careerdetails');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@careerdetails')->name('front.careerdetails');
     } elseif ($type == 'knowledgebase_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@knowledgebase_details')->name('front.knowledgebase_details');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@knowledgebase_details')->name('front.knowledgebase_details');
     } elseif ($type == 'blog_details') {
-      Route::get("$permalink/{slug}", 'Front\FrontendController@blogdetails')->name('front.blogdetails');
+      Route::get("$permalink/{slug}", 'App\Http\Controllers\Front\FrontendController@blogdetails')->name('front.blogdetails');
     } elseif ($type == 'rss_details') {
-      Route::get("$permalink/{slug}/{id}", 'Front\FrontendController@rssdetails')->name('front.rssdetails');
+      Route::get("$permalink/{slug}/{id}", 'App\Http\Controllers\Front\FrontendController@rssdetails')->name('front.rssdetails');
     }
   }
 });
@@ -1399,73 +1496,73 @@ Route::group(['middleware' => ['setlang']], function () {
     $permalink = $pl->permalink;
 
     if ($type == 'packages') {
-      $action = 'Front\FrontendController@packages';
+      $action = 'App\Http\Controllers\Front\FrontendController@packages';
       $routeName = 'front.packages';
     } elseif ($type == 'services') {
-      $action = 'Front\FrontendController@services';
+      $action = 'App\Http\Controllers\Front\FrontendController@services';
       $routeName = 'front.services';
     } elseif ($type == 'portfolios') {
-      $action = 'Front\FrontendController@portfolios';
+      $action = 'App\Http\Controllers\Front\FrontendController@portfolios';
       $routeName = 'front.portfolios';
     } elseif ($type == 'products') {
-      $action = 'Front\ProductController@product';
+      $action = 'App\Http\Controllers\Front\ProductController@product';
       $routeName = 'front.product';
     } elseif ($type == 'cart') {
-      $action = 'Front\ProductController@cart';
+      $action = 'App\Http\Controllers\Front\ProductController@cart';
       $routeName = 'front.cart';
     } elseif ($type == 'product_checkout') {
-      $action = 'Front\ProductController@checkout';
+      $action = 'App\Http\Controllers\Front\ProductController@checkout';
       $routeName = 'front.checkout';
     } elseif ($type == 'team') {
-      $action = 'Front\FrontendController@team';
+      $action = 'App\Http\Controllers\Front\FrontendController@team';
       $routeName = 'front.team';
     } elseif ($type == 'courses') {
-      $action = 'Front\CourseController@courses';
+      $action = 'App\Http\Controllers\Front\CourseController@courses';
       $routeName = 'courses';
     } elseif ($type == 'causes') {
-      $action = 'Front\FrontendController@causes';
+      $action = 'App\Http\Controllers\Front\FrontendController@causes';
       $routeName = 'front.causes';
     } elseif ($type == 'events') {
-      $action = 'Front\FrontendController@events';
+      $action = 'App\Http\Controllers\Front\FrontendController@events';
       $routeName = 'front.events';
     } elseif ($type == 'career') {
-      $action = 'Front\FrontendController@career';
+      $action = 'App\Http\Controllers\Front\FrontendController@career';
       $routeName = 'front.career';
     } elseif ($type == 'event_calendar') {
-      $action = 'Front\FrontendController@calendar';
+      $action = 'App\Http\Controllers\Front\FrontendController@calendar';
       $routeName = 'front.calendar';
     } elseif ($type == 'knowledgebase') {
-      $action = 'Front\FrontendController@knowledgebase';
+      $action = 'App\Http\Controllers\Front\FrontendController@knowledgebase';
       $routeName = 'front.knowledgebase';
     } elseif ($type == 'gallery') {
-      $action = 'Front\FrontendController@gallery';
+      $action = 'App\Http\Controllers\Front\FrontendController@gallery';
       $routeName = 'front.gallery';
     } elseif ($type == 'faq') {
-      $action = 'Front\FrontendController@faq';
+      $action = 'App\Http\Controllers\Front\FrontendController@faq';
       $routeName = 'front.faq';
     } elseif ($type == 'blogs') {
-      $action = 'Front\FrontendController@blogs';
+      $action = 'App\Http\Controllers\Front\FrontendController@blogs';
       $routeName = 'front.blogs';
     } elseif ($type == 'rss') {
-      $action = 'Front\FrontendController@rss';
+      $action = 'App\Http\Controllers\Front\FrontendController@rss';
       $routeName = 'front.rss';
     } elseif ($type == 'contact') {
-      $action = 'Front\FrontendController@contact';
+      $action = 'App\Http\Controllers\Front\FrontendController@contact';
       $routeName = 'front.contact';
     } elseif ($type == 'quote') {
-      $action = 'Front\FrontendController@quote';
+      $action = 'App\Http\Controllers\Front\FrontendController@quote';
       $routeName = 'front.quote';
     } elseif ($type == 'login') {
-      $action = 'User\LoginController@showLoginForm';
+      $action = 'App\Http\Controllers\User\LoginController@showLoginForm';
       $routeName = 'user.login';
     } elseif ($type == 'register') {
       $action = 'User\RegisterController@registerPage';
       $routeName = 'user-register';
     } elseif ($type == 'forget_password') {
-      $action = 'User\ForgotController@showforgotform';
+      $action = 'App\Http\Controllers\User\ForgotController@showforgotform';
       $routeName = 'user-forgot';
     } elseif ($type == 'admin_login') {
-      $action = 'Admin\LoginController@login';
+      $action = 'App\Http\Controllers\Admin\LoginController@login';
       $routeName = 'admin.login';
       Route::get("$permalink", "$action")->name("$routeName")->middleware('guest:admin');
       continue;
@@ -1477,7 +1574,7 @@ Route::group(['middleware' => ['setlang']], function () {
 
 // Dynamic Page Routes
 Route::group(['middleware' => 'setlang'], function () {
-  Route::get('/{slug}', 'Front\FrontendController@dynamicPage')->name('front.dynamicPage');
+  Route::get('/{slug}', 'App\Http\Controllers\Front\FrontendController@dynamicPage')->name('front.dynamicPage');
 });
 
 //Commented Routes
@@ -1521,4 +1618,9 @@ Route::group(['middleware' => 'setlang'], function () {
 
 //Route::controller(App\Http\Controllers\Admin\RssFeedsController::class)->group(function () {
 //Route::get('rss-feed/cronJobUpdate', 'cronJobUpdate')->name('rss.cronJobUpdate');
-//});
+//});<?php
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });

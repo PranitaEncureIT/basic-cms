@@ -39,6 +39,68 @@ class EventController extends Controller
         $data['abx'] = $lang->basic_extra;
         $data['events'] = Event::where('lang_id', $lang_id)->orderBy('id', 'DESC')->get();
         $data['event_categories'] = EventCategory::where('lang_id', $lang_id)->where('status', '1')->get();
+
+
+        if ($request->ajax()) {
+            try{
+                $draw = $request->input('draw');
+                $start = $request->input('start');
+                $length = $request->input('length');
+                $searchValue = strtolower(trim($request->input('search.value')));
+                
+                // Base history query
+                $results = Event::select('events.*','event_categories.name as cat_name')->where('events.lang_id', $lang_id)
+                                    ->join('event_categories','events.cat_id','=','event_categories.id');
+ 
+ 
+                // Apply search filtering
+                if (!empty($searchValue)) {
+                    $results->where(function ($query) use ($searchValue) {
+                        $query->where(DB::raw('LOWER(title)'), 'like', "%$searchValue%")
+                              ->orWhere(DB::raw('LOWER(cat_name)'), 'like', "%$searchValue%");
+                    });
+                }
+ 
+                // Total record count
+                $recordsTotal = $results->count();
+ 
+                // Pagination & sorting
+                $data = $results->orderByDesc('id')->skip($start)->take($length)->get();
+ 
+                // Format the data
+                foreach ($data as $key => $row) {
+                    $row->sr_no = $key + 1 + $start;
+                    $imagePath = public_path('/assets/front/img/events/sliders/'.$row->image);
+                    if (file_exists($imagePath) && !empty($row->image)){
+                        $imagePath = env('ASSET_URL').'/assets/front/img/events/sliders/'.$row->image;
+                        $img = '<img src="'.$imagePath.'" alt="Image">';
+                    }else{
+                        $imagePath = env('ASSET_URL').'/assets/front/img/no_image.jpg';
+                        $img = '<img src="'.$imagePath.'" alt="Image" width="25%">';
+                    }
+                    $row->image = $img;
+                    $row->title = convertUtf8(strlen($row->title)) > 30 ? convertUtf8(substr($row->title, 0, 30)) . '...' : convertUtf8($row->title);
+
+                    $row->event_date = Carbon::parse($row->date)->format('jS F, Y');
+
+                    $row->action = '<a class="btn btn-secondary btn-sm" href="'.route('admin.event.edit', $row->id) . '?language=' . request()->input('language').'"><span class="btn-label"><i class="fas fa-edit"></i></span></a><form class="deleteform d-inline-block" action="'.route('admin.event.delete').'" method="post"><input type="hidden" name="_token" value="'.csrf_token().'"><input type="hidden" name="event_id" value="'.$row->id.'"><button type="submit" class="btn btn-danger btn-sm deletebtn"><span class="btn-label"><i class="fas fa-trash"></i></span></button></form>';
+                   
+                }
+ 
+                $response = [
+                    'draw' => intval($draw),
+                    'recordsTotal' => $recordsTotal,
+                    'recordsFiltered' => $recordsTotal, // If no additional filtering is applied
+                    'data' => $data,
+                ];
+ 
+                return response()->json($response);
+ 
+            }catch (\Exception $e) {
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+        }
+
         return view('admin.event.event.index', $data);
     }
 
@@ -201,16 +263,13 @@ class EventController extends Controller
     {
         $slug = make_slug($request->title);
         $eventId = $request->event_id;
-
-        $sliders = !empty($request->slider) ? explode(',', $request->slider) : [];
-        $allowedExts = array('jpg', 'png', 'jpeg');
-
+        $langId=$request->lang_id; 
+        $catId=$request->cat_id; 
         $video = $request->video;
         $videoExts = array('mp4');
         $extVideo = pathinfo($video, PATHINFO_EXTENSION);
 
         $rules = [
-            'slider' => 'required',
             'title' => [
                 'required',
                 'max:255',
@@ -232,28 +291,6 @@ class EventController extends Controller
             'cat_id' => 'required',
         ];
 
-        if ($request->filled('video')) {
-            $rules['video'] = [
-                function ($attribute, $value, $fail) use ($extVideo, $videoExts) {
-                    if (!in_array($extVideo, $videoExts)) {
-                        return $fail("Only mp4 video is allowed");
-                    }
-                }
-            ];
-        }
-
-        if ($request->filled('slider')) {
-            $rules['slider'] = [
-                function ($attribute, $value, $fail) use ($sliders, $allowedExts) {
-                    foreach ($sliders as $key => $slider) {
-                        $extSlider = pathinfo($slider, PATHINFO_EXTENSION);
-                        if (!in_array($extSlider, $allowedExts)) {
-                            return $fail("Only png, jpg, jpeg images are allowed");
-                        }
-                    }
-                }
-            ];
-        }
 
         $messages = [
             'title.required' => 'The title field is required',
@@ -272,39 +309,61 @@ class EventController extends Controller
             return response()->json($validator->errors());
         }
 
-        $event = Event::findOrFail($request->event_id);
-        if ($request->filled('video')) {
+         $event = Event::findOrFail($request->event_id);
+        $event->title=$request->title;
+        $event->slug=$slug;
+        $event->date=$request->date;
+        $event->time=$request->time;
+        $event->cost=$request->cost;
+        $event->available_tickets=$request->available_tickets;
+        $event->organizer=$request->organizer;
+        $event->organizer_email=$request->organizer_email;
+        $event->organizer_phone=$request->organizer_phone;
+        $event->organizer_website=$request->organizer_website;
+        $event->venue=$request->venue;
+        $event->venue_location=$request->venue_location;
+        $event->venue_phone=$request->venue_phone;
+        $event->meta_tags=$request->meta_tags;
+        $event->meta_description=$request->meta_description;
+        $event->lang_id=$langId;
+        $event->cat_id=$catId;
+
+         if($request->video){
             @unlink('assets/front/img/events/videos/' . $event->video);
-            $videoFile = uniqid() .'.'. $extVideo;
-            @copy($video, 'assets/front/img/events/videos/' . $videoFile);
-            $videoFile = $videoFile;
-        } else {
-            $videoFile = $event->video;
-        }
-        $event->update($request->except('image', 'video', 'content') + [
-                'slug' => $slug,
-                'content' => str_replace(url('/') . '/assets/front/img/', "{base_url}/assets/front/img/", $request->content),
-                'video' => $videoFile
-            ]);
-        $event = Event::findOrFail($request->event_id);
+         }
+
+        // if ($request->filled('video')) {
+        //     @unlink('assets/front/img/events/videos/' . $event->video);
+        //     $videoFile = uniqid() .'.'. $extVideo;
+        //     @copy($video, 'assets/front/img/events/videos/' . $videoFile);
+        //     $videoFile = $videoFile;
+        // } else {
+        //     $videoFile = $event->video;
+        // }
+        // $event->update($request->except('image', 'video', 'content') + [
+        //         'slug' => $slug,
+        //         'content' => str_replace(url('/') . '/assets/front/img/', "{base_url}/assets/front/img/", $request->content),
+        //         'video' => $videoFile
+        //     ]);
+        // $event = Event::findOrFail($request->event_id);
 
 
-        // copy the sliders first
-        $fileNames = [];
-        foreach ($sliders as $key => $slider) {
-            $extSlider = pathinfo($slider, PATHINFO_EXTENSION);
-            $filename = uniqid() .'.'. $extSlider;
-            @copy($slider, 'assets/front/img/events/sliders/' . $filename);
-            $fileNames[] = $filename;
-        }
+        // // copy the sliders first
+        // $fileNames = [];
+        // foreach ($sliders as $key => $slider) {
+        //     $extSlider = pathinfo($slider, PATHINFO_EXTENSION);
+        //     $filename = uniqid() .'.'. $extSlider;
+        //     @copy($slider, 'assets/front/img/events/sliders/' . $filename);
+        //     $fileNames[] = $filename;
+        // }
 
-        // delete & unlink previous slider images
-        $preImages = json_decode($event->image, true);
-        foreach ($preImages as $key => $pi) {
-            @unlink('assets/front/img/events/sliders/' . $pi);
-        }
+        // // delete & unlink previous slider images
+        // $preImages = json_decode($event->image, true);
+        // foreach ($preImages as $key => $pi) {
+        //     @unlink('assets/front/img/events/sliders/' . $pi);
+        // }
 
-        $event->image = json_encode($fileNames);
+        // $event->image = json_encode($fileNames);
         $event->save();
 
         Session::flash('success', 'Event updated successfully!');
