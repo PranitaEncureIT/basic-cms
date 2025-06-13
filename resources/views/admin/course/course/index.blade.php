@@ -185,7 +185,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                         <span class="btn-label">
                           <i class="fas fa-edit"></i>
                         </span>
-                        Edit
+                        
                       </a>
 
                       <form
@@ -206,7 +206,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                           <span class="btn-label">
                             <i class="fas fa-trash"></i>
                           </span>
-                          Delete
+                          
                         </button>
                       </form>
 
@@ -217,7 +217,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                         <span class="btn-label">
                           <i class="fa fa-book"></i>
                         </span>
-                        Modules
+                        
                       </a>
                     </td>
                   </tr>

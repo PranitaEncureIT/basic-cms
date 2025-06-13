@@ -57,7 +57,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Manage
+                              
                             </a>
                           </td>
                           <td>
@@ -65,7 +65,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                             <form class="deleteform d-inline-block" action="{{route('admin.role.delete')}}" method="post">
                               @csrf
@@ -74,7 +74,7 @@
                                 <span class="btn-label">
                                   <i class="fas fa-trash"></i>
                                 </span>
-                                Delete
+                                
                               </button>
                             </form>
                           </td>

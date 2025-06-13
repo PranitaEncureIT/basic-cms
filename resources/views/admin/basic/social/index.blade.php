@@ -116,7 +116,7 @@
                                 <span class="btn-label">
                                     <i class="fas fa-edit"></i>
                                 </span>
-                                Edit
+                                
                             </a>
                             <form class="d-inline-block deleteform" action="{{route('admin.social.delete')}}" method="post">
                               @csrf
@@ -125,7 +125,7 @@
                                 <span class="btn-label">
                                   <i class="fas fa-trash"></i>
                                 </span>
-                                Delete
+                                
                               </button>
                             </form>
                           </td>

@@ -107,7 +107,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                 <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                                 </span>
-                                Edit
+                                
                             </a>
                             @if ($bex->custom_page_pagebuilder == 1)
 
@@ -115,7 +115,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                     <span class="btn-label">
                                         <i class="fas fa-edit"></i>
                                     </span>
-                                    Content
+                                    
                                 </a>
                             @endif
                             <form class="d-inline-block deleteform" action="{{route('admin.page.delete')}}" method="post">
@@ -125,7 +125,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                 <span class="btn-label">
                                   <i class="fas fa-trash"></i>
                                 </span>
-                                Delete
+                                
                               </button>
                             </form>
                           </td>

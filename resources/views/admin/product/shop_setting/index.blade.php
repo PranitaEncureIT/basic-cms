@@ -102,7 +102,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                             <form class="deleteform d-inline-block" action="{{route('admin.shipping.delete')}}" method="post">
                               @csrf
@@ -111,7 +111,7 @@ $selLang = \App\Models\Language::where('code', request()->input('language'))->fi
                                 <span class="btn-label">
                                   <i class="fas fa-trash"></i>
                                 </span>
-                                Delete
+                                
                               </button>
                             </form>
                           </td>

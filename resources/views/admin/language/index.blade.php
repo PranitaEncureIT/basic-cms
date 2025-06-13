@@ -79,7 +79,7 @@
                         <span class="btn-label">
                           <i class="fas fa-edit"></i>
                         </span>
-                        Edit Keyword
+                       
                       </a>
                       <a
                         class="btn btn-secondary btn-sm"
@@ -88,7 +88,7 @@
                         <span class="btn-label">
                           <i class="fas fa-edit"></i>
                         </span>
-                        Edit
+                        
                       </a>
                       <form
                         class="deleteform d-inline-block"

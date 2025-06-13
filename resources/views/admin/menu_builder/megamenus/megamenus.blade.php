@@ -64,7 +64,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -75,7 +75,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -86,7 +86,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -97,7 +97,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -108,7 +108,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -119,7 +119,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>
@@ -130,7 +130,7 @@
                               <span class="btn-label">
                                 <i class="fas fa-edit"></i>
                               </span>
-                              Edit
+                              
                             </a>
                           </td>
                         </tr>

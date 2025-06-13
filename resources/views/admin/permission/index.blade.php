@@ -57,7 +57,7 @@
                                                     data-group_name="{{ $permission->group_name }}"
                                                     data-status="{{ $permission->status }}"
                                                     data-basic="{{ $permission->basic }}">
-                                                    Edit
+                                                    <i class="fas fa-edit"></i>
                                                 </button>
 
                                                 <form class="delete-permission-form d-inline-block"

@@ -145,7 +145,7 @@
                                                             <span class="btn-label">
                                                                 <i class="fas fa-edit"></i>
                                                             </span>
-                                                            Edit
+                                                            
                                                         </a>
                                                         <form class="deleteform d-inline-block"
                                                             action="{{ route('admin.donation.delete') }}" method="post">
@@ -156,7 +156,7 @@
                                                                 <span class="btn-label">
                                                                     <i class="fas fa-trash"></i>
                                                                 </span>
-                                                                Delete
+                                                                
                                                             </button>
                                                         </form>
                                                     </td>

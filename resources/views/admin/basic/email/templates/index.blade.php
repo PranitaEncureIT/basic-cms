@@ -72,7 +72,7 @@
                                                 {{$template->email_subject}}
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-warning" href="{{route('admin.email.editTemplate', $template->id)}}"><i class="far fa-edit"></i> Edit</a>
+                                                <a class="btn btn-sm btn-warning" href="{{route('admin.email.editTemplate', $template->id)}}"><i class="far fa-edit"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
