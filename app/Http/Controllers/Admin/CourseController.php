@@ -115,15 +115,22 @@ class CourseController extends Controller
             if(!empty($filename)) $course->course_image = $filename; 
         }
 
-        if ($request->filled('instructor_image')) {
-            $filename = uniqid() . '.' . $extInsImage;
-        
-            $directory = "cms/instructors/";
-            @mkdir($directory, 0775, true);
-            @copy($insImage, $directory . $filename);
-        
-            $course->instructor_image = $filename;
+        if ($request->hasFile('instructor_image') && $request->file('instructor_image')->isValid()) {
+            $instructorimage = $request->file('instructor_image');
+            $folderPath = 'cms/course/';
+            $filename = CommonHelper::upload_file($instructorimage, $folderPath, '');
+            if(!empty($filename)) $course->instructor_image = $filename; 
         }
+
+        // if ($request->filled('instructor_image')) {
+        //     $filename = uniqid() . '.' . $extInsImage;
+        
+        //     $directory = "cms/instructors/";
+        //     @mkdir($directory, 0775, true);
+        //     @copy($insImage, $directory . $filename);
+        
+        //     $course->instructor_image = $filename;
+        // }
 
         $link = $request->video_link;
 
@@ -166,7 +173,6 @@ class CourseController extends Controller
         $courseId = $request->course_id;
 
         $rules = [
-            'language_id' => 'required',
             'course_category_id' => 'required',
             'title' => [
                 'required',
@@ -191,7 +197,6 @@ class CourseController extends Controller
         ];
 
         $messages = [
-            'language_id.required' => 'The language field is required',
             'course_category_id.required' => 'The course category field is required'
         ];
 
@@ -203,7 +208,7 @@ class CourseController extends Controller
         }
 
         $course = Course::findOrFail($request->course_id);
-        $course->language_id = $request->language_id;
+        $course->language_id = $request->language_id ?? '';
         $course->course_category_id = $request->course_category_id;
         $course->title = $request->title;
         $course->slug = $slug;
@@ -221,12 +226,15 @@ class CourseController extends Controller
             }
         }
 
-        if ($request->filled('instructor_image')) {
-            $filename = uniqid() . '.' . pathinfo($request->instructor_image, PATHINFO_EXTENSION);
-            $directory = "cms/instructors/";
-            @mkdir($directory, 0775, true);
-            @copy($request->instructor_image, $directory . $filename);
-            $course->instructor_image = $filename;
+
+
+         if ($request->hasFile('instructor_image') && $request->file('instructor_image')->isValid()) {
+            $instructorimage = $request->file('instructor_image');
+            $folderPath = 'cms/course/';
+            $filename = CommonHelper::upload_file($instructorimage, $folderPath, '');
+            if (!empty($filename)) {
+                $course->instructor_image = $filename;
+            }
         }
 
         $link = $request->video_link;

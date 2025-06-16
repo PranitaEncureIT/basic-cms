@@ -243,6 +243,21 @@
       }
   });
 </script>
+
+
+<script>
+  document.getElementById('fileInput2').addEventListener('change', function (event) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+              document.getElementById('sliderThumbs2').innerHTML =
+                  '<img src="' + e.target.result + '" alt="Image">';
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  });
+</script>
 @endsection
 
 @section('scripts')

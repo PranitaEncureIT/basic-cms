@@ -64,22 +64,16 @@
                                 @csrf
 
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
-
                                 {{-- Image Part --}}
                                 <div class="form-group">
                                     <label for="">Image ** </label>
                                     <br>
-                                    @php
-                                        $imagePath = public_path('assets/front/img/courses/' . $course->course_image);
-                                    @endphp
                                     <div class="thumb-preview" id="thumbPreview1">
-                                        @if (file_exists($imagePath) && !empty($course->course_image))
-                                            <img src="{{ asset('assets/front/img/courses/' . $course->course_image) }}"
-                                                alt="Feature Image">
+                                        @if (!empty($course->course_image) && file_exists(public_path('cms/course/' . $course->course_image)))
+                                            <img src="{{ asset('cms/course/' . $course->course_image) }}" alt="Course Image">
                                         @else
-                                            <img src="{{ asset('assets/front/img/no_image.jpg') }}" alt="Image">
+                                            <img src="{{ asset('assets/front/img/no_image.jpg') }}" alt="No Image">
                                         @endif
-
                                     </div>
                                     <br>
                                     <br>
@@ -249,22 +243,15 @@
                                         <div class="form-group">
                                             <label for="">Instructor Image ** </label>
                                             <br>
-                                            @php
-                                                $imagePath = public_path('assets/front/img/instructors/' . $course->instructor_image );
-                                            @endphp
                                             <div class="thumb-preview" id="thumbPreview2">
-
-                                                @if (file_exists($imagePath) && !empty($course->instructor_image))
-                                                    <img src="{{ asset('assets/front/img/instructors/' . $course->instructor_image) }}"
-                                                        alt="Instructor Image">
-                                                @else
-                                                    <img src="{{ asset('assets/front/img/no_image.jpg') }}"
+                                                @if (!empty($course->instructor_image && file_exists(public_path('cms/course/' .$course->instructor_image ))))
+                                                     <img src="{{asset('cms/course/' .$course->instructor_image)}}" alt="">
+                                                     @else
+                                                     <img src="{{ asset('assets/front/img/no_image.jpg') }}"
                                                         alt="Image">
                                                 @endif
                                             </div>
                                             <br>
-                                            <br>
-
                                             <input id="fileInput2" type="file" name="instructor_image"
                                                 accept="image/*" style="display: none;">
                                             <!-- Label acting as the button triggers the file input -->

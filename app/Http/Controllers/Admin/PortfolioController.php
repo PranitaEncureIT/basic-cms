@@ -54,7 +54,6 @@ class PortfolioController extends Controller
   public function store(Request $request)
   {
     $slug = make_slug($request->title);
-
     $sliders = !empty($request->slider) ? explode(',', $request->slider) : [];
     $image = $request->image;
     $allowedExts = array('jpg', 'png', 'jpeg', 'svg');
